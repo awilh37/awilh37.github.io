@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chess Login Data</title>
+</head>
+<body>
+  <table>
+    <tr>
+      <th>awilh37</th>
+      <th>Thriftycat</th>
+      <th>beesh</th>
+      <th>Jimmy</th>
+      <th>Caleb1109</th>
+      <th>Marshall</th>
+    </tr>
+    <tr>
+      <td>125012</td>
+      <td>g</td>
+      <td>pass</td>
+      <td>12345</td>
+      <td>Caleb1109</td>
+      <td>leballin</td>
+    </tr>
+    <tr>
+      <td>Alex</td>
+      <td>Luke</td>
+      <td>Andy</td>
+      <td>Malachi</td>
+      <td>Caleb</td>
+      <td>Mr. Lefebvre</td>
+    </tr>
+    <tr>
+      <td>https://lh3.googleusercontent.com/a/ACg8ocKNKq2DrGii-x6YEJ8myukkGmNBXk2mkBO1QknEZcyB8AM</td>
+      <td>https://lh3.googleusercontent.com/a-/ALV-UjVNS48b0dp2aQUv78I8dY1WpTaKFJjSbev2TycKRHYMrbk</td>
+      <td>https://lh3.googleusercontent.com/cm/AOgkWRbu-idFxNte9oordjNTjal8Aazraz1akLLtFl0xVVHzLkQRVbPdisG3fUFupzlm</td>
+      <td>https://lh3.googleusercontent.com/a-/ALV-UjXbrlzojzOL7FUkoGlRsISRPMlZDpRpktoXiXykaxn5Aw</td>
+      <td>https://lh3.googleusercontent.com/a-/ALV-UjVjd_QJ767c89ZFpgH9FD_qiDwYlFlDYT-0UWHaM1vjxwU</td>
+      <td>https://lh3.googleusercontent.com/a-/ALV-UjVrz27twlWnPV_L7nydNrgP8KbCZcxfkqGMg0zP1awm6rM</td>
+    </tr>
+  </table>
+</body>
+</html>
