@@ -1,3 +1,3 @@
-[test page](https://awilh37.github.io/test/gitpage/info)
+[test page](test/gitpage/info)
 
-[Github page](github.com/awilh37)
+[Github page](https://github.com/awilh37)
