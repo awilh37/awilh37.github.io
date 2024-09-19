@@ -1,5 +1,5 @@
 ## Test page
-[test page](test)
+[test page](https://awilh37.github.io/test)
 
 ## Project Links
 [Projects](projects)
