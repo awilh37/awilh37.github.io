@@ -1,5 +1,5 @@
 ## Test page
-[test page](test/gitpage/info)
+[test page](test)
 
 ## Project Links
 [Projects](projects)
