@@ -16,7 +16,7 @@
             max-width: 900px;
             margin: 2rem auto;
             background-color: #fff;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 44px 6px -2px rgba(0, 0, 0, 0.05);
             border-radius: 0.75rem; /* rounded-xl */
             padding: 2.5rem; /* p-10 */
         }
@@ -573,13 +573,16 @@
                 console.error("App content container not found!");
                 return;
             }
+            console.log("renderApp called. isAppReady:", isAppReady); // Debugging log
             appContent.innerHTML = ''; // Clear previous content
+            console.log("App content cleared."); // Debugging log
 
             if (!isAppReady) {
                 appContent.innerHTML = `<p class="text-lg text-gray-700">Loading application...</p>`;
+                console.log("App not ready, showing loading message."); // Debugging log
                 return;
             }
-
+            
             if (showCreateQuizForm) {
                 renderCreateQuizForm(appContent);
             } else if (currentQuiz) {
@@ -591,6 +594,7 @@
             } else {
                 renderQuizList(appContent);
             }
+            console.log("renderApp finished rendering content."); // Debugging log
         }
 
         /**
@@ -598,6 +602,7 @@
          * @param {HTMLElement} parentElement - The DOM element to append content to.
          */
         function renderQuizList(parentElement) {
+            console.log("renderQuizList called."); // Debugging log
             const div = document.createElement('div');
             div.className = 'text-center';
             div.innerHTML = `
@@ -648,6 +653,7 @@
             div.appendChild(createButton);
 
             parentElement.appendChild(div);
+            console.log("renderQuizList finished."); // Debugging log
         }
 
         /**
@@ -655,6 +661,7 @@
          * @param {HTMLElement} parentElement - The DOM element to append content to.
          */
         function renderCurrentQuiz(parentElement) {
+            console.log("renderCurrentQuiz called."); // Debugging log
             const question = currentQuiz.questions[currentQuestionIndex];
             const div = document.createElement('div');
             div.className = 'space-y-6';
@@ -721,6 +728,7 @@
             div.appendChild(nextButton);
 
             parentElement.appendChild(div);
+            console.log("renderCurrentQuiz finished."); // Debugging log
         }
 
         /**
@@ -728,6 +736,7 @@
          * @param {HTMLElement} parentElement - The DOM element to append content to.
          */
         function renderQuizResults(parentElement) {
+            console.log("renderQuizResults called."); // Debugging log
             const div = document.createElement('div');
             div.className = 'space-y-6';
             div.innerHTML = `
@@ -773,6 +782,7 @@
 
             div.appendChild(buttonContainer);
             parentElement.appendChild(div);
+            console.log("renderQuizResults finished."); // Debugging log
         }
 
         /**
@@ -780,6 +790,7 @@
          * @param {HTMLElement} parentElement - The DOM element to append content to.
          */
         function renderCreateQuizForm(parentElement) {
+            console.log("renderCreateQuizForm called."); // Debugging log
             const div = document.createElement('div');
             div.className = 'space-y-6';
 
@@ -874,6 +885,7 @@
             }
 
             parentElement.appendChild(div);
+            console.log("renderCreateQuizForm finished."); // Debugging log
         }
 
         // --- Core Quiz Logic ---
@@ -883,6 +895,7 @@
          * @param {object} quiz - The quiz object to select.
          */
         function selectQuiz(quiz) {
+            console.log("selectQuiz called with quiz:", quiz.id); // Debugging log
             // Create a deep copy of the quiz to avoid modifying the original stored object
             // This is crucial for shuffling answers on retake without affecting the stored original.
             currentQuiz = JSON.parse(JSON.stringify(quiz));
@@ -907,6 +920,7 @@
          * @param {object} selectedOption - The selected answer option object.
          */
         function handleAnswerSelect(questionIndex, selectedOption) {
+            console.log("handleAnswerSelect called for question:", questionIndex); // Debugging log
             if (showRationale) return; // Prevent re-answering
 
             const isCorrect = selectedOption.isCorrect;
@@ -921,6 +935,7 @@
          * Moves to the next question or submits the quiz if it's the last question.
          */
         function goToNextQuestion() {
+            console.log("goToNextQuestion called. Current index:", currentQuestionIndex); // Debugging log
             feedbackMessage = '';
             showRationale = false;
             if (currentQuestionIndex < currentQuiz.questions.length - 1) {
@@ -935,6 +950,7 @@
          * Submits the quiz and transitions to the results view.
          */
         function submitQuiz() {
+            console.log("submitQuiz called."); // Debugging log
             showResults = true;
             feedbackMessage = '';
             showRationale = false;
@@ -950,6 +966,7 @@
                     if (currentScore > existingBestScore) {
                         quizzes[quizIndex].bestScore = currentScore;
                         localStorage.setItem(LOCAL_STORAGE_QUIZZES_KEY, JSON.stringify(quizzes));
+                        console.log("Updated best score for quiz:", currentQuiz.id, "to", currentScore); // Debugging log
                     }
                 }
             }
@@ -960,6 +977,7 @@
          * Retakes the current quiz from the beginning.
          */
         function retakeQuiz() {
+            console.log("retakeQuiz called."); // Debugging log
             selectQuiz(quizzes.find(q => q.id === currentQuiz.id)); // Find the original quiz object to ensure all data is consistent, then re-select to reset and reshuffle
         }
 
@@ -967,6 +985,7 @@
          * Navigates back to the quiz selection screen.
          */
         function chooseAnotherQuiz() {
+            console.log("chooseAnotherQuiz called."); // Debugging log
             currentQuiz = null;
             renderApp();
         }
@@ -982,6 +1001,7 @@
                     score++;
                 }
             });
+            console.log("Calculated score:", score); // Debugging log
             return score;
         }
 
@@ -991,6 +1011,7 @@
          * Toggles the visibility of the quiz creation form.
          */
         function toggleCreateQuizForm() {
+            console.log("toggleCreateQuizForm called."); // Debugging log
             showCreateQuizForm = !showCreateQuizForm;
             newQuizTitle = ''; // Clear form on toggle
             newQuizQuestions = [{ question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }];
@@ -1004,9 +1025,267 @@
          * @param {string} value - The new value.
          */
         function handleNewQuestionChange(qIndex, field, value) {
+            // console.log(`handleNewQuestionChange: Q${qIndex} field '${field}' changed to '${value}'`); // Too verbose for general use
             newQuizQuestions[qIndex][field] = value;
             // No need to re-render immediately for every input, as input values are managed by DOM
         }
 
         /**
-         * Handles changes to new answer option te
+         * Handles changes to new answer option text.
+         * @param {number} qIndex - Index of the question.
+         * @param {number} optIndex - Index of the answer option.
+         * @param {string} value - The new text value.
+         */
+        function handleNewAnswerOptionChange(qIndex, optIndex, value) {
+            // console.log(`handleNewAnswerOptionChange: Q${qIndex} Opt${optIndex} changed to '${value}'`); // Too verbose
+            newQuizQuestions[qIndex].answerOptions[optIndex].text = value;
+            // No need to re-render immediately
+        }
+
+        /**
+         * Handles setting the correct answer for a new question.
+         * @param {number} qIndex - Index of the question.
+         * @param {number} optIndex - Index of the option being set as correct.
+         */
+        function handleNewCorrectAnswerChange(qIndex, optIndex) {
+            console.log(`handleNewCorrectAnswerChange: Q${qIndex} Opt${optIndex} set as correct.`); // Debugging log
+            newQuizQuestions[qIndex].answerOptions.forEach((option, i) => {
+                option.isCorrect = (i === optIndex);
+            });
+            // No need to re-render immediately
+        }
+
+        /**
+         * Adds a new blank question field to the creation form.
+         */
+        function addNewQuestionField() {
+            console.log("addNewQuestionField called."); // Debugging log
+            newQuizQuestions.push(
+                { question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }
+            );
+            renderApp(); // Re-render to show the new question in the form
+        }
+
+        /**
+         * Saves the newly created quiz to Local Storage.
+         */
+        async function handleSaveNewQuiz() {
+            console.log("handleSaveNewQuiz called."); // Debugging log
+            if (!newQuizTitle.trim()) {
+                displayMessage('error', "Quiz title cannot be empty.");
+                console.warn("Save failed: Quiz title empty."); // Debugging log
+                return;
+            }
+
+            // Validate questions and answers
+            const isValid = newQuizQuestions.every(q => {
+                if (!q.question.trim()) { console.warn("Validation failed: Empty question text."); return false; }
+                if (!q.answerOptions.every(opt => opt.text.trim())) { console.warn("Validation failed: Empty answer option text."); return false; }
+                // Ensure there's at least one correct answer
+                if (!q.answerOptions.some(opt => opt.isCorrect)) { console.warn("Validation failed: No correct answer selected."); return false; }
+                // Ensure no more than one correct answer
+                if (q.answerOptions.filter(opt => opt.isCorrect).length > 1) { console.warn("Validation failed: Multiple correct answers selected."); return false; }
+                return true;
+            });
+
+            if (!isValid) {
+                displayMessage('error', "All questions must have text, all answer options must have text, and each question must have exactly one correct answer.");
+                return;
+            }
+
+            isSavingQuiz = true;
+            renderApp(); // Update button state to 'Saving...'
+
+            try {
+                // Generate a simple unique ID for the new quiz
+                const newQuizId = 'quiz_' + Date.now();
+                const newQuizData = {
+                    id: newQuizId,
+                    title: newQuizTitle,
+                    questions: newQuizQuestions,
+                    createdAt: new Date().toISOString(), // Capture creation date
+                    bestScore: 0 // Initialize best score
+                };
+
+                // Load existing quizzes, add the new one, and save back to local storage
+                let storedQuizzes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_QUIZZES_KEY) || '[]');
+                storedQuizzes.push(newQuizData);
+                localStorage.setItem(LOCAL_STORAGE_QUIZZES_KEY, JSON.stringify(storedQuizzes));
+                quizzes = storedQuizzes; // Update the global quizzes array
+
+                newQuizTitle = '';
+                newQuizQuestions = [ // Reset form
+                    { question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }
+                ];
+                showCreateQuizForm = false;
+                displayMessage('success', 'Quiz successfully saved!');
+                console.log("Quiz saved successfully. New quizzes array:", quizzes); // Debugging log
+            } catch (error) {
+                console.error("Error saving new quiz to local storage:", error); // Detailed error log
+                displayMessage('error', "Failed to save quiz: " + error.message);
+            } finally {
+                isSavingQuiz = false;
+                renderApp(); // Ensure UI reflects final state
+            }
+        }
+
+        /**
+         * Generates quiz questions from the local pool.
+         */
+        function generateRandomQuizQuestions() {
+            console.log("generateRandomQuizQuestions called."); // Debugging log
+            isGeneratingQuestions = true;
+            renderApp(); // Update button state to 'Generating...'
+            displayMessage('success', 'Generating random quiz questions...');
+
+            try {
+                const generatedQuizQuestions = [];
+                const shuffledAllQuestions = [...allBiologyQuestions].sort(() => 0.5 - Math.random()); // Shuffle all questions
+
+                // Select up to 10 unique questions
+                for (let i = 0; i < Math.min(10, shuffledAllQuestions.length); i++) {
+                    const originalQuestion = shuffledAllQuestions[i];
+                    const correctOption = originalQuestion.allOptions.find(opt => opt.isCorrect);
+                    // Ensure correctOption is found before proceeding
+                    if (!correctOption) {
+                        console.warn(`Question "${originalQuestion.question}" has no correct option defined. Skipping.`);
+                        continue;
+                    }
+
+                    const incorrectOptionsPool = originalQuestion.allOptions.filter(opt => !opt.isCorrect);
+
+                    const selectedIncorrectOptions = [];
+                    const shuffledIncorrectPool = [...incorrectOptionsPool].sort(() => 0.5 - Math.random());
+
+                    for (let j = 0; j < Math.min(3, shuffledIncorrectPool.length); j++) {
+                        selectedIncorrectOptions.push(shuffledIncorrectPool[j]);
+                    }
+
+                    const finalOptions = [correctOption, ...selectedIncorrectOptions];
+
+                    // Ensure exactly 4 options are presented for each question in the UI
+                    while (finalOptions.length < 4) {
+                        finalOptions.push({ text: `(Filler option ${finalOptions.length + 1})`, isCorrect: false, rationale: "This is a placeholder option." });
+                    }
+                    while (finalOptions.length > 4) {
+                        finalOptions.pop();
+                    }
+
+                    // Shuffle the final options for this question
+                    finalOptions.sort(() => 0.5 - Math.random());
+
+                    generatedQuizQuestions.push({
+                        question: originalQuestion.question,
+                        answerOptions: finalOptions,
+                        hint: originalQuestion.hint
+                    });
+                }
+
+                // Determine the next quiz number based on current quizzes in local storage
+                const nextQuizNumber = quizzes.length + 1;
+                newQuizTitle = `Random Biology Quiz #${nextQuizNumber}`;
+                newQuizQuestions = generatedQuizQuestions; // Update newQuizQuestions with the generated ones
+                displayMessage('success', 'Random quiz generated successfully!');
+                console.log("Random quiz generated. Title:", newQuizTitle, "Questions:", newQuizQuestions); // Debugging log
+
+            } catch (error) {
+                console.error("Error generating random questions:", error); // Detailed error log
+                displayMessage('error', "Failed to generate random questions: " + error.message + ". Please try again.");
+                // Reset to a blank question if generation fails
+                newQuizQuestions = [{ question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }];
+            } finally {
+                isGeneratingQuestions = false;
+                renderApp(); // Re-render to show generated questions or error
+            }
+        }
+
+        /**
+         * Deletes a quiz from local storage after confirmation.
+         * @param {string} quizId - The ID of the quiz to delete.
+         */
+        function deleteQuiz(quizId) {
+            console.log("deleteQuiz called for ID:", quizId); // Debugging log
+            showConfirmationModal("Are you sure you want to delete this quiz? This action cannot be undone.", () => {
+                quizzes = quizzes.filter(quiz => quiz.id !== quizId);
+                localStorage.setItem(LOCAL_STORAGE_QUIZZES_KEY, JSON.stringify(quizzes));
+                displayMessage('success', 'Quiz deleted successfully!');
+                console.log("Quiz deleted. Remaining quizzes:", quizzes); // Debugging log
+                renderApp(); // Re-render the quiz list
+            });
+        }
+
+        /**
+         * Shows a custom confirmation modal.
+         * @param {string} message - The message to display in the modal.
+         * @param {function} onConfirm - Callback function to execute if user confirms.
+         */
+        function showConfirmationModal(message, onConfirm) {
+            console.log("showConfirmationModal called."); // Debugging log
+            const modal = document.getElementById('confirmationModal');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+            const modalCancelBtn = document.getElementById('modalCancelBtn');
+
+            if (!modal || !modalMessage || !modalConfirmBtn || !modalCancelBtn) {
+                console.error("Modal elements not found! Falling back to window.confirm.");
+                // Fallback to simple logic if modal elements are missing - though this should not happen with proper HTML structure
+                if (window.confirm(message)) {
+                     onConfirm();
+                }
+                return;
+            }
+
+            modalMessage.textContent = message;
+            modal.classList.remove('hidden'); // Show modal
+
+            // Clear previous listeners to prevent multiple executions
+            modalConfirmBtn.onclick = null;
+            modalCancelBtn.onclick = null;
+
+            modalConfirmBtn.onclick = () => {
+                modal.classList.add('hidden'); // Hide modal
+                onConfirm();
+            };
+
+            modalCancelBtn.onclick = () => {
+                modal.classList.add('hidden'); // Hide modal
+            };
+            console.log("Confirmation modal displayed."); // Debugging log
+        }
+
+
+        // --- Application Initialization ---
+
+        window.onload = async () => {
+            console.log("Window onload triggered."); // Debugging log
+            try {
+                // Load quizzes from local storage
+                const storedQuizzes = localStorage.getItem(LOCAL_STORAGE_QUIZZES_KEY);
+                console.log("Stored quizzes from local storage (raw):", storedQuizzes); // Debugging log
+                if (storedQuizzes) {
+                    quizzes = JSON.parse(storedQuizzes);
+                    // Ensure all loaded quizzes have a bestScore and createdAt property for consistency
+                    quizzes = quizzes.map(quiz => ({
+                        ...quiz,
+                        bestScore: quiz.bestScore !== undefined ? quiz.bestScore : 0,
+                        createdAt: quiz.createdAt || new Date().toISOString() // Assign current date if missing
+                    }));
+                    console.log("Quizzes loaded and parsed:", quizzes); // Debugging log
+                } else {
+                    quizzes = [];
+                    console.log("No quizzes found in local storage. Initializing empty array."); // Debugging log
+                }
+                isAppReady = true; // App is ready after attempting to load local data
+                console.log("isAppReady set to true. Calling renderApp()."); // Debugging log
+                renderApp();
+            } catch (error) {
+                console.error("Error during application initialization:", error); // Detailed error log
+                displayMessage('error', "Failed to load the application. Please check your browser's console for details: " + error.message);
+                isAppReady = true; // Still set to true so basic UI can render, even with an error message
+                renderApp(); // Attempt to render even on error to show error message
+            }
+            console.log("Window onload process finished."); // Debugging log
+        };
+    </script>
+</body>
+</html>
