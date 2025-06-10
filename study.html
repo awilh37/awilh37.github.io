@@ -91,6 +91,434 @@
         // Local Storage Key
         const LOCAL_STORAGE_QUIZZES_KEY = 'honorsBioQuizzes';
 
+        // --- Built-in Pool of Biology Questions ---
+        // This array contains a large set of questions from which random quizzes will be generated.
+        // Each question includes a 'question' string, 'allOptions' (a broader array of possible answers including correct and incorrect), and a 'hint'.
+        const allBiologyQuestions = [
+            {
+                question: "What is the primary function of the mitochondria?",
+                allOptions: [
+                    { text: "Protein synthesis", isCorrect: false, rationale: "Ribosomes are responsible for protein synthesis." },
+                    { text: "Energy production through cellular respiration", isCorrect: true, rationale: "Mitochondria are often called the 'powerhouses' of the cell because they generate most of the cell's supply of ATP." },
+                    { text: "Waste disposal", isCorrect: false, rationale: "Lysosomes handle waste disposal." },
+                    { text: "Storage of genetic material", isCorrect: false, rationale: "The nucleus stores genetic material." },
+                    { text: "Photosynthesis", isCorrect: false, rationale: "Chloroplasts perform photosynthesis in plant cells." }
+                ],
+                hint: "Think about where the cell gets its power."
+            },
+            {
+                question: "Which of the following describes a haploid cell?",
+                allOptions: [
+                    { text: "Contains two sets of chromosomes", isCorrect: false, rationale: "This describes a diploid cell." },
+                    { text: "Contains half the number of chromosomes of a diploid cell", isCorrect: true, rationale: "Haploid cells, like gametes, contain a single set of chromosomes (n)." },
+                    { text: "Is always a somatic cell", isCorrect: false, rationale: "Somatic cells are diploid." },
+                    { text: "Undergoes mitosis to produce gametes", isCorrect: false, rationale: "Meiosis produces gametes." }
+                ],
+                hint: "Think 'half'."
+            },
+            {
+                question: "What is the main role of DNA helicase during DNA replication?",
+                allOptions: [
+                    { text: "Adds new nucleotides to the growing DNA strand", isCorrect: false, rationale: "DNA polymerase adds new nucleotides." },
+                    { text: "Joins Okazaki fragments together", isCorrect: false, rationale: "DNA ligase joins Okazaki fragments." },
+                    { text: "Unwinds the DNA double helix", isCorrect: true, rationale: "Helicase unwinds and separates the two strands of the DNA double helix." },
+                    { text: "Synthesizes RNA primers", isCorrect: false, rationale: "Primase synthesizes RNA primers." }
+                ],
+                hint: "It 'unzips' the DNA."
+            },
+            {
+                question: "In which phase of the cell cycle does DNA replication occur?",
+                allOptions: [
+                    { text: "G1 phase", isCorrect: false, rationale: "G1 is for cell growth." },
+                    { text: "S phase", isCorrect: true, rationale: "The 'S' stands for synthesis, referring to DNA synthesis or replication." },
+                    { text: "G2 phase", isCorrect: false, rationale: "G2 is for preparation for mitosis." },
+                    { text: "M phase", isCorrect: false, rationale: "M phase is for mitosis and cytokinesis (cell division)." }
+                ],
+                hint: "The 'S' stands for something important."
+            },
+            {
+                question: "What is crossing over, and when does it occur?",
+                allOptions: [
+                    { text: "Exchange of genetic material between sister chromatids during Anaphase II", isCorrect: false, rationale: "Crossing over occurs between homologous chromosomes, not sister chromatids, and in Prophase I." },
+                    { text: "Exchange of genetic material between homologous chromosomes during Prophase I of meiosis", isCorrect: true, rationale: "Crossing over is the exchange of genetic material between non-sister chromatids of homologous chromosomes during Prophase I of meiosis." },
+                    { text: "Random alignment of chromosomes at Metaphase I of meiosis", isCorrect: false, rationale: "This describes independent assortment, not crossing over." },
+                    { text: "Separation of sister chromatids during Anaphase of mitosis", isCorrect: false, rationale: "This is a key event in mitosis." }
+                ],
+                hint: "It's a source of genetic variation in meiosis, occurring early on."
+            },
+            {
+                question: "Which of the following is an example of codominance?",
+                allOptions: [
+                    { text: "Pink flowers from red and white parents", isCorrect: false, rationale: "This is an example of incomplete dominance, where traits blend." },
+                    { text: "Human blood type AB", isCorrect: true, rationale: "In blood type AB, both A and B alleles are fully expressed simultaneously, making it a classic example of codominance." },
+                    { text: "Tall pea plants being completely dominant over short pea plants", isCorrect: false, rationale: "This is an example of complete dominance." },
+                    { text: "Multiple genes affecting skin color", isCorrect: false, rationale: "This describes polygenic inheritance." }
+                ],
+                hint: "Think about situations where *both* traits are visibly expressed, not blended."
+            },
+            {
+                question: "What is the difference between genotype and phenotype?",
+                allOptions: [
+                    { text: "Genotype is the observable trait, phenotype is the genetic makeup.", isCorrect: false, rationale: "This is reversed." },
+                    { text: "Genotype is the genetic makeup, phenotype is the observable trait.", isCorrect: true, rationale: "Genotype refers to the set of genes an organism carries, while phenotype is the observable characteristics resulting from both genotype and environment." },
+                    { text: "Genotype refers to dominant alleles, phenotype to recessive alleles.", isCorrect: false, rationale: "Both genotype and phenotype involve all types of alleles." },
+                    { text: "They are interchangeable terms.", isCorrect: false, rationale: "They are distinct concepts in genetics." }
+                ],
+                hint: "Think 'genes' versus 'physical appearance'."
+            },
+            {
+                question: "According to natural selection, what happens to individuals who are best adapted to their environment?",
+                allOptions: [
+                    { text: "They always produce sterile offspring.", isCorrect: false, rationale: "This is incorrect; successful adaptation leads to fertile offspring." },
+                    { text: "They are randomly eliminated from the population.", isCorrect: false, rationale: "Natural selection is not random elimination." },
+                    { text: "They are more likely to survive and reproduce, passing on their traits.", isCorrect: true, rationale: "Natural selection favors individuals with advantageous traits, leading to increased survival and reproductive success." },
+                    { text: "They undergo mutations to become even more adapted.", isCorrect: false, rationale: "Mutations are random; adaptation is a result of selection on existing variation." }
+                ],
+                hint: "Survival of the fittest."
+            },
+            {
+                question: "What is the most inclusive (broadest) taxonomic rank?",
+                allOptions: [
+                    { text: "Kingdom", isCorrect: false, rationale: "Kingdom is broad, but Domain is broader." },
+                    { text: "Class", isCorrect: false, rationale: "Class is more specific than Kingdom or Domain." },
+                    { text: "Phylum", isCorrect: false, rationale: "Phylum is more specific than Kingdom or Domain." },
+                    { text: "Domain", isCorrect: true, rationale: "Domain is the highest and most inclusive rank in biological classification." },
+                    { text: "Species", isCorrect: false, rationale: "Species is the most specific rank." }
+                ],
+                hint: "Think about the very top of the classification hierarchy."
+            },
+            {
+                question: "What is the process of synthesizing an RNA molecule from a DNA template?",
+                allOptions: [
+                    { text: "Replication", isCorrect: false, rationale: "Replication is DNA copying DNA." },
+                    { text: "Translation", isCorrect: false, rationale: "Translation is protein synthesis from RNA." },
+                    { text: "Transcription", isCorrect: true, rationale: "Transcription is the process where genetic information from DNA is copied into an RNA molecule." },
+                    { text: "Mutation", isCorrect: false, rationale: "Mutation is a change in DNA sequence." }
+                ],
+                hint: "Think about making a 'copy' of genetic information into a different form."
+            },
+            {
+                question: "If a segment of DNA is $5'-ATGC-3'$, what is the sequence of the complementary mRNA strand?",
+                allOptions: [
+                    { text: "$5'-UACG-3'$", isCorrect: true, rationale: "During transcription, Adenine (A) pairs with Uracil (U), Thymine (T) with Adenine (A), Guanine (G) with Cytosine (C), and Cytosine (C) with Guanine (G). The mRNA is synthesized 5' to 3' from a 3' to 5' template." },
+                    { text: "$3'-TACG-5'$", isCorrect: false, rationale: "This would be the complementary DNA strand, not mRNA." },
+                    { text: "$5'-TACG-3'$", isCorrect: false, rationale: "This is incorrect; mRNA contains Uracil (U) instead of Thymine (T)." },
+                    { text: "$3'-UACG-5'$", isCorrect: false, rationale: "While the bases are correct, the directionality is usually presented 5' to 3' for clarity unless specified as a template." }
+                ],
+                hint: "Remember to replace Thymine with Uracil in RNA."
+            },
+            {
+                question: "What is the purpose of Meiosis?",
+                allOptions: [
+                    { text: "To produce two identical diploid cells for growth and repair.", isCorrect: false, rationale: "This is the purpose of mitosis." },
+                    { text: "To produce four genetically identical haploid gametes.", isCorrect: false, rationale: "Meiosis produces genetically unique haploid gametes, not identical ones." },
+                    { text: "To produce four genetically unique haploid gametes for sexual reproduction.", isCorrect: true, rationale: "Meiosis reduces the chromosome number by half and introduces genetic variation, essential for sexual reproduction." },
+                    { text: "To increase the chromosome number in somatic cells.", isCorrect: false, rationale: "Meiosis reduces the chromosome number, and it occurs in germline cells, not somatic cells." }
+                ],
+                hint: "Think about its role in sexual reproduction."
+            },
+            {
+                question: "Which term describes different forms of a gene?",
+                allOptions: [
+                    { text: "Chromosome", isCorrect: false, rationale: "A chromosome is a structure containing many genes." },
+                    { text: "Allele", isCorrect: true, rationale: "Alleles are alternative forms of a gene, located at the same locus on homologous chromosomes." },
+                    { text: "Phenotype", isCorrect: false, rationale: "Phenotype is the observable trait." },
+                    { text: "Genotype", isCorrect: false, rationale: "Genotype is the combination of alleles an individual possesses." }
+                ],
+                hint: "These are often represented by letters like 'A' or 'a'."
+            },
+            {
+                question: "What is a mutation?",
+                allOptions: [
+                    { text: "The process of DNA replication.", isCorrect: false, rationale: "DNA replication is the copying of DNA." },
+                    { text: "A permanent change in the DNA sequence.", isCorrect: true, rationale: "A mutation is a permanent alteration in the DNA sequence that makes up a gene or chromosome." },
+                    { text: "The synthesis of proteins.", isCorrect: false, rationale: "Protein synthesis involves transcription and translation." },
+                    { text: "The movement of genes between populations.", isCorrect: false, rationale: "This describes gene flow." }
+                ],
+                hint: "It's an error or change in the genetic code."
+            },
+            {
+                question: "Which of the following is a vestigial structure?",
+                allOptions: [
+                    { text: "Bird wing for flight", isCorrect: false, rationale: "A bird wing is a functional structure for flight." },
+                    { text: "Human appendix", isCorrect: true, rationale: "The human appendix is an example of a vestigial structure, having lost much of its ancestral function." },
+                    { text: "Bat wing and human arm", isCorrect: false, rationale: "These are homologous structures, showing common ancestry." },
+                    { text: "Insect wing and bird wing", isCorrect: false, rationale: "These are analogous structures, having similar function but different evolutionary origins." }
+                ],
+                hint: "Think about structures that have lost their original function over evolutionary time."
+            },
+            {
+                question: "What is the correct order of the Linnaean classification ranks from broadest to most specific?",
+                allOptions: [
+                    { text: "Kingdom, Phylum, Class, Order, Family, Genus, Species", isCorrect: true, rationale: "This is the standard hierarchical order of taxonomic ranks." },
+                    { text: "Species, Genus, Family, Order, Class, Phylum, Kingdom", isCorrect: false, rationale: "This is the reverse order." },
+                    { text: "Phylum, Kingdom, Class, Order, Family, Genus, Species", isCorrect: false, rationale: "Kingdom should precede Phylum." },
+                    { text: "Class, Order, Family, Genus, Species, Phylum, Kingdom", isCorrect: false, rationale: "This order is incorrect." }
+                ],
+                hint: "Remember 'King Philip Came Over For Good Soup'."
+            },
+            {
+                question: "What is the primary product of translation?",
+                allOptions: [
+                    { text: "DNA", isCorrect: false, rationale: "DNA is replicated, not produced by translation." },
+                    { text: "RNA", isCorrect: false, rationale: "RNA is produced during transcription." },
+                    { text: "Polypeptide (protein)", isCorrect: true, rationale: "Translation is the process by which ribosomes synthesize proteins after the transcription of DNA to RNA." },
+                    { text: "Nucleotide", isCorrect: false, rationale: "Nucleotides are building blocks of nucleic acids." }
+                ],
+                hint: "This process decodes mRNA into a chain of amino acids."
+            },
+            {
+                question: "Which concept explains why two individuals heterozygous for a trait ($Aa$) can produce offspring with a recessive phenotype ($aa$)?",
+                allOptions: [
+                    { text: "Law of Independent Assortment", isCorrect: false, rationale: "This law applies to the inheritance of multiple genes." },
+                    { text: "Law of Segregation", isCorrect: true, rationale: "The Law of Segregation states that allele pairs separate or segregate during gamete formation and randomly unite at fertilization." },
+                    { text: "Incomplete Dominance", isCorrect: false, rationale: "Incomplete dominance describes blending phenotypes, not the reappearance of recessive traits from heterozygotes." },
+                    { text: "Codominance", isCorrect: false, rationale: "Codominance is when both alleles are expressed equally." }
+                ],
+                hint: "Think about what happens to alleles during gamete formation."
+            },
+            {
+                question: "What is the ultimate source of all new alleles in a population?",
+                allOptions: [
+                    { text: "Natural selection", isCorrect: false, rationale: "Natural selection acts on existing variation, it doesn't create new alleles." },
+                    { text: "Gene flow", isCorrect: false, rationale: "Gene flow introduces alleles from other populations, but doesn't create them." },
+                    { text: "Genetic drift", isCorrect: false, rationale: "Genetic drift is random change in allele frequencies, not the source of new alleles." },
+                    { text: "Mutation", isCorrect: true, rationale: "Mutations are random changes in the DNA sequence that can create new alleles, providing the raw material for evolution." }
+                ],
+                hint: "This random change in DNA provides raw material for evolution."
+            },
+            {
+                question: "What is a major difference between mitosis and meiosis?",
+                allOptions: [
+                    { text: "Mitosis produces haploid cells, while meiosis produces diploid cells.", isCorrect: false, rationale: "This is reversed; mitosis produces diploid cells, meiosis produces haploid." },
+                    { text: "Mitosis produces four daughter cells, while meiosis produces two daughter cells.", isCorrect: false, rationale: "Mitosis produces two, meiosis produces four." },
+                    { text: "Mitosis produces genetically identical cells, while meiosis produces genetically unique cells.", isCorrect: true, rationale: "Mitosis creates exact copies, whereas meiosis introduces genetic variation through crossing over and independent assortment." },
+                    { text: "Mitosis occurs only in gametes, while meiosis occurs in somatic cells.", isCorrect: false, rationale: "This is reversed; mitosis is for somatic cells, meiosis for gametes." }
+                ],
+                hint: "Think about the genetic outcome of each process."
+            },
+            {
+                question: "What is a pedigree chart primarily used for in genetics?",
+                allOptions: [
+                    { text: "To determine the probability of a genetic cross", isCorrect: false, rationale: "Punnett squares are used for probability calculations." },
+                    { text: "To synthesize proteins", isCorrect: false, rationale: "Protein synthesis involves ribosomes and mRNA." },
+                    { text: "To track the inheritance of a trait through generations of a family", isCorrect: true, rationale: "Pedigrees are visual tools to trace the pattern of inheritance of a specific trait through several generations." },
+                    { text: "To analyze chromosome mutations", isCorrect: false, rationale: "Karyotypes are used for analyzing chromosome mutations." }
+                ],
+                hint: "It's like a family tree for genetic traits."
+            },
+            {
+                question: "Which of the following is NOT one of the three main differences between DNA and RNA?",
+                allOptions: [
+                    { text: "DNA is double-stranded, RNA is single-stranded.", isCorrect: false, rationale: "This is a main difference." },
+                    { text: "DNA contains deoxyribose, RNA contains ribose.", isCorrect: false, rationale: "This is a main difference." },
+                    { text: "DNA contains phosphate, RNA contains sulfate.", isCorrect: true, rationale: "Both DNA and RNA contain phosphate groups. Sulfate is not a component." },
+                    { text: "DNA contains thymine, RNA contains uracil.", isCorrect: false, rationale: "This is a main difference." }
+                ],
+                hint: "Focus on the backbone components and specific bases."
+            },
+            {
+                question: "The observation that different species of finches on the Galápagos Islands have beaks of various shapes and sizes, each suited to a different food source, is a classic example supporting which evolutionary concept?",
+                allOptions: [
+                    { text: "Genetic drift", isCorrect: false, rationale: "Genetic drift is random; this shows adaptation." },
+                    { text: "Punctuated equilibrium", isCorrect: false, rationale: "Punctuated equilibrium describes the pattern of evolution, not the mechanism." },
+                    { text: "Natural selection", isCorrect: true, rationale: "Darwin's finches are a prime example of natural selection, where favorable adaptations (beak shapes) led to differential survival and reproduction in different environments." },
+                    { text: "Inheritance of acquired characteristics", isCorrect: false, rationale: "This is Lamarck's disproven theory." }
+                ],
+                hint: "This is a famous observation by Darwin."
+            },
+            {
+                question: "What is a codon?",
+                allOptions: [
+                    { text: "A segment of DNA that codes for a protein.", isCorrect: false, rationale: "This describes a gene." },
+                    { text: "A three-nucleotide sequence on mRNA that codes for a specific amino acid.", isCorrect: true, rationale: "A codon is a three-nucleotide sequence on an mRNA molecule that specifies a particular amino acid or termination signal during protein synthesis." },
+                    { text: "A three-nucleotide sequence on tRNA that is complementary to an mRNA codon.", isCorrect: false, rationale: "This describes an anticodon." },
+                    { text: "The entire set of genes in an organism.", isCorrect: false, rationale: "This describes the genome." }
+                ],
+                hint: "It's the 'word' in the genetic code that specifies a building block of protein."
+            },
+            {
+                question: "Which of the following describes a homozygous dominant individual?",
+                allOptions: [
+                    { text: "Has two different alleles for a trait (e.g., Aa)", isCorrect: false, rationale: "This describes a heterozygous individual." },
+                    { text: "Has two identical dominant alleles for a trait (e.g., AA)", isCorrect: true, rationale: "Homozygous dominant means having two copies of the same dominant allele." },
+                    { text: "Has two identical recessive alleles for a trait (e.g., aa)", isCorrect: false, rationale: "This describes a homozygous recessive individual." },
+                    { text: "Expresses the recessive phenotype", isCorrect: false, rationale: "This describes a homozygous recessive individual." }
+                ],
+                hint: "Think 'purebred' for the dominant trait."
+            },
+            {
+                question: "What is the function of transfer RNA (tRNA) during translation?",
+                allOptions: [
+                    { text: "Carries genetic information from DNA to the ribosome", isCorrect: false, rationale: "This is the function of mRNA." },
+                    { text: "Forms the structural components of ribosomes", isCorrect: false, rationale: "This is the function of rRNA." },
+                    { text: "Brings specific amino acids to the ribosome based on the mRNA codon", isCorrect: true, rationale: "tRNA molecules act as adaptors, bringing the correct amino acids to the ribosome to match the codons on the mRNA." },
+                    { text: "Unwinds the DNA double helix for transcription", isCorrect: false, rationale: "This is the function of RNA polymerase during transcription." }
+                ],
+                hint: "Think about its role in delivering building blocks."
+            },
+            {
+                question: "What is nondisjunction?",
+                allOptions: [
+                    { text: "The failure of homologous chromosomes or sister chromatids to separate during meiosis or mitosis.", isCorrect: true, rationale: "Nondisjunction is the error in chromosome segregation that leads to gametes with an abnormal number of chromosomes." },
+                    { text: "A type of gene mutation where a base is substituted for another.", isCorrect: false, rationale: "This is a point mutation." },
+                    { text: "The exchange of genetic material between homologous chromosomes.", isCorrect: false, rationale: "This is crossing over." },
+                    { text: "The fusion of two gametes during fertilization.", isCorrect: false, rationale: "This is fertilization." }
+                ],
+                hint: "Think about chromosome errors during cell division."
+            },
+            {
+                question: "Which type of mutation involves the removal of one or more nucleotide base pairs from a DNA sequence?",
+                allOptions: [
+                    { text: "Insertion mutation", isCorrect: false, rationale: "Insertion adds nucleotides." },
+                    { text: "Substitution mutation", isCorrect: false, rationale: "Substitution replaces nucleotides." },
+                    { text: "Deletion mutation", isCorrect: true, rationale: "A deletion mutation involves the removal of one or more base pairs from a DNA sequence." },
+                    { text: "Translocation mutation", isCorrect: false, rationale: "Translocation involves movement of chromosome segments." }
+                ],
+                hint: "Think about a segment being taken out."
+            },
+            {
+                question: "Who is considered the 'father of genetics' due to his work with pea plants?",
+                allOptions: [
+                    { text: "Charles Darwin", isCorrect: false, rationale: "Darwin is known for evolution by natural selection." },
+                    { text: "James Watson", isCorrect: false, rationale: "Watson was co-discoverer of DNA structure." },
+                    { text: "Gregor Mendel", isCorrect: true, rationale: "Gregor Mendel's experiments with pea plants laid the foundation for modern genetics." },
+                    { text: "Rosalind Franklin", isCorrect: false, rationale: "Franklin contributed to DNA structure discovery." }
+                ],
+                hint: "He experimented with pea plants."
+            },
+            {
+                question: "A test cross (crossing an individual with an unknown genotype with a homozygous recessive individual) is used to determine what?",
+                allOptions: [
+                    { text: "The phenotype of the unknown individual.", isCorrect: false, rationale: "The phenotype is usually already observable." },
+                    { text: "The sex of the unknown individual.", isCorrect: false, rationale: "Sex is determined by chromosomes, not test crosses." },
+                    { text: "The genotype of the unknown individual.", isCorrect: true, rationale: "A test cross helps determine if an individual with a dominant phenotype is homozygous dominant or heterozygous." },
+                    { text: "The number of chromosomes in the unknown individual.", isCorrect: false, rationale: "Karyotyping determines chromosome number." }
+                ],
+                hint: "This type of cross reveals hidden genetic information."
+            },
+            {
+                question: "Homologous structures are evidence of what?",
+                allOptions: [
+                    { text: "Convergent evolution", isCorrect: false, rationale: "Convergent evolution leads to analogous structures." },
+                    { text: "Divergent evolution (common ancestry)", isCorrect: true, rationale: "Homologous structures are similar in origin but may have different functions, indicating shared ancestry and divergent evolution." },
+                    { text: "Independent adaptation to similar environments", isCorrect: false, rationale: "This leads to analogous structures." },
+                    { text: "Mutations occurring at high rates", isCorrect: false, rationale: "Mutations are the source of variation, not the explanation for homologous structures." }
+                ],
+                hint: "Think about structures that share a common evolutionary past."
+            },
+            {
+                question: "What is the primary function of ribosomes?",
+                allOptions: [
+                    { text: "DNA replication", isCorrect: false, rationale: "DNA replication is carried out by DNA polymerases." },
+                    { text: "Cellular respiration", isCorrect: false, rationale: "Cellular respiration occurs in mitochondria." },
+                    { text: "Protein synthesis", isCorrect: true, rationale: "Ribosomes are the cellular machinery responsible for translating mRNA into proteins." },
+                    { text: "Photosynthesis", isCorrect: false, rationale: "Photosynthesis occurs in chloroplasts." }
+                ],
+                hint: "They are the cell's protein factories."
+            },
+            {
+                question: "Which type of inheritance pattern results in a blended phenotype in heterozygotes (e.g., red and white parents produce pink offspring)?",
+                allOptions: [
+                    { text: "Codominance", isCorrect: false, rationale: "Codominance results in both traits being fully expressed, not blended." },
+                    { text: "Complete dominance", isCorrect: false, rationale: "Complete dominance results in one allele masking the other entirely." },
+                    { text: "Incomplete dominance", isCorrect: true, rationale: "Incomplete dominance is characterized by heterozygotes exhibiting an intermediate phenotype that is a blend of the two homozygous phenotypes." },
+                    { text: "Sex-linked inheritance", isCorrect: false, rationale: "Sex-linked inheritance relates to genes on sex chromosomes." }
+                ],
+                hint: "Think about a mix or intermediate expression."
+            },
+             {
+                question: "What does the 'P' stand for in the P generation in genetics?",
+                allOptions: [
+                    { text: "Parental", isCorrect: true, rationale: "The P generation refers to the parental generation, the first set of parents crossed in a genetic experiment." },
+                    { text: "Phenotype", isCorrect: false, rationale: "Phenotype is the observable characteristic." },
+                    { text: "Probability", isCorrect: false, rationale: "Probability is the likelihood of an event." },
+                    { text: "Protein", isCorrect: false, rationale: "Protein is a macromolecule." }
+                ],
+                hint: "It refers to the initial cross."
+            },
+             {
+                question: "If a true-breeding tall pea plant (TT) is crossed with a true-breeding short pea plant (tt), all F1 offspring will be tall. This illustrates which of Mendel's laws?",
+                allOptions: [
+                    { text: "Law of Independent Assortment", isCorrect: false, rationale: "This law applies to two or more genes." },
+                    { text: "Law of Segregation", isCorrect: true, rationale: "The Law of Segregation explains why individual alleles separate into different gametes, leading to the expression of dominant traits in F1 from homozygous parents." },
+                    { text: "Law of Dominance", isCorrect: true, rationale: "This scenario directly demonstrates the Law of Dominance, where the dominant allele (T) masks the expression of the recessive allele (t) in heterozygotes." },
+                    { text: "Principle of Uniformity", isCorrect: false, rationale: "While F1 offspring are uniform, this is a result of dominance, not a distinct law." }
+                ],
+                hint: "Consider how dominant traits express themselves."
+            },
+            {
+                question: "What is the primary function of mRNA in protein synthesis?",
+                allOptions: [
+                    { text: "To carry amino acids to the ribosome", isCorrect: false, rationale: "tRNA (transfer RNA) carries amino acids to the ribosome." },
+                    { text: "To form the structural component of ribosomes", isCorrect: false, rationale: "rRNA (ribosomal RNA) forms the structural component of ribosomes." },
+                    { text: "To carry genetic information from DNA to the ribosome", isCorrect: true, rationale: "mRNA (messenger RNA) carries the genetic code from DNA in the nucleus to the ribosomes in the cytoplasm for protein synthesis." },
+                    { text: "To regulate gene expression by silencing specific genes", isCorrect: false, rationale: "This is a function of various types of non-coding RNAs, not typically mRNA." }
+                ],
+                hint: "Think about the 'messenger' role of mRNA in the central dogma."
+            },
+            {
+                question: "A plant cell forms a cell plate during cytokinesis, whereas an animal cell forms a cleavage furrow. This difference is due to what?",
+                allOptions: [
+                    { text: "The presence of chloroplasts in plant cells", isCorrect: false, rationale: "Chloroplasts are for photosynthesis, not cell division mechanics." },
+                    { text: "The rigid cell wall in plant cells", isCorrect: true, rationale: "The rigid cell wall prevents pinching in, so a cell plate forms to create a new cell wall between daughter cells." },
+                    { text: "The larger size of plant cells", isCorrect: false, rationale: "Cell size isn't the primary reason for this difference." },
+                    { text: "The absence of a nucleus in plant cells", isCorrect: false, rationale: "Plant cells do have a nucleus." }
+                ],
+                hint: "Consider the outermost protective layer unique to plant cells."
+            },
+            {
+                question: "Which of the following is NOT a mechanism that changes allele frequencies in a population?",
+                allOptions: [
+                    { text: "Gene Flow", isCorrect: false, rationale: "Gene flow (migration) changes allele frequencies." },
+                    { text: "Genetic Drift", isCorrect: false, rationale: "Genetic drift (random changes) changes allele frequencies." },
+                    { text: "Mutation", isCorrect: false, rationale: "Mutation introduces new alleles, thus changing frequencies." },
+                    { text: "Sexual reproduction", isCorrect: true, rationale: "Sexual reproduction shuffles existing alleles into new combinations but does not inherently change allele frequencies on its own, unlike the other options which are evolutionary mechanisms." }
+                ],
+                hint: "Think about processes that introduce new genetic variation vs. just rearranging existing variation."
+            },
+            {
+                question: "In a pedigree chart, what does a filled square typically represent?",
+                allOptions: [
+                    { text: "Affected female", isCorrect: false, rationale: "An affected female is a filled circle." },
+                    { text: "Unaffected male", isCorrect: false, rationale: "An unaffected male is an unfilled square." },
+                    { text: "Affected male", isCorrect: true, rationale: "A filled square in a pedigree chart typically represents an affected male." },
+                    { text: "Carrier female", isCorrect: false, rationale: "A carrier female is usually a half-filled circle." }
+                ],
+                hint: "Remember the standard symbols for sex and trait expression."
+            },
+            {
+                question: "What is the phenomenon where a single gene affects multiple, seemingly unrelated phenotypic traits?",
+                allOptions: [
+                    { text: "Polygenic inheritance", isCorrect: false, rationale: "Polygenic inheritance involves multiple genes affecting one trait." },
+                    { text: "Epistasis", isCorrect: false, rationale: "Epistasis is when one gene masks or modifies the expression of another." },
+                    { text: "Pleiotropy", isCorrect: true, rationale: "Pleiotropy occurs when a single gene has multiple, distinct phenotypic effects." },
+                    { text: "Gene linkage", isCorrect: false, rationale: "Gene linkage refers to genes being located close together on a chromosome." }
+                ],
+                hint: "Think about the 'many' effects of one gene."
+            },
+            {
+                question: "What is the primary difference between transcription and translation?",
+                allOptions: [
+                    { text: "Transcription makes DNA, translation makes RNA.", isCorrect: false, rationale: "Transcription makes RNA, translation makes protein." },
+                    { text: "Transcription occurs in the cytoplasm, translation in the nucleus.", isCorrect: false, rationale: "Transcription occurs in the nucleus, translation in the cytoplasm (eukaryotes)." },
+                    { text: "Transcription makes RNA from DNA, translation makes protein from RNA.", isCorrect: true, rationale: "Transcription is the synthesis of RNA from a DNA template. Translation is the synthesis of a protein from an mRNA template." },
+                    { text: "Transcription is DNA replication, translation is gene expression.", isCorrect: false, rationale: "Transcription is part of gene expression, but not DNA replication." }
+                ],
+                hint: "Consider the molecules involved and the end product of each process."
+            },
+            {
+                question: "The 'struggle for existence' is a key component of whose theory of evolution?",
+                allOptions: [
+                    { text: "Jean-Baptiste Lamarck", isCorrect: false, rationale: "Lamarck proposed inheritance of acquired characteristics." },
+                    { text: "Alfred Russel Wallace", isCorrect: false, rationale: "Wallace independently developed a similar theory to Darwin, but Darwin popularized this phrase." },
+                    { text: "Charles Darwin", isCorrect: true, rationale: "Darwin's theory of natural selection is based on the idea that organisms produce more offspring than can survive, leading to a struggle for existence." },
+                    { text: "Gregor Mendel", isCorrect: false, rationale: "Mendel is known for genetics, not evolution." }
+                ],
+                hint: "This phrase is often associated with the concept of 'survival of the fittest'."
+            }
+        ];
+
         // --- Utility Functions for UI Updates ---
 
         /**
@@ -344,13 +772,13 @@
                 </div>`;
             div.insertAdjacentHTML('beforeend', titleInputHtml);
 
-            // New AI Generate Questions Button
+            // New AI Generate Questions Button (now for random generation)
             const generateButton = document.createElement('button');
             generateButton.className = `w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md mb-4
                 ${isGeneratingQuestions ? 'opacity-50 cursor-not-allowed' : ''}`;
-            generateButton.textContent = isGeneratingQuestions ? 'Generating Questions...' : 'Generate 10 Questions with AI';
+            generateButton.textContent = isGeneratingQuestions ? 'Generating Quiz...' : 'Generate Random Quiz';
             generateButton.disabled = isGeneratingQuestions;
-            generateButton.onclick = generateQuizQuestionsAI;
+            generateButton.onclick = generateRandomQuizQuestions; // Changed function name
             div.appendChild(generateButton);
 
             const questionsContainer = document.createElement('div');
@@ -617,178 +1045,54 @@
         }
 
         /**
-         * Generates quiz questions using the Gemini API.
-         * The prompt now includes content from the user's study guide.
+         * Generates quiz questions from the local pool.
          */
-        async function generateQuizQuestionsAI() {
+        function generateRandomQuizQuestions() {
             isGeneratingQuestions = true;
             renderApp(); // Update button state to 'Generating...'
-            displayMessage('success', 'Generating questions... This may take a moment.');
-
-            // Content from the user's "Biology CP/CPA/H Final Exam Study Guide ~ 2025.odt"
-            const studyGuideContent = `
-                Biology Final Exam Review Guide
-
-                Mitosis/Meiosis
-                * What is the cell cycle? What are the parts of the cell cycle? (G1, S, G2, M phase) What happens in each of these phases?
-                * What happens during Interphase of the cell cycle? (G1, S, G2)
-                * Chromosome structure: sister chromatids, centromere, genes
-                * What are the phases of mitosis? (PMAT)
-                * What is cytokinesis?
-                * What is a cell plate? What type of cell forms a cell plate during cell division?
-                * What is the purpose of Meiosis?
-                * What is a tetrad? When do tetrads form?
-                * What is crossing over? What is genetic recombination?
-                * How do mitosis and meiosis differ?
-                * Mitosis occurs in what types of cells? Meiosis occurs in what types of cells?
-                * What are gametes? Egg and sperm? Polar bodies? A zygote?
-                * Haploid (n) vs. diploid (2n) cells.
-
-                DNA
-                * What does "DNA" stand for? What does "RNA" stand for?
-                * What are the building blocks of nucleic acids (DNA/RNA)?
-                * What are the 3 parts of a nucleotide?
-                * What 4 types of bases are found in DNA? RNA?
-                * What are the complementary base pairing rules?
-                DNA: A pairs with T, C with G;
-                RNA: A pairs with U
-                * In what stage of the cell cycle does DNA replicate? What happens in DNA replication?
-                * What are the 3 main differences between DNA and RNA?
-                * How do you go from DNA to proteins?
-                  * Transcription. What is it and where does it occur?
-                  * Translation. What is it and where does it occur?
-                * What is a codon? Anticodon?
-                * What is a mutation? Why do they occur?
-                * What is a base substitution? Does it always affect the amino acids produced?
-                * What are base insertions and deletions?
-
-                Genetics
-                * What is genetics?
-                * Who was Mendel? Why did he use pea plants to study genetics?
-                * What is the P generation? F1? F2?
-                * What are alleles?
-                * Dominant vs. Recessive
-                  * Dominant alleles are written as a capital letter (T), recessive as a lowercase (t)
-                * Purebred vs. Hybrid. (Homozygous = purebred (BB or bb) / Heterozygous = hybrid (Bb))
-                * Genotype vs. Phenotype ~ Genotypic and Phenotypic ratios
-                * What is the law of segregation?
-                * What is the law of independent assortment?
-                * What is probability?
-                * Use a punnett square to solve one and two factor crosses.
-                  * Ex: One Factor Cross ~ A homozygous black mouse (BB) is crossed with a brown (bb) mouse. Brown is recessive. What will all of the babies (the F1) look like? If 2 F1 mated, what would be the genotype and phenotypes of their offsprings?
-                  * Ex: Two Factor Cross ~ A heterozygous black, homozygous running mouse (BbRR) is crossed with a homozygous brown, heterozygous running mouse (bbRr). Black (B) is dominant to brown (b). Running (R) is dominant to waltzing (r).
-                  * What are the possible gametes from each mouse?
-                  * Heterozygous black, homozygous running mouse = BR and bR.
-                  * Homozygous brown, heterozygous running mouse = bR and br.
-                * Genetic problems involving incomplete dominance (the traits blend)
-                  * Ex: RR=red. WW=white. RW=pink.
-                * Genetics problems involving codominance (both traits show).
-                  * Ex: BB=brown fur. WW= white fur. BW=roan (a mix of both brown and white)
-                * Genetic problems involving Blood types (type AB is an example of codominance)
-                * Know the genotypes and phenotypes of each blood type (A, B, AB, O)
-                * What is the genotype of a male and a female? XY vs XX
-                * What are sex-linked traits? Solve genetic problems involving sex-linked traits
-                * What is nondisjunction?
-                * Using a pedigree: how to interpret them, determine if a trait is dominant/recessive, autosomal/sex-linked, identify genotypes of individuals.
-
-                Evolution and Classification
-                * What is evolution?
-                * What are the mechanisms that change allele frequencies in a population? (Gene Flow, Genetic Drift, Founder Effect, Population Bottleneck, Mutation, Natural Selection)
-                * What was Lamarck's theory of evolution?
-                * What is an adaptation?
-                * Darwin's finches ~ Descent with Modification, Natural Selection
-                * What are fossils? How do they provide evidence for evolution?
-                * Homologous structures vs. Analogous structures vs. Vestigial structures
-                * Biochemical evidence of evolution (DNA/amino acid sequence similarities)
-                * What is a species?
-                * What is the classification system? (Domain, Kingdom, Phylum, Class, Order, Family, Genus, Species)
-                * What is binomial nomenclature?
-            `;
-
-            const prompt = `Generate 10 multiple-choice questions for an Honors Biology quiz based on the following study guide content.
-            Each question should have 4 answer options, only one of which is correct.
-            Provide a concise rationale (1-2 sentences) for each answer option (explaining why it's plausible or incorrect).
-            Provide a brief, non-obvious hint for each question.
-            Ensure the questions cover a mix of topics from the study guide (e.g., cell cycle, DNA, genetics, evolution, classification).
-            Return the response as a JSON array of question objects.
-
-            Study Guide Content:
-            \`\`\`
-            ${studyGuideContent}
-            \`\`\`
-            `;
-
-            let chatHistory = [];
-            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-
-            const payload = {
-                contents: chatHistory,
-                generationConfig: {
-                    responseMimeType: "application/json",
-                    responseSchema: {
-                        type: "ARRAY",
-                        items: {
-                            type: "OBJECT",
-                            properties: {
-                                "question": { "type": "STRING" },
-                                "answerOptions": {
-                                    "type": "ARRAY",
-                                    "items": {
-                                        "type": "OBJECT",
-                                        "properties": {
-                                            "text": { "type": "STRING" },
-                                            "isCorrect": { "type": "BOOLEAN" },
-                                            "rationale": { "type": "STRING" }
-                                        },
-                                        "propertyOrdering": ["text", "isCorrect", "rationale"]
-                                    },
-                                    "minItems": 4,
-                                    "maxItems": 4
-                                },
-                                "hint": { "type": "STRING" }
-                            },
-                            "propertyOrdering": ["question", "answerOptions", "hint"]
-                        },
-                        "minItems": 10,
-                        "maxItems": 10
-                    }
-                }
-            };
-
-            // Correctly access the API key from the environment
-            const apiKey = typeof __api_key !== 'undefined' ? __api_key : '';
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            displayMessage('success', 'Generating random quiz questions...');
 
             try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+                const generatedQuizQuestions = [];
+                const shuffledAllQuestions = [...allBiologyQuestions].sort(() => 0.5 - Math.random()); // Shuffle all questions
 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`API error: ${response.status} ${response.statusText} - ${errorText}`);
+                // Select up to 10 unique questions
+                for (let i = 0; i < Math.min(10, shuffledAllQuestions.length); i++) {
+                    const originalQuestion = shuffledAllQuestions[i];
+                    const correctOption = originalQuestion.allOptions.find(opt => opt.isCorrect);
+                    const incorrectOptionsPool = originalQuestion.allOptions.filter(opt => !opt.isCorrect);
+
+                    // Shuffle incorrect options and pick 3 unique ones
+                    const selectedIncorrectOptions = [];
+                    const shuffledIncorrectPool = [...incorrectOptionsPool].sort(() => 0.5 - Math.random());
+
+                    for (let j = 0; j < Math.min(3, shuffledIncorrectPool.length); j++) {
+                        selectedIncorrectOptions.push(shuffledIncorrectPool[j]);
+                    }
+
+                    // If fewer than 3 incorrect options were available, we still proceed with what we have.
+                    // The core logic is to have 1 correct + N incorrect.
+
+                    const finalOptions = [correctOption, ...selectedIncorrectOptions];
+
+                    // Shuffle the final options for this question
+                    finalOptions.sort(() => 0.5 - Math.random());
+
+                    generatedQuizQuestions.push({
+                        question: originalQuestion.question,
+                        answerOptions: finalOptions,
+                        hint: originalQuestion.hint
+                    });
                 }
 
-                const result = await response.json();
+                newQuizQuestions = generatedQuizQuestions;
+                newQuizTitle = "Random Biology Quiz - " + new Date().toLocaleDateString();
+                displayMessage('success', 'Random quiz generated successfully!');
 
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    const jsonString = result.candidates[0].content.parts[0].text;
-                    const generatedQuestions = JSON.parse(jsonString);
-
-                    newQuizQuestions = generatedQuestions;
-                    newQuizTitle = "AI Generated Biology Quiz - " + new Date().toLocaleDateString();
-                    displayMessage('success', 'Questions generated successfully!');
-                } else {
-                    throw new Error('No candidates found or unexpected API response structure.');
-                }
             } catch (error) {
-                console.error("Error generating questions:", error);
-                displayMessage('error', "Failed to generate questions: " + error.message + ". Please try again.");
-                // Optionally reset newQuizQuestions to empty or default if generation fails
+                console.error("Error generating random questions:", error);
+                displayMessage('error', "Failed to generate random questions: " + error.message + ". Please try again.");
+                // Reset to a blank question if generation fails
                 newQuizQuestions = [{ question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }];
             } finally {
                 isGeneratingQuestions = false;
