@@ -407,7 +407,7 @@
             saveQuizBtn.textContent = isSavingQuiz ? 'Saving Quiz...' : 'Save Quiz';
             saveQuizBtn.disabled = isSavingQuiz;
             saveQuizBtn.onclick = handleSaveNewQuiz;
-            div.appendChild(saveQuiz);
+            div.appendChild(saveQuizBtn); /* Changed saveQuiz to saveQuizBtn */
 
             // Add event listener for quiz title after it's in the DOM
             const quizTitleInput = div.querySelector('#quizTitle');
