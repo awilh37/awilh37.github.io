@@ -1,7 +1,7 @@
 [
     {
         "question": "What is the primary function of the mitochondria?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Protein synthesis", "isCorrect": false, "rationale": "Ribosomes are responsible for protein synthesis." },
             { "text": "Energy production through cellular respiration", "isCorrect": true, "rationale": "Mitochondria are often called the 'powerhouses' of the cell because they generate most of the cell's supply of ATP." },
             { "text": "Waste disposal", "isCorrect": false, "rationale": "Lysosomes handle waste disposal." },
@@ -12,7 +12,7 @@
     },
     {
         "question": "Which of the following describes a haploid cell?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Contains two sets of chromosomes", "isCorrect": false, "rationale": "This describes a diploid cell." },
             { "text": "Contains half the number of chromosomes of a diploid cell", "isCorrect": true, "rationale": "Haploid cells, like gametes, contain a single set of chromosomes (n)." },
             { "text": "Is always a somatic cell", "isCorrect": false, "rationale": "Somatic cells are diploid." },
@@ -22,7 +22,7 @@
     },
     {
         "question": "What is the main role of DNA helicase during DNA replication?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Adds new nucleotides to the growing DNA strand", "isCorrect": false, "rationale": "DNA polymerase adds new nucleotides." },
             { "text": "Joins Okazaki fragments together", "isCorrect": false, "rationale": "DNA ligase joins Okazaki fragments." },
             { "text": "Unwinds the DNA double helix", "isCorrect": true, "rationale": "Helicase unwinds and separates the two strands of the DNA double helix." },
@@ -32,7 +32,7 @@
     },
     {
         "question": "In which phase of the cell cycle does DNA replication occur?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "G1 phase", "isCorrect": false, "rationale": "G1 is for cell growth." },
             { "text": "S phase", "isCorrect": true, "rationale": "The 'S' stands for synthesis, referring to DNA synthesis or replication." },
             { "text": "G2 phase", "isCorrect": false, "rationale": "G2 is for preparation for mitosis." },
@@ -42,7 +42,7 @@
     },
     {
         "question": "What is crossing over, and when does it occur?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Exchange of genetic material between sister chromatids during Anaphase II", "isCorrect": false, "rationale": "Crossing over occurs between homologous chromosomes, not sister chromatids, and in Prophase I." },
             { "text": "Exchange of genetic material between homologous chromosomes during Prophase I of meiosis", "isCorrect": true, "rationale": "Crossing over is the exchange of genetic material between non-sister chromatids of homologous chromosomes during Prophase I of meiosis." },
             { "text": "Random alignment of chromosomes at Metaphase I of meiosis", "isCorrect": false, "rationale": "This describes independent assortment, not crossing over." },
@@ -52,7 +52,7 @@
     },
     {
         "question": "Which of the following is an example of codominance?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Pink flowers from red and white parents", "isCorrect": false, "rationale": "This is an example of incomplete dominance, where traits blend." },
             { "text": "Human blood type AB", "isCorrect": true, "rationale": "In blood type AB, both A and B alleles are fully expressed simultaneously, making it a classic example of codominance." },
             { "text": "Tall pea plants being completely dominant over short pea plants", "isCorrect": false, "rationale": "This is an example of complete dominance." },
@@ -62,7 +62,7 @@
     },
     {
         "question": "What is the difference between genotype and phenotype?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Genotype is the observable trait, phenotype is the genetic makeup.", "isCorrect": false, "rationale": "This is reversed." },
             { "text": "Genotype is the genetic makeup, phenotype is the observable trait.", "isCorrect": true, "rationale": "Genotype refers to the set of genes an organism carries, while phenotype is the observable characteristics resulting from both genotype and environment." },
             { "text": "Genotype refers to dominant alleles, phenotype to recessive alleles.", "isCorrect": false, "rationale": "Both genotype and phenotype involve all types of alleles." },
@@ -72,7 +72,7 @@
     },
     {
         "question": "According to natural selection, what happens to individuals who are best adapted to their environment?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "They always produce sterile offspring.", "isCorrect": false, "rationale": "This is incorrect; successful adaptation leads to fertile offspring." },
             { "text": "They are randomly eliminated from the population.", "isCorrect": false, "rationale": "Natural selection is not random elimination." },
             { "text": "They are more likely to survive and reproduce, passing on their traits.", "isCorrect": true, "rationale": "Natural selection favors individuals with advantageous traits, leading to increased survival and reproductive success." },
@@ -82,7 +82,7 @@
     },
     {
         "question": "What is the most inclusive (broadest) taxonomic rank?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Kingdom", "isCorrect": false, "rationale": "Kingdom is broad, but Domain is broader." },
             { "text": "Class", "isCorrect": false, "rationale": "Class is more specific than Kingdom or Domain." },
             { "text": "Phylum", "isCorrect": false, "rationale": "Phylum is more specific than Kingdom or Domain." },
@@ -93,7 +93,7 @@
     },
     {
         "question": "What is the process of synthesizing an RNA molecule from a DNA template?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Replication", "isCorrect": false, "rationale": "Replication is DNA copying DNA." },
             { "text": "Translation", "isCorrect": false, "rationale": "Translation is protein synthesis from RNA." },
             { "text": "Transcription", "isCorrect": true, "rationale": "Transcription is the process where genetic information from DNA is copied into an RNA molecule." },
@@ -103,7 +103,7 @@
     },
     {
         "question": "If a segment of DNA is $5'-ATGC-3'$, what is the sequence of the complementary mRNA strand?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "$5'-UACG-3'$", "isCorrect": true, "rationale": "During transcription, Adenine (A) pairs with Uracil (U), Thymine (T) with Adenine (A), Guanine (G) with Cytosine (C), and Cytosine (C) with Guanine (G). The mRNA is synthesized 5' to 3' from a 3' to 5' template." },
             { "text": "$3'-TACG-5'$", "isCorrect": false, "rationale": "This would be the complementary DNA strand, not mRNA." },
             { "text": "$5'-TACG-3'$", "isCorrect": false, "rationale": "This is incorrect; mRNA contains Uracil (U) instead of Thymine (T)." },
@@ -113,7 +113,7 @@
     },
     {
         "question": "What is the purpose of Meiosis?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "To produce two identical diploid cells for growth and repair.", "isCorrect": false, "rationale": "This is the purpose of mitosis." },
             { "text": "To produce four genetically identical haploid gametes.", "isCorrect": false, "rationale": "Meiosis produces genetically unique haploid gametes, not identical ones." },
             { "text": "To produce four genetically unique haploid gametes for sexual reproduction.", "isCorrect": true, "rationale": "Meiosis reduces the chromosome number by half and introduces genetic variation, essential for sexual reproduction." },
@@ -123,7 +123,7 @@
     },
     {
         "question": "Which term describes different forms of a gene?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Chromosome", "isCorrect": false, "rationale": "A chromosome is a structure containing many genes." },
             { "text": "Allele", "isCorrect": true, "rationale": "Alleles are alternative forms of a gene, located at the same locus on homologous chromosomes." },
             { "text": "Phenotype", "isCorrect": false, "rationale": "Phenotype is the observable trait." },
@@ -133,7 +133,7 @@
     },
     {
         "question": "What is a mutation?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "The process of DNA replication.", "isCorrect": false, "rationale": "DNA replication is the copying of DNA." },
             { "text": "A permanent change in the DNA sequence.", "isCorrect": true, "rationale": "A mutation is a permanent alteration in the DNA sequence that makes up a gene or chromosome." },
             { "text": "The synthesis of proteins.", "isCorrect": false, "rationale": "Protein synthesis involves transcription and translation." },
@@ -143,7 +143,7 @@
     },
     {
         "question": "Which of the following is a vestigial structure?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Bird wing for flight", "isCorrect": false, "rationale": "A bird wing is a functional structure for flight." },
             { "text": "Human appendix", "isCorrect": true, "rationale": "The human appendix is an example of a vestigial structure, having lost much of its ancestral function." },
             { "text": "Bat wing and human arm", "isCorrect": false, "rationale": "These are homologous structures, showing common ancestry." },
@@ -153,7 +153,7 @@
     },
     {
         "question": "What is the correct order of the Linnaean classification ranks from broadest to most specific?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Kingdom, Phylum, Class, Order, Family, Genus, Species", "isCorrect": true, "rationale": "This is the standard hierarchical order of taxonomic ranks." },
             { "text": "Species, Genus, Family, Order, Class, Phylum, Kingdom", "isCorrect": false, "rationale": "This is the reverse order." },
             { "text": "Phylum, Kingdom, Class, Order, Family, Genus, Species", "isCorrect": false, "rationale": "Kingdom should precede Phylum." },
@@ -163,7 +163,7 @@
     },
     {
         "question": "What is the primary product of translation?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "DNA", "isCorrect": false, "rationale": "DNA is replicated, not produced by translation." },
             { "text": "RNA", "isCorrect": false, "rationale": "RNA is produced during transcription." },
             { "text": "Polypeptide (protein)", "isCorrect": true, "rationale": "Translation is the process by which ribosomes synthesize proteins after the transcription of DNA to RNA." },
@@ -173,7 +173,7 @@
     },
     {
         "question": "Which concept explains why two individuals heterozygous for a trait ($Aa$) can produce offspring with a recessive phenotype ($aa$)?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Law of Independent Assortment", "isCorrect": false, "rationale": "This law applies to the inheritance of multiple genes." },
             { "text": "Law of Segregation", "isCorrect": true, "rationale": "The Law of Segregation states that allele pairs separate or segregate during gamete formation and randomly unite at fertilization." },
             { "text": "Incomplete Dominance", "isCorrect": false, "rationale": "Incomplete dominance describes blending phenotypes, not the reappearance of recessive traits from heterozygotes." },
@@ -183,7 +183,7 @@
     },
     {
         "question": "What is the ultimate source of all new alleles in a population?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Natural selection", "isCorrect": false, "rationale": "Natural selection acts on existing variation, it doesn't create new alleles." },
             { "text": "Gene flow", "isCorrect": false, "rationale": "Gene flow introduces alleles from other populations, but doesn't create them." },
             { "text": "Genetic drift", "isCorrect": false, "rationale": "Genetic drift is random change in allele frequencies, not the source of new alleles." },
@@ -193,7 +193,7 @@
     },
     {
         "question": "What is a major difference between mitosis and meiosis?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Mitosis produces haploid cells, while meiosis produces diploid cells.", "isCorrect": false, "rationale": "This is reversed; mitosis produces diploid cells, meiosis produces haploid." },
             { "text": "Mitosis produces four daughter cells, while meiosis produces two daughter cells.", "isCorrect": false, "rationale": "Mitosis produces two, meiosis produces four." },
             { "text": "Mitosis produces genetically identical cells, while meiosis produces genetically unique cells.", "isCorrect": true, "rationale": "Mitosis creates exact copies, whereas meiosis introduces genetic variation through crossing over and independent assortment." },
@@ -203,7 +203,7 @@
     },
     {
         "question": "What is a pedigree chart primarily used for in genetics?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "To determine the probability of a genetic cross", "isCorrect": false, "rationale": "Punnett squares are used for probability calculations." },
             { "text": "To synthesize proteins", "isCorrect": false, "rationale": "Protein synthesis involves ribosomes and mRNA." },
             { "text": "To track the inheritance of a trait through generations of a family", "isCorrect": true, "rationale": "Pedigrees are visual tools to trace the pattern of inheritance of a specific trait through several generations." },
@@ -213,7 +213,7 @@
     },
     {
         "question": "Which of the following is NOT one of the three main differences between DNA and RNA?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "DNA is double-stranded, RNA is single-stranded.", "isCorrect": false, "rationale": "This is a main difference." },
             { "text": "DNA contains deoxyribose, RNA contains ribose.", "isCorrect": false, "rationale": "This is a main difference." },
             { "text": "DNA contains phosphate, RNA contains sulfate.", "isCorrect": true, "rationale": "Both DNA and RNA contain phosphate groups. Sulfate is not a component." },
@@ -223,7 +223,7 @@
     },
     {
         "question": "The observation that different species of finches on the Galápagos Islands have beaks of various shapes and sizes, each suited to a different food source, is a classic example supporting which evolutionary concept?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Genetic drift", "isCorrect": false, "rationale": "Genetic drift is random; this shows adaptation." },
             { "text": "Punctuated equilibrium", "isCorrect": false, "rationale": "Punctuated equilibrium describes the pattern of evolution, not the mechanism." },
             { "text": "Natural selection", "isCorrect": true, "rationale": "Darwin's finches are a prime example of natural selection, where favorable adaptations (beak shapes) led to differential survival and reproduction in different environments." },
@@ -233,7 +233,7 @@
     },
     {
         "question": "What is a codon?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "A segment of DNA that codes for a protein.", "isCorrect": false, "rationale": "This describes a gene." },
             { "text": "A three-nucleotide sequence on mRNA that codes for a specific amino acid.", "isCorrect": true, "rationale": "A codon is a three-nucleotide sequence on an mRNA molecule that specifies a particular amino acid or termination signal during protein synthesis." },
             { "text": "A three-nucleotide sequence on tRNA that is complementary to an mRNA codon.", "isCorrect": false, "rationale": "This describes an anticodon." },
@@ -243,7 +243,7 @@
     },
     {
         "question": "Which of the following describes a homozygous dominant individual?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Has two different alleles for a trait (e.g., Aa)", "isCorrect": false, "rationale": "This describes a heterozygous individual." },
             { "text": "Has two identical dominant alleles for a trait (e.g., AA)", "isCorrect": true, "rationale": "Homozygous dominant means having two copies of the same dominant allele." },
             { "text": "Has two identical recessive alleles for a trait (e.g., aa)", "isCorrect": false, "rationale": "This describes a homozygous recessive individual." },
@@ -253,7 +253,7 @@
     },
     {
         "question": "What is the function of transfer RNA (tRNA) during translation?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Carries genetic information from DNA to the ribosome", "isCorrect": false, "rationale": "This is the function of mRNA." },
             { "text": "Forms the structural components of ribosomes", "isCorrect": false, "rationale": "This is the function of rRNA." },
             { "text": "Brings specific amino acids to the ribosome based on the mRNA codon", "isCorrect": true, "rationale": "tRNA molecules act as adaptors, bringing the correct amino acids to the ribosome to match the codons on the mRNA." },
@@ -263,7 +263,7 @@
     },
     {
         "question": "What is nondisjunction?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "The failure of homologous chromosomes or sister chromatids to separate during meiosis or mitosis.", "isCorrect": true, "rationale": "Nondisjunction is the error in chromosome segregation that leads to gametes with an abnormal number of chromosomes." },
             { "text": "A type of gene mutation where a base is substituted for another.", "isCorrect": false, "rationale": "This is a point mutation." },
             { "text": "The exchange of genetic material between homologous chromosomes.", "isCorrect": false, "rationale": "This is crossing over." },
@@ -273,7 +273,7 @@
     },
     {
         "question": "Which type of mutation involves the removal of one or more nucleotide base pairs from a DNA sequence?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Insertion mutation", "isCorrect": false, "rationale": "Insertion adds nucleotides." },
             { "text": "Substitution mutation", "isCorrect": false, "rationale": "Substitution replaces nucleotides." },
             { "text": "Deletion mutation", "isCorrect": true, "rationale": "A deletion mutation involves the removal of one or more base pairs from a DNA sequence." },
@@ -283,7 +283,7 @@
     },
     {
         "question": "Who is considered the 'father of genetics' due to his work with pea plants?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Charles Darwin", "isCorrect": false, "rationale": "Darwin is known for evolution by natural selection." },
             { "text": "James Watson", "isCorrect": false, "rationale": "Watson was co-discoverer of DNA structure." },
             { "text": "Gregor Mendel", "isCorrect": true, "rationale": "Gregor Mendel's experiments with pea plants laid the foundation for modern genetics." },
@@ -293,7 +293,7 @@
     },
     {
         "question": "A test cross (crossing an individual with an unknown genotype with a homozygous recessive individual) is used to determine what?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "The phenotype of the unknown individual.", "isCorrect": false, "rationale": "The phenotype is usually already observable." },
             { "text": "The sex of the unknown individual.", "isCorrect": false, "rationale": "Sex is determined by chromosomes, not test crosses." },
             { "text": "The genotype of the unknown individual.", "isCorrect": true, "rationale": "A test cross helps determine if an individual with a dominant phenotype is homozygous dominant or heterozygous." },
@@ -303,7 +303,7 @@
     },
     {
         "question": "Homologous structures are evidence of what?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Convergent evolution", "isCorrect": false, "rationale": "Convergent evolution leads to analogous structures." },
             { "text": "Divergent evolution (common ancestry)", "isCorrect": true, "rationale": "Homologous structures are similar in origin but may have different functions, indicating shared ancestry and divergent evolution." },
             { "text": "Independent adaptation to similar environments", "isCorrect": false, "rationale": "This leads to analogous structures." },
@@ -313,7 +313,7 @@
     },
     {
         "question": "What is the primary function of ribosomes?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "DNA replication", "isCorrect": false, "rationale": "DNA replication is carried out by DNA polymerases." },
             { "text": "Cellular respiration", "isCorrect": false, "rationale": "Cellular respiration occurs in mitochondria." },
             { "text": "Protein synthesis", "isCorrect": true, "rationale": "Ribosomes are the cellular machinery responsible for translating mRNA into proteins." },
@@ -323,7 +323,7 @@
     },
     {
         "question": "Which type of inheritance pattern results in a blended phenotype in heterozygotes (e.g., red and white parents produce pink offspring)?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Codominance", "isCorrect": false, "rationale": "Codominance results in both traits being fully expressed, not blended." },
             { "text": "Complete dominance", "isCorrect": false, "rationale": "Complete dominance results in one allele masking the other entirely." },
             { "text": "Incomplete dominance", "isCorrect": true, "rationale": "Incomplete dominance is characterized by heterozygotes exhibiting an intermediate phenotype that is a blend of the two homozygous phenotypes." },
@@ -333,7 +333,7 @@
     },
     {
         "question": "What does the 'P' stand for in the P generation in genetics?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Parental", "isCorrect": true, "rationale": "The P generation refers to the parental generation, the first set of parents crossed in a genetic experiment." },
             { "text": "Phenotype", "isCorrect": false, "rationale": "Phenotype is the observable characteristic." },
             { "text": "Probability", "isCorrect": false, "rationale": "Probability is the likelihood of an event." },
@@ -343,7 +343,7 @@
     },
     {
         "question": "If a true-breeding tall pea plant (TT) is crossed with a true-breeding short pea plant (tt), all F1 offspring will be tall. This illustrates which of Mendel's laws?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Law of Independent Assortment", "isCorrect": false, "rationale": "This law applies to two or more genes." },
             { "text": "Law of Segregation", "isCorrect": true, "rationale": "The Law of Segregation explains why individual alleles separate into different gametes, leading to the expression of dominant traits in F1 from homozygous parents." },
             { "text": "Law of Dominance", "isCorrect": true, "rationale": "This scenario directly demonstrates the Law of Dominance, where the dominant allele (T) masks the expression of the recessive allele (t) in heterozygotes." },
@@ -353,7 +353,7 @@
     },
     {
         "question": "What is the primary function of mRNA in protein synthesis?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "To carry amino acids to the ribosome", "isCorrect": false, "rationale": "tRNA (transfer RNA) carries amino acids to the ribosome." },
             { "text": "To form the structural component of ribosomes", "isCorrect": false, "rationale": "rRNA (ribosomal RNA) forms the structural component of ribosomes." },
             { "text": "To carry genetic information from DNA to the ribosome", "isCorrect": true, "rationale": "mRNA (messenger RNA) carries the genetic code from DNA in the nucleus to the ribosomes in the cytoplasm for protein synthesis." },
@@ -363,7 +363,7 @@
     },
     {
         "question": "A plant cell forms a cell plate during cytokinesis, whereas an animal cell forms a cleavage furrow. This difference is due to what?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "The presence of chloroplasts in plant cells", "isCorrect": false, "rationale": "Chloroplasts are for photosynthesis, not cell division mechanics." },
             { "text": "The rigid cell wall in plant cells", "isCorrect": true, "rationale": "The rigid cell wall prevents pinching in, so a cell plate forms to create a new cell wall between daughter cells." },
             { "text": "The larger size of plant cells", "isCorrect": false, "rationale": "Cell size isn't the primary reason for this difference." },
@@ -373,7 +373,7 @@
     },
     {
         "question": "Which of the following is NOT a mechanism that changes allele frequencies in a population?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Gene Flow", "isCorrect": false, "rationale": "Gene flow (migration) changes allele frequencies." },
             { "text": "Genetic Drift", "isCorrect": false, "rationale": "Genetic drift (random changes) changes allele frequencies." },
             { "text": "Mutation", "isCorrect": false, "rationale": "Mutation introduces new alleles, thus changing frequencies." },
@@ -383,7 +383,7 @@
     },
     {
         "question": "In a pedigree chart, what does a filled square typically represent?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Affected female", "isCorrect": false, "rationale": "An affected female is a filled circle." },
             { "text": "Unaffected male", "isCorrect": false, "rationale": "An unaffected male is an unfilled square." },
             { "text": "Affected male", "isCorrect": true, "rationale": "A filled square in a pedigree chart typically represents an affected male." },
@@ -393,7 +393,7 @@
     },
     {
         "question": "What is the phenomenon where a single gene affects multiple, seemingly unrelated phenotypic traits?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Polygenic inheritance", "isCorrect": false, "rationale": "Polygenic inheritance involves multiple genes affecting one trait." },
             { "text": "Epistasis", "isCorrect": false, "rationale": "Epistasis is when one gene masks or modifies the expression of another." },
             { "text": "Pleiotropy", "isCorrect": true, "rationale": "Pleiotropy occurs when a single gene has multiple, distinct phenotypic effects." },
@@ -403,7 +403,7 @@
     },
     {
         "question": "What is the primary difference between transcription and translation?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Transcription makes DNA, translation makes RNA.", "isCorrect": false, "rationale": "Transcription makes RNA, translation makes protein." },
             { "text": "Transcription occurs in the cytoplasm, translation in the nucleus.", "isCorrect": false, "rationale": "Transcription occurs in the nucleus, translation in the cytoplasm (eukaryotes)." },
             { "text": "Transcription makes RNA from DNA, translation makes protein from RNA.", "isCorrect": true, "rationale": "Transcription is the synthesis of RNA from a DNA template. Translation is the synthesis of a protein from an mRNA template." },
@@ -413,7 +413,7 @@
     },
     {
         "question": "The 'struggle for existence' is a key component of whose theory of evolution?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Jean-Baptiste Lamarck", "isCorrect": false, "rationale": "Lamarck proposed inheritance of acquired characteristics." },
             { "text": "Alfred Russel Wallace", "isCorrect": false, "rationale": "Wallace independently developed a similar theory to Darwin, but Darwin popularized this phrase." },
             { "text": "Charles Darwin", "isCorrect": true, "rationale": "Darwin's theory of natural selection is based on the idea that organisms produce more offspring than can survive, leading to a struggle for existence." },
@@ -423,7 +423,7 @@
     },
     {
         "question": "Which organelle is responsible for detoxification and lipid synthesis?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Rough Endoplasmic Reticulum", "isCorrect": false, "rationale": "The Rough ER is involved in protein synthesis and modification with ribosomes." },
             { "text": "Golgi Apparatus", "isCorrect": false, "rationale": "The Golgi modifies, sorts, and packages proteins and lipids for secretion or delivery to other organelles." },
             { "text": "Smooth Endoplasmic Reticulum", "isCorrect": true, "rationale": "The Smooth ER is involved in lipid synthesis, detoxification of drugs and poisons, and storage of calcium ions." },
@@ -433,7 +433,7 @@
     },
     {
         "question": "What type of bond forms between amino acids to create a polypeptide chain?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Hydrogen bond", "isCorrect": false, "rationale": "Hydrogen bonds occur between polar molecules and are important for protein folding, but not the primary bond holding amino acids together in a chain." },
             { "text": "Ionic bond", "isCorrect": false, "rationale": "Ionic bonds typically form between ions with opposite charges." },
             { "text": "Peptide bond", "isCorrect": true, "rationale": "A peptide bond is a covalent bond formed between the carboxyl group of one amino acid and the amino group of another, forming a polypeptide chain." },
@@ -443,7 +443,7 @@
     },
     {
         "question": "Which of the following is an example of a negative feedback loop in biological systems?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Blood clotting after an injury", "isCorrect": false, "rationale": "Blood clotting is an example of a positive feedback loop, where the response intensifies the stimulus." },
             { "text": "Contractions during childbirth", "isCorrect": false, "rationale": "Childbirth contractions are an example of a positive feedback loop." },
             { "text": "Regulation of blood glucose levels by insulin and glucagon", "isCorrect": true, "rationale": "When blood glucose rises, insulin is released to lower it, and when it falls, glucagon is released to raise it, thus maintaining homeostasis. This is a classic negative feedback loop." },
@@ -453,7 +453,7 @@
     },
     {
         "question": "Photosynthesis primarily takes place in which plant cell organelle?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Mitochondria", "isCorrect": false, "rationale": "Mitochondria perform cellular respiration." },
             { "text": "Vacuole", "isCorrect": false, "rationale": "Vacuoles are for storage and waste." },
             { "text": "Chloroplast", "isCorrect": true, "rationale": "Chloroplasts contain chlorophyll and are the sites of photosynthesis in plant and algal cells." },
@@ -463,7 +463,7 @@
     },
     {
         "question": "What is the role of ATP in cellular processes?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "To store genetic information", "isCorrect": false, "rationale": "DNA stores genetic information." },
             { "text": "To act as the primary energy currency of the cell", "isCorrect": true, "rationale": "ATP (adenosine triphosphate) provides readily usable energy for various cellular activities." },
             { "text": "To transport oxygen in the blood", "isCorrect": false, "rationale": "Hemoglobin transports oxygen." },
@@ -473,7 +473,7 @@
     },
     {
         "question": "Which type of RNA carries the genetic code from DNA to the ribosome to guide protein synthesis?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "tRNA (transfer RNA)", "isCorrect": false, "rationale": "tRNA carries amino acids to the ribosome." },
             { "text": "rRNA (ribosomal RNA)", "isCorrect": false, "rationale": "rRNA is a structural component of ribosomes." },
             { "text": "mRNA (messenger RNA)", "isCorrect": true, "rationale": "mRNA carries the genetic instructions from DNA in the nucleus to the ribosomes in the cytoplasm." },
@@ -483,7 +483,7 @@
     },
     {
         "question": "What is osmosis?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "The movement of solute particles across a semipermeable membrane.", "isCorrect": false, "rationale": "This describes diffusion of solutes." },
             { "text": "The movement of water molecules across a semipermeable membrane from an area of higher solute concentration to an area of lower solute concentration.", "isCorrect": false, "rationale": "This is the incorrect direction of water movement." },
             { "text": "The movement of water molecules across a semipermeable membrane from an area of higher water concentration (lower solute) to an area of lower water concentration (higher solute).", "isCorrect": true, "rationale": "Osmosis is the net movement of water across a selectively permeable membrane from an area of higher water potential (lower solute concentration) to an area of lower water potential (higher solute concentration)." },
@@ -493,7 +493,7 @@
     },
     {
         "question": "Which of the following is a characteristic of enzymes?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "They are consumed during the reactions they catalyze.", "isCorrect": false, "rationale": "Enzymes are catalysts, meaning they facilitate reactions without being consumed." },
             { "text": "They increase the activation energy of a reaction.", "isCorrect": false, "rationale": "Enzymes *decrease* the activation energy." },
             { "text": "They are highly specific to their substrates.", "isCorrect": true, "rationale": "Enzymes typically have a specific three-dimensional shape that allows them to bind only to specific molecules (substrates)." },
@@ -503,7 +503,7 @@
     },
     {
         "question": "What is the primary role of decomposers in an ecosystem?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "To produce organic matter through photosynthesis.", "isCorrect": false, "rationale": "Producers (like plants) do this." },
             { "text": "To consume other organisms for energy.", "isCorrect": false, "rationale": "Consumers do this." },
             { "text": "To break down dead organic material and recycle nutrients.", "isCorrect": true, "rationale": "Decomposers (bacteria, fungi) break down dead organisms and waste products, returning vital nutrients to the soil or water." },
@@ -513,7 +513,7 @@
     },
     {
         "question": "Which of the following describes a homozygous recessive genotype?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Two different alleles for a trait (e.g., Bb)", "isCorrect": false, "rationale": "This is heterozygous." },
             { "text": "Two identical dominant alleles for a trait (e.g., BB)", "isCorrect": false, "rationale": "This is homozygous dominant." },
             { "text": "Two identical recessive alleles for a trait (e.g., bb)", "isCorrect": true, "rationale": "Homozygous recessive means having two copies of the same recessive allele." },
@@ -523,7 +523,7 @@
     },
     {
         "question": "What is the purpose of gel electrophoresis in molecular biology?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "To amplify DNA sequences.", "isCorrect": false, "rationale": "PCR (Polymerase Chain Reaction) amplifies DNA sequences." },
             { "text": "To cut DNA at specific recognition sites.", "isCorrect": false, "rationale": "Restriction enzymes cut DNA." },
             { "text": "To separate DNA fragments by size.", "isCorrect": true, "rationale": "Gel electrophoresis separates DNA (or RNA or protein) fragments based on their size and electrical charge by moving them through a gel matrix." },
@@ -533,7 +533,7 @@
     },
     {
         "question": "In a food web, what trophic level do organisms that eat primary consumers belong to?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Producers", "isCorrect": false, "rationale": "Producers create their own food." },
             { "text": "Primary Consumers", "isCorrect": false, "rationale": "Primary consumers eat producers." },
             { "text": "Secondary Consumers", "isCorrect": true, "rationale": "Secondary consumers eat primary consumers (herbivores)." },
@@ -543,7 +543,7 @@
     },
     {
         "question": "Which macromolecule is characterized by a high proportion of carbon-hydrogen bonds and is largely hydrophobic?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Carbohydrates", "isCorrect": false, "rationale": "Carbohydrates are generally hydrophilic." },
             { "text": "Proteins", "isCorrect": false, "rationale": "Proteins have diverse structures and functions, some parts are hydrophobic, but they are not defined by being largely hydrophobic due to C-H bonds." },
             { "text": "Nucleic Acids", "isCorrect": false, "rationale": "Nucleic acids contain phosphate groups which are hydrophilic." },
@@ -553,7 +553,7 @@
     },
     {
         "question": "What is the role of ribosomes in the synthesis of proteins?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "To transport mRNA from the nucleus to the cytoplasm.", "isCorrect": false, "rationale": "mRNA moves from the nucleus to the cytoplasm via nuclear pores." },
             { "text": "To synthesize polypeptide chains by reading mRNA codons and bringing appropriate tRNAs.", "isCorrect": true, "rationale": "Ribosomes are the cellular machinery where translation occurs, synthesizing proteins by linking amino acids delivered by tRNA according to the mRNA sequence." },
             { "text": "To fold proteins into their correct three-dimensional structure.", "isCorrect": false, "rationale": "Protein folding is aided by chaperones and occurs after synthesis, often in the ER." },
@@ -563,7 +563,7 @@
     },
     {
         "question": "Which type of cell junction allows for the direct passage of small molecules and ions between adjacent animal cells?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Tight junctions", "isCorrect": false, "rationale": "Tight junctions form a watertight seal between cells, preventing leakage." },
             { "text": "Desmosomes", "isCorrect": false, "rationale": "Desmosomes provide strong adhesion between cells, acting like rivets." },
             { "text": "Gap junctions", "isCorrect": true, "rationale": "Gap junctions (communicating junctions) are channels that allow ions and small molecules to pass directly between adjacent animal cells, facilitating communication." },
@@ -573,7 +573,7 @@
     },
     {
         "question": "What is the concept of 'carrying capacity' in ecology?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "The maximum reproductive potential of a species.", "isCorrect": false, "rationale": "This is biotic potential." },
             { "text": "The total biomass of all organisms in an ecosystem.", "isCorrect": false, "rationale": "This is biomass." },
             { "text": "The maximum population size that an environment can sustain indefinitely.", "isCorrect": true, "rationale": "Carrying capacity (K) is the maximum population size of a biological species that can be sustained indefinitely by the environment, given the food, habitat, water, and other necessities available." },
@@ -583,7 +583,7 @@
     },
     {
         "question": "Which process uses light energy to synthesize glucose?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Cellular Respiration", "isCorrect": false, "rationale": "Cellular respiration breaks down glucose for energy." },
             { "text": "Chemosynthesis", "isCorrect": false, "rationale": "Chemosynthesis uses chemical energy, not light, to produce food." },
             { "text": "Fermentation", "isCorrect": false, "rationale": "Fermentation is an anaerobic process that does not produce glucose." },
@@ -593,7 +593,7 @@
     },
     {
         "question": "In DNA, adenine always pairs with thymine, and guanine always pairs with cytosine. This is known as what rule?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "The Law of Segregation", "isCorrect": false, "rationale": "This is a Mendelian genetics principle." },
             { "text": "The Central Dogma", "isCorrect": false, "rationale": "The Central Dogma describes the flow of genetic information from DNA to RNA to protein." },
             { "text": "Chargaff's Rule", "isCorrect": true, "rationale": "Chargaff's Rule states that in DNA, the amount of adenine equals the amount of thymine, and the amount of guanine equals the amount of cytosine." },
@@ -603,7 +603,7 @@
     },
     {
         "question": "What happens during the process of transcription?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "DNA is copied to make another DNA molecule.", "isCorrect": false, "rationale": "This is replication." },
             { "text": "RNA is used as a template to make proteins.", "isCorrect": false, "rationale": "This is translation." },
             { "text": "A molecule of mRNA is synthesized from a DNA template.", "isCorrect": true, "rationale": "Transcription is the synthesis of an RNA molecule from a DNA template." },
@@ -613,7 +613,7 @@
     },
     {
         "question": "Which adaptation is most likely to be found in a desert plant?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Large, broad leaves to maximize light absorption.", "isCorrect": false, "rationale": "Large leaves would lead to excessive water loss in a desert." },
             { "text": "Shallow, widespread root system to capture surface water.", "isCorrect": true, "rationale": "Desert plants often have shallow root systems to quickly absorb rainfall that rarely penetrates deep into the soil." },
             { "text": "Stomata that are always open to facilitate gas exchange.", "isCorrect": false, "rationale": "Open stomata would lead to rapid water loss; desert plants typically close them during the day." },
@@ -623,7 +623,7 @@
     },
     {
         "question": "What is the main function of the cell membrane?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "To store genetic material.", "isCorrect": false, "rationale": "The nucleus stores genetic material." },
             { "text": "To produce ATP.", "isCorrect": false, "rationale": "Mitochondria produce ATP." },
             { "text": "To control which substances enter and leave the cell.", "isCorrect": true, "rationale": "The cell membrane (plasma membrane) is selectively permeable, regulating the passage of substances into and out of the cell." },
@@ -633,7 +633,7 @@
     },
     {
         "question": "The process by which organisms with traits better suited to their environment tend to survive and reproduce more offspring is called:",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Genetic drift", "isCorrect": false, "rationale": "Genetic drift is random changes in allele frequencies." },
             { "text": "Gene flow", "isCorrect": false, "rationale": "Gene flow is the movement of genes between populations." },
             { "text": "Mutation", "isCorrect": false, "rationale": "Mutation creates new alleles, but isn't the process of selection." },
@@ -643,7 +643,7 @@
     },
     {
         "question": "Which of the following describes an example of a symbiotic relationship where both organisms benefit?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "A tick feeding on a dog.", "isCorrect": false, "rationale": "This is parasitism, where one benefits and the other is harmed." },
             { "text": "A lion preying on a zebra.", "isCorrect": false, "rationale": "This is predation." },
             { "text": "Bees pollinating flowers, benefiting from nectar while helping the flower reproduce.", "isCorrect": true, "rationale": "This is mutualism, a type of symbiosis where both species involved benefit." },
@@ -653,7 +653,7 @@
     },
     {
         "question": "What is the function of the Golgi apparatus?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "To produce energy through cellular respiration.", "isCorrect": false, "rationale": "Mitochondria produce energy." },
             { "text": "To synthesize proteins.", "isCorrect": false, "rationale": "Ribosomes synthesize proteins." },
             { "text": "To modify, sort, and package proteins and lipids.", "isCorrect": true, "rationale": "The Golgi apparatus modifies, sorts, and packages proteins and lipids into vesicles for secretion or delivery to other organelles." },
@@ -663,7 +663,7 @@
     },
     {
         "question": "The scientific name for an organism, like *Homo sapiens*, follows a system of binomial nomenclature. Which two taxonomic ranks are used in this system?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Family and Genus", "isCorrect": false, "rationale": "Family and Genus are ranks, but not the ones used for binomial nomenclature." },
             { "text": "Order and Species", "isCorrect": false, "rationale": "Order and Species are ranks, but not the two used for binomial nomenclature." },
             { "text": "Genus and Species", "isCorrect": true, "rationale": "Binomial nomenclature uses the Genus name followed by the Species epithet (e.g., *Homo sapiens*)." },
@@ -673,7 +673,7 @@
     },
     {
         "question": "Which of the following is an example of an abiotic factor in an ecosystem?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Bacteria", "isCorrect": false, "rationale": "Bacteria are living (biotic) organisms." },
             { "text": "Trees", "isCorrect": false, "rationale": "Trees are living (biotic) organisms." },
             { "text": "Sunlight", "isCorrect": true, "rationale": "Sunlight is a non-living chemical or physical part of the environment that affects living organisms." },
@@ -683,7 +683,7 @@
     },
     {
         "question": "What is the primary role of tRNA during protein synthesis?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Carries genetic information from DNA to the ribosome.", "isCorrect": false, "rationale": "mRNA does this." },
             { "text": "Forms the structural components of ribosomes.", "isCorrect": false, "rationale": "rRNA does this." },
             { "text": "Brings specific amino acids to the ribosome.", "isCorrect": true, "rationale": "tRNA molecules have an anticodon that pairs with an mRNA codon and carry the corresponding amino acid to the ribosome." },
@@ -693,7 +693,7 @@
     },
     {
         "question": "Which level of protein structure involves the unique sequence of amino acids in a polypeptide chain?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Secondary structure", "isCorrect": false, "rationale": "Secondary structure involves local folding patterns like alpha-helices and beta-sheets." },
             { "text": "Tertiary structure", "isCorrect": false, "rationale": "Tertiary structure is the overall three-dimensional shape of a single polypeptide chain." },
             { "text": "Quaternary structure", "isCorrect": false, "rationale": "Quaternary structure involves the arrangement of multiple polypeptide subunits." },
@@ -703,7 +703,7 @@
     },
     {
         "question": "The movement of substances from an area of high concentration to an area of low concentration, without the use of energy, is called:",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Active transport", "isCorrect": false, "rationale": "Active transport requires energy and moves substances against their concentration gradient." },
             { "text": "Endocytosis", "isCorrect": false, "rationale": "Endocytosis is a form of active transport involving engulfment by the cell membrane." },
             { "text": "Facilitated diffusion", "isCorrect": false, "rationale": "Facilitated diffusion uses transport proteins but is still a type of passive transport (down concentration gradient)." },
@@ -713,7 +713,7 @@
     },
     {
         "question": "Which of the following is a monomer of carbohydrates?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Amino acid", "isCorrect": false, "rationale": "Amino acids are monomers of proteins." },
             { "text": "Nucleotide", "isCorrect": false, "rationale": "Nucleotides are monomers of nucleic acids." },
             { "text": "Monosaccharide", "isCorrect": true, "rationale": "Monosaccharides (simple sugars like glucose) are the basic building blocks of carbohydrates." },
@@ -723,7 +723,7 @@
     },
     {
         "question": "The process of genetic recombination (crossing over) occurs during which stage of meiosis?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Prophase II", "isCorrect": false, "rationale": "Crossing over occurs in Meiosis I, not Meiosis II." },
             { "text": "Metaphase I", "isCorrect": false, "rationale": "Chromosomes align during Metaphase I, but crossing over has already occurred." },
             { "text": "Prophase I", "isCorrect": true, "rationale": "Crossing over, the exchange of genetic material between homologous chromosomes, occurs during Prophase I of meiosis." },
@@ -733,7 +733,7 @@
     },
     {
         "question": "A cell spends most of its life in which phase of the cell cycle, carrying out its normal metabolic functions and growing?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Mitosis", "isCorrect": false, "rationale": "Mitosis is the process of cell division, which is a relatively short part of the cell's life cycle." },
             { "text": "Cytokinesis", "isCorrect": false, "rationale": "Cytokinesis is the final step of cell division where the cytoplasm divides, not the phase where the cell spends most of its time." },
             { "text": "Interphase", "isCorrect": true, "rationale": "Interphase is the longest part of the cell cycle, where the cell grows, replicates its DNA, and prepares for division." },
@@ -743,7 +743,7 @@
     },
     {
         "question": "Which of the following scenarios best illustrates Lamarck's idea of the inheritance of acquired characteristics?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "A giraffe stretches its neck to reach higher leaves, and its offspring are born with slightly longer necks.", "isCorrect": true, "rationale": "This scenario perfectly matches Lamarck's concept that traits acquired through effort during a lifetime are passed directly to the next generation." },
             { "text": "In a population of mice, the fastest ones are better at escaping predators, so over generations, the average speed of the mice increases.", "isCorrect": false, "rationale": "This describes natural selection, where pre-existing traits that are advantageous become more common over time." },
             { "text": "A random mutation in a bacterium's DNA gives it resistance to an antibiotic, allowing it to survive and reproduce.", "isCorrect": false, "rationale": "This illustrates evolution through mutation and natural selection, not the inheritance of traits acquired through use." },
@@ -753,7 +753,7 @@
     },
     {
         "question": "The Law of Independent Assortment applies to genes that are located on different chromosomes or are very far apart on the same chromosome. Why?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "Because the orientation of one homologous pair at the metaphase plate does not influence the orientation of any other pair.", "isCorrect": true, "rationale": "The random alignment of homologous chromosome pairs during metaphase I is the physical basis for the law of independent assortment." },
             { "text": "Because sister chromatids separate during anaphase II.", "isCorrect": false, "rationale": "The separation of sister chromatids ensures each gamete gets one copy of a chromosome, but it doesn't explain how different genes are inherited independently." },
             { "text": "Because crossing over exchanges genetic material between homologous chromosomes.", "isCorrect": false, "rationale": "Crossing over creates new combinations of alleles on the *same* chromosome (recombination), but independent assortment deals with how *different* chromosomes are sorted." },
@@ -763,7 +763,7 @@
     },
     {
         "question": "What happens during the G2 phase of the cell cycle?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "The cell divides into two daughter cells.", "isCorrect": false, "rationale": "Cell division occurs during the M phase (mitosis and cytokinesis), not the G2 phase." },
             { "text": "DNA is replicated.", "isCorrect": false, "rationale": "DNA replication occurs during the S (synthesis) phase, which comes before the G2 phase." },
             { "text": "The cell grows and synthesizes proteins and organelles needed for division.", "isCorrect": true, "rationale": "The G2 phase is a period of final growth and preparation where the cell synthesizes the molecules required for mitosis." },
@@ -773,7 +773,7 @@
     },
     {
         "question": "A key point of Darwin's theory of evolution is that variation exists within a population. What is the ultimate source of this variation?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "The struggle for existence.", "isCorrect": false, "rationale": "The struggle for existence is a driving force of natural selection, but it acts on variation that is already present." },
             { "text": "Inheritance of acquired characteristics.", "isCorrect": false, "rationale": "This was Lamarck's idea and has been disproven; it is not the source of heritable variation." },
             { "text": "Genetic mutation.", "isCorrect": true, "rationale": "Mutations are random changes in the DNA sequence that create new alleles, providing the raw material for evolution." },
@@ -783,7 +783,7 @@
     },
     {
         "question": "In pea plants, tall (T) is dominant to short (t), and purple flowers (P) are dominant to white (p). A plant with genotype TtPp is crossed with a plant with genotype TtPp. What fraction of the offspring would be expected to have a short, white phenotype?",
-        "answerOptions": [
+        "allOptions": [
             { "text": "9/16", "isCorrect": false, "rationale": "This is the proportion of offspring expected to show at least one dominant phenotype for both traits." },
             { "text": "3/16", "isCorrect": false, "rationale": "This is the proportion expected for one dominant and one recessive phenotype (e.g., tall and white, or short and purple)." },
             { "text": "1/4", "isCorrect": false, "rationale": "This is the probability of being homozygous recessive for a single trait, not both traits combined." },
@@ -792,9 +792,7 @@
         "hint": "A short, white phenotype corresponds to a specific homozygous recessive genotype. Calculate the probability for each trait separately."
     },
     {
-        "question": "The M phase of the cell cycle consists of which two main events?",
-        "hint": "This phase involves the division of both the nucleus and the cytoplasm.",
-        "answerOptions":[
+        "question": "The M phase of the cell cycle consists of which two main events?","hint":"This phase involves the division of both the nucleus and the cytoplasm.","answerOptions":[
             {"text":"G1 and G2 phases","isCorrect":false,"rationale":"G1 and G2 are parts of interphase, the period of growth and preparation for division."},
             {"text":"Interphase and Mitosis","isCorrect":false,"rationale":"Interphase is the phase that precedes the M phase."},
             {"text":"Mitosis and Cytokinesis","isCorrect":true,"rationale":"The M phase includes mitosis (the division of the nucleus) followed by cytokinesis (the division of the cytoplasm)."},
@@ -830,1145 +828,5 @@
             { "text": "DNA replication", "isCorrect": false, "rationale": "DNA replication is part of the uncontrolled process, but the core issue is the loss of regulation over the entire cycle." },
             { "text": "Cellular respiration", "isCorrect": false, "rationale": "Cancer cells still perform cellular respiration to get energy; the defect is in the control of their proliferation." }
         ]
-    },
-    {
-        "question": "Which of the following is an example of convergent evolution?",
-        "answerOptions": [
-            { "text": "The human arm and the bat wing", "isCorrect": false, "rationale": "These are homologous structures, indicating divergent evolution from a common ancestor." },
-            { "text": "The flipper of a dolphin and the wing of a bat", "isCorrect": false, "rationale": "These are homologous structures, showing common ancestry despite different functions." },
-            { "text": "The streamlined body shape of a shark and a dolphin", "isCorrect": true, "rationale": "Convergent evolution is the independent evolution of similar features in species of different lineages due to similar environmental pressures. Both sharks (fish) and dolphins (mammals) evolved streamlined bodies for efficient movement in water." },
-            { "text": "The different breeds of dogs developed from wolves", "isCorrect": false, "rationale": "This is artificial selection, a form of divergent evolution within a single species." }
-        ],
-        "hint": "Think about unrelated organisms developing similar traits due to similar environments."
-    },
-    {
-        "question": "What is the purpose of the Punnett square?",
-        "answerOptions": [
-            { "text": "To determine the age of fossils", "isCorrect": false, "rationale": "Radiometric dating is used for dating fossils." },
-            { "text": "To predict the genotypes and phenotypes of offspring from a genetic cross", "isCorrect": true, "rationale": "A Punnett square is a diagram that is used to predict the genotypes of a particular cross or breeding experiment." },
-            { "text": "To measure the genetic diversity of a population", "isCorrect": false, "rationale": "Population genetics studies genetic diversity." },
-            { "text": "To identify homologous structures between different species", "isCorrect": false, "rationale": "Comparative anatomy is used for homologous structures." }
-        ],
-        "hint": "It's a visual tool for predicting genetic outcomes."
-    },
-    {
-        "question": "Which type of selection favors individuals at one extreme of the phenotypic range?",
-        "answerOptions": [
-            { "text": "Stabilizing selection", "isCorrect": false, "rationale": "Stabilizing selection favors intermediate phenotypes." },
-            { "text": "Disruptive selection", "isCorrect": false, "rationale": "Disruptive selection favors individuals at both extremes of the phenotypic range." },
-            { "text": "Directional selection", "isCorrect": true, "rationale": "Directional selection favors individuals exhibiting one extreme of a phenotypic range, thereby shifting the population's phenotypic distribution toward that extreme." },
-            { "text": "Sexual selection", "isCorrect": false, "rationale": "Sexual selection relates to traits that enhance mating success." }
-        ],
-        "hint": "Think about selection pushing a trait in a single 'direction'."
-    },
-    {
-        "question": "What is gene flow?",
-        "answerOptions": [
-            { "text": "The random change in allele frequencies in a population", "isCorrect": false, "rationale": "This describes genetic drift." },
-            { "text": "The movement of alleles into or out of a population due to the migration of individuals", "isCorrect": true, "rationale": "Gene flow is the transfer of alleles or genes from one population to another." },
-            { "text": "The creation of new alleles through mutation", "isCorrect": false, "rationale": "This describes mutation." },
-            { "text": "The differential survival and reproduction of individuals based on their phenotype", "isCorrect": false, "rationale": "This describes natural selection." }
-        ],
-        "hint": "Think about 'migration' of genes."
-    },
-    {
-        "question": "Which of the following is a characteristic of prokaryotic cells?",
-        "answerOptions": [
-            { "text": "Presence of a true nucleus", "isCorrect": false, "rationale": "Prokaryotic cells lack a membrane-bound nucleus." },
-            { "text": "Presence of membrane-bound organelles", "isCorrect": false, "rationale": "Prokaryotic cells lack membrane-bound organelles." },
-            { "text": "Circular DNA in the cytoplasm (nucleoid region)", "isCorrect": true, "rationale": "Prokaryotic cells typically have a single, circular chromosome located in a region called the nucleoid, without a surrounding membrane." },
-            { "text": "Larger and more complex than eukaryotic cells", "isCorrect": false, "rationale": "Prokaryotic cells are generally smaller and simpler than eukaryotic cells." }
-        ],
-        "hint": "Think 'before nucleus'."
-    },
-    {
-        "question": "What is the function of the cell wall in plant cells?",
-        "answerOptions": [
-            { "text": "To regulate what enters and leaves the cell", "isCorrect": false, "rationale": "The cell membrane regulates passage." },
-            { "text": "To provide structural support and protection to the cell", "isCorrect": true, "rationale": "The cell wall, made primarily of cellulose in plants, provides rigid support and protection against mechanical stress and osmotic lysis." },
-            { "text": "To store water and nutrients", "isCorrect": false, "rationale": "Vacuoles store water and nutrients." },
-            { "text": "To produce energy through cellular respiration", "isCorrect": false, "rationale": "Mitochondria produce energy." }
-        ],
-        "hint": "It's the outermost rigid layer of a plant cell."
-    },
-    {
-        "question": "Which of the following describes transcription in eukaryotes?",
-        "answerOptions": [
-            { "text": "Occurs in the cytoplasm and produces protein", "isCorrect": false, "rationale": "This describes translation." },
-            { "text": "Occurs in the nucleus and produces mRNA", "isCorrect": true, "rationale": "In eukaryotes, transcription takes place in the nucleus, where DNA is used as a template to synthesize messenger RNA (mRNA)." },
-            { "text": "Occurs in the cytoplasm and produces DNA", "isCorrect": false, "rationale": "Neither occurs here." },
-            { "text": "Occurs in the mitochondria and produces ATP", "isCorrect": false, "rationale": "This describes cellular respiration." }
-        ],
-        "hint": "Think about where DNA is located and what is formed directly from it."
-    },
-    {
-        "question": "What is the role of stomata in plants?",
-        "answerOptions": [
-            { "text": "To absorb water from the soil", "isCorrect": false, "rationale": "Roots absorb water from the soil." },
-            { "text": "To transport sugars throughout the plant", "isCorrect": false, "rationale": "Phloem transports sugars." },
-            { "text": "To regulate gas exchange (CO2 intake, O2 release, water vapor release)", "isCorrect": true, "rationale": "Stomata are small pores on the leaf surface that regulate the exchange of gases (carbon dioxide, oxygen) and water vapor with the atmosphere." },
-            { "text": "To provide structural support to the stem", "isCorrect": false, "rationale": "The stem provides structural support." }
-        ],
-        "hint": "These are small pores, usually on leaves."
-    },
-    {
-        "question": "If a red flower (RR) is crossed with a white flower (WW) and the offspring are all pink (RW), what type of inheritance is this?",
-        "answerOptions": [
-            { "text": "Complete dominance", "isCorrect": false, "rationale": "Complete dominance would result in either all red or all white offspring, depending on which color is dominant." },
-            { "text": "Codominance", "isCorrect": false, "rationale": "Codominance would result in both red and white patches being expressed simultaneously, not a blend." },
-            { "text": "Incomplete dominance", "isCorrect": true, "rationale": "Incomplete dominance occurs when the phenotype of the heterozygote is intermediate between the phenotypes of the two homozygotes, resulting in a blended appearance." },
-            { "text": "Sex-linked inheritance", "isCorrect": false, "rationale": "Sex-linked inheritance involves genes on sex chromosomes." }
-        ],
-        "hint": "Think about a 'blended' phenotype."
-    },
-    {
-        "question": "What is the function of xylem in plants?",
-        "answerOptions": [
-            { "text": "Transporting sugars from leaves to other parts of the plant", "isCorrect": false, "rationale": "Phloem transports sugars." },
-            { "text": "Transporting water and minerals from roots to leaves", "isCorrect": true, "rationale": "Xylem is the vascular tissue responsible for the transport of water and dissolved minerals from the roots to the rest of the plant." },
-            { "text": "Producing flowers for reproduction", "isCorrect": false, "rationale": "Flowers are reproductive organs." },
-            { "text": "Storing excess food in the roots", "isCorrect": false, "rationale": "Roots are storage organs, but not the primary function of xylem." }
-        ],
-        "hint": "Think 'upward' movement in plants."
-    },
-    {
-        "question": "Which of the following is considered a primary producer in most ecosystems?",
-        "answerOptions": [
-            { "text": "Fungus", "isCorrect": false, "rationale": "Fungi are decomposers." },
-            { "text": "Herbivore", "isCorrect": false, "rationale": "Herbivores are primary consumers." },
-            { "text": "Carnivore", "isCorrect": false, "rationale": "Carnivores are secondary or tertiary consumers." },
-            { "text": "Algae", "isCorrect": true, "rationale": "Algae are photosynthetic organisms that convert light energy into chemical energy, forming the base of many aquatic food webs." }
-        ],
-        "hint": "These organisms produce their own food."
-    },
-    {
-        "question": "What is the cell theory?",
-        "answerOptions": [
-            { "text": "All living things are composed of cells.", "isCorrect": false, "rationale": "This is one part of the cell theory." },
-            { "text": "Cells are the basic unit of structure and function in living things.", "isCorrect": false, "rationale": "This is another part of the cell theory." },
-            { "text": "All cells come from pre-existing cells.", "isCorrect": false, "rationale": "This is the third part of the cell theory." },
-            { "text": "All living things are composed of cells, cells are the basic unit of structure and function in living things, and all cells come from pre-existing cells.", "isCorrect": true, "rationale": "The cell theory is comprised of these three fundamental principles." }
-        ],
-        "hint": "It's a foundational concept in biology with three main tenets."
-    },
-    {
-        "question": "Which type of cell is generally larger and more complex, possessing membrane-bound organelles?",
-        "answerOptions": [
-            { "text": "Prokaryotic cell", "isCorrect": false, "rationale": "Prokaryotic cells are smaller and lack membrane-bound organelles." },
-            { "text": "Bacterial cell", "isCorrect": false, "rationale": "Bacterial cells are prokaryotic." },
-            { "text": "Eukaryotic cell", "isCorrect": true, "rationale": "Eukaryotic cells are characterized by their larger size, complexity, and the presence of membrane-bound organelles like the nucleus, mitochondria, and endoplasmic reticulum." },
-            { "text": "Archaea cell", "isCorrect": false, "rationale": "Archaea cells are prokaryotic." }
-        ],
-        "hint": "Think about cells with a 'true nucleus'."
-    },
-    {
-        "question": "What is the process of synthesizing glucose from non-carbohydrate precursors?",
-        "answerOptions": [
-            { "text": "Glycolysis", "isCorrect": false, "rationale": "Glycolysis is the breakdown of glucose." },
-            { "text": "Gluconeogenesis", "isCorrect": true, "rationale": "Gluconeogenesis is the metabolic pathway that results in the generation of glucose from non-carbohydrate carbon substrates such as lactate, glycerol, and glucogenic amino acids." },
-            { "text": "Glycogenesis", "isCorrect": false, "rationale": "Glycogenesis is the synthesis of glycogen from glucose." },
-            { "text": "Glycogenolysis", "isCorrect": false, "rationale": "Glycogenolysis is the breakdown of glycogen into glucose." }
-        ],
-        "hint": "It's the 'new' formation of glucose."
-    },
-    {
-        "question": "Which of the following describes the smooth endoplasmic reticulum's role?",
-        "answerOptions": [
-            { "text": "Protein synthesis", "isCorrect": false, "rationale": "Protein synthesis (with ribosomes) occurs on the rough ER." },
-            { "text": "Lipid synthesis and detoxification", "isCorrect": true, "rationale": "The smooth ER is involved in various metabolic processes including lipid synthesis, carbohydrate metabolism, and detoxification of drugs and poisons." },
-            { "text": "Packaging and sorting of proteins", "isCorrect": false, "rationale": "The Golgi apparatus handles packaging and sorting." },
-            { "text": "Cellular respiration", "isCorrect": false, "rationale": "Mitochondria perform cellular respiration." }
-        ],
-        "hint": "Think about fats and breaking down toxins."
-    },
-    {
-        "question": "What is the function of lysosomes?",
-        "answerOptions": [
-            { "text": "Energy production", "isCorrect": false, "rationale": "Mitochondria produce energy." },
-            { "text": "Waste digestion and recycling of cellular components", "isCorrect": true, "rationale": "Lysosomes are membrane-bound organelles containing digestive enzymes that break down excess or worn-out cell parts, as well as foreign substances." },
-            { "text": "Photosynthesis", "isCorrect": false, "rationale": "Chloroplasts perform photosynthesis." },
-            { "text": "Protein synthesis", "isCorrect": false, "rationale": "Ribosomes synthesize proteins." }
-        ],
-        "hint": "They are the 'recycling centers' of the cell."
-    },
-    {
-        "question": "Which organelle is responsible for generating most of the ATP in eukaryotic cells?",
-        "answerOptions": [
-            { "text": "Nucleus", "isCorrect": false, "rationale": "The nucleus stores genetic material." },
-            { "text": "Ribosome", "isCorrect": false, "rationale": "Ribosomes synthesize proteins." },
-            { "text": "Mitochondria", "isCorrect": true, "rationale": "Mitochondria are the primary sites of ATP production through cellular respiration in eukaryotic cells." },
-            { "text": "Chloroplast", "isCorrect": false, "rationale": "Chloroplasts perform photosynthesis, producing glucose, not ATP directly as their main function for the cell." }
-        ],
-        "hint": "It's often called the 'powerhouse' of the cell."
-    },
-    {
-        "question": "What is the definition of a gene?",
-        "answerOptions": [
-            { "text": "A long, continuous piece of DNA.", "isCorrect": false, "rationale": "This describes a chromosome." },
-            { "text": "A specific sequence of DNA that codes for a protein or functional RNA molecule.", "isCorrect": true, "rationale": "A gene is a fundamental unit of heredity that contains instructions for making a specific protein or a functional RNA molecule." },
-            { "text": "The entire set of genetic material in an organism.", "isCorrect": false, "rationale": "This describes the genome." },
-            { "text": "A segment of protein that performs a specific function.", "isCorrect": false, "rationale": "Genes code for proteins, they are not segments of proteins themselves." }
-        ],
-        "hint": "It's the basic unit of heredity."
-    },
-    {
-        "question": "Which of the following best describes the Central Dogma of molecular biology?",
-        "answerOptions": [
-            { "text": "Protein synthesis is the reverse of DNA replication.", "isCorrect": false, "rationale": "This statement is incorrect." },
-            { "text": "DNA is replicated, then transcribed into RNA, then translated into protein.", "isCorrect": true, "rationale": "The Central Dogma describes the flow of genetic information: DNA makes RNA, and RNA makes protein." },
-            { "text": "RNA is replicated, then transcribed into DNA, then translated into protein.", "isCorrect": false, "rationale": "This describes reverse transcription, not the central dogma." },
-            { "text": "Proteins are directly translated from DNA.", "isCorrect": false, "rationale": "Proteins are translated from RNA (mRNA), not directly from DNA." }
-        ],
-        "hint": "Think about the sequence of information flow from genetic material to functional molecules."
-    },
-    {
-        "question": "What is the process of synthesizing DNA from an RNA template?",
-        "answerOptions": [
-            { "text": "Replication", "isCorrect": false, "rationale": "Replication is DNA from DNA." },
-            { "text": "Transcription", "isCorrect": false, "rationale": "Transcription is RNA from DNA." },
-            { "text": "Reverse Transcription", "isCorrect": true, "rationale": "Reverse transcription is the process by which a retrovirus (or other retrotransposons) replicates, using an RNA template to synthesize DNA, catalyzed by the enzyme reverse transcriptase." },
-            { "text": "Translation", "isCorrect": false, "rationale": "Translation is protein from RNA." }
-        ],
-        "hint": "It's how some viruses make DNA from their genetic material."
-    },
-    {
-        "question": "What is the role of DNA polymerase during DNA replication?",
-        "answerOptions": [
-            { "text": "Unwinds the DNA double helix", "isCorrect": false, "rationale": "DNA helicase unwinds the helix." },
-            { "text": "Adds new nucleotides to the growing DNA strand", "isCorrect": true, "rationale": "DNA polymerase is the enzyme that synthesizes new DNA strands by adding nucleotides complementary to the template strand." },
-            { "text": "Joins Okazaki fragments together", "isCorrect": false, "rationale": "DNA ligase joins Okazaki fragments." },
-            { "text": "Synthesizes RNA primers", "isCorrect": false, "rationale": "Primase synthesizes RNA primers." }
-        ],
-        "hint": "Think about the enzyme that 'builds' new DNA strands."
-    },
-    {
-        "question": "Which of the following is an example of an analogous structure?",
-        "answerOptions": [
-            { "text": "The arm of a human and the wing of a bat", "isCorrect": false, "rationale": "These are homologous structures, indicating common ancestry." },
-            { "text": "The leg of a cat and the flipper of a whale", "isCorrect": false, "rationale": "These are homologous structures, indicating common ancestry." },
-            { "text": "The wing of a bird and the wing of an insect", "isCorrect": true, "rationale": "Analogous structures have similar functions but different evolutionary origins, arising from convergent evolution. Bird wings and insect wings both enable flight but evolved independently." },
-            { "text": "The leaves of an oak tree and a maple tree", "isCorrect": false, "rationale": "These are homologous structures." }
-        ],
-        "hint": "Think about structures that look similar and have the same function but evolved independently."
-    },
-    {
-        "question": "What is genetic drift?",
-        "answerOptions": [
-            { "text": "The movement of genes between populations", "isCorrect": false, "rationale": "This is gene flow." },
-            { "text": "The change in allele frequencies in a population due to random chance", "isCorrect": true, "rationale": "Genetic drift describes random fluctuations in the number of gene variants (alleles) in a population, which can lead to the loss of some alleles and the fixation of others." },
-            { "text": "The process by which organisms adapt to their environment", "isCorrect": false, "rationale": "This is natural selection." },
-            { "text": "The creation of new alleles through mutation", "isCorrect": false, "rationale": "This is mutation." }
-        ],
-        "hint": "Think about 'random' changes in gene frequencies."
-    },
-    {
-        "question": "Which type of speciation occurs when a population is divided by a geographical barrier?",
-        "answerOptions": [
-            { "text": "Sympatric speciation", "isCorrect": false, "rationale": "Sympatric speciation occurs within the same geographical area." },
-            { "text": "Parapatric speciation", "isCorrect": false, "rationale": "Parapatric speciation occurs when populations are adjacent and there's limited gene flow." },
-            { "text": "Allopatric speciation", "isCorrect": true, "rationale": "Allopatric speciation occurs when populations are geographically isolated, preventing gene flow and allowing for divergence." },
-            { "text": "Peripatric speciation", "isCorrect": false, "rationale": "Peripatric speciation is a type of allopatric speciation where a small population breaks off from a larger one." }
-        ],
-        "hint": "Think about 'different homelands'."
-    },
-    {
-        "question": "What is adaptive radiation?",
-        "answerOptions": [
-            { "text": "The development of similar traits in unrelated species", "isCorrect": false, "rationale": "This is convergent evolution." },
-            { "text": "The rapid evolution of many new species from a common ancestor when introduced to new environments", "isCorrect": true, "rationale": "Adaptive radiation is a process in which organisms diversify rapidly from an ancestral species into a multitude of new forms, particularly when a change in the environment makes new resources available, creates new challenges, or opens new environmental niches." },
-            { "text": "The loss of genetic diversity in a population", "isCorrect": false, "rationale": "This can be a result of genetic drift, not adaptive radiation." },
-            { "text": "The movement of genes between populations", "isCorrect": false, "rationale": "This is gene flow." }
-        ],
-        "hint": "Think about a single ancestor diversifying into many new forms in new ecological roles."
-    },
-    {
-        "question": "Which geological era is known as the 'Age of Dinosaurs'?",
-        "answerOptions": [
-            { "text": "Paleozoic Era", "isCorrect": false, "rationale": "The Paleozoic Era was before the dinosaurs, featuring ancient life forms." },
-            { "text": "Cenozoic Era", "isCorrect": false, "rationale": "The Cenozoic Era is the 'Age of Mammals', after the dinosaurs." },
-            { "text": "Mesozoic Era", "isCorrect": true, "rationale": "The Mesozoic Era (Triassic, Jurassic, Cretaceous periods) is widely known as the 'Age of Reptiles' or 'Age of Dinosaurs'." },
-            { "text": "Precambrian Era", "isCorrect": false, "rationale": "The Precambrian Era predates complex multicellular life." }
-        ],
-        "hint": "Think about the era between the ancient life and the age of mammals."
-    },
-    {
-        "question": "What is the Hardy-Weinberg principle used to describe?",
-        "answerOptions": [
-            { "text": "How evolution occurs in a population", "isCorrect": false, "rationale": "The Hardy-Weinberg principle describes a *non-evolving* population." },
-            { "text": "A population that is not evolving", "isCorrect": true, "rationale": "The Hardy-Weinberg principle states that allele and genotype frequencies in a population will remain constant from generation to generation in the absence of other evolutionary influences." },
-            { "text": "The rate of mutation in a population", "isCorrect": false, "rationale": "It does not calculate mutation rates." },
-            { "text": "The effect of natural selection on allele frequencies", "isCorrect": false, "rationale": "Natural selection causes evolution, which is what the Hardy-Weinberg principle assumes is NOT happening." }
-        ],
-        "hint": "It provides a baseline for a 'static' or non-changing population."
-    },
-    {
-        "question": "Which kingdom includes organisms that are multicellular, eukaryotic, heterotrophic, and lack cell walls?",
-        "answerOptions": [
-            { "text": "Plantae", "isCorrect": false, "rationale": "Plantae are autotrophic and have cell walls." },
-            { "text": "Fungi", "isCorrect": false, "rationale": "Fungi are heterotrophic but have cell walls." },
-            { "text": "Animalia", "isCorrect": true, "rationale": "The Animalia kingdom is characterized by multicellular, eukaryotic, heterotrophic organisms that typically lack cell walls." },
-            { "text": "Protista", "isCorrect": false, "rationale": "Protists are a diverse group; some are multicellular, but many are unicellular, and they may or may not have cell walls." }
-        ],
-        "hint": "Think about humans and other animals."
-    },
-    {
-        "question": "What is an ecological niche?",
-        "answerOptions": [
-            { "text": "The physical area where an organism lives", "isCorrect": false, "rationale": "This describes the habitat." },
-            { "text": "The role and position a species has in its environment, including how it meets its needs for food and shelter, how it survives, and how it reproduces.", "isCorrect": true, "rationale": "An ecological niche encompasses all the biotic and abiotic factors that a species needs to survive, reproduce, and carry out its ecological role." },
-            { "text": "The total number of individuals of a species in a given area", "isCorrect": false, "rationale": "This describes population size." },
-            { "text": "A group of organisms of the same species living in the same area", "isCorrect": false, "rationale": "This describes a population." }
-        ],
-        "hint": "It's more than just where an organism lives; it's its 'job' in the ecosystem."
-    },
-    {
-        "question": "What are homologous chromosomes?",
-        "answerOptions": [
-            { "text": "Chromosomes that are identical copies of each other", "isCorrect": false, "rationale": "These are sister chromatids." },
-            { "text": "Chromosomes that are different in size and gene content", "isCorrect": false, "rationale": "These would be non-homologous chromosomes." },
-            { "text": "Pairs of chromosomes (one from each parent) that are similar in length, gene position, and centromere location", "isCorrect": true, "rationale": "Homologous chromosomes are pairs of chromosomes that contain the same genes in the same loci but may have different alleles." },
-            { "text": "Chromosomes that carry only recessive alleles", "isCorrect": false, "rationale": "Chromosomes carry both dominant and recessive alleles." }
-        ],
-        "hint": "Think about pairs of chromosomes in diploid organisms."
-    },
-    {
-        "question": "Which type of cellular transport requires energy and moves substances against their concentration gradient?",
-        "answerOptions": [
-            { "text": "Osmosis", "isCorrect": false, "rationale": "Osmosis is passive transport of water." },
-            { "text": "Facilitated diffusion", "isCorrect": false, "rationale": "Facilitated diffusion is passive transport (with aid of proteins) down a concentration gradient." },
-            { "text": "Active transport", "isCorrect": true, "rationale": "Active transport moves molecules across a cell membrane into a region of higher concentration, requiring cellular energy (ATP)." },
-            { "text": "Simple diffusion", "isCorrect": false, "rationale": "Simple diffusion is passive transport down a concentration gradient." }
-        ],
-        "hint": "Think about moving 'uphill' against a gradient."
-    },
-    {
-        "question": "What is the role of nitrogen-fixing bacteria in the nitrogen cycle?",
-        "answerOptions": [
-            { "text": "Convert nitrates into atmospheric nitrogen (denitrification)", "isCorrect": false, "rationale": "Denitrifying bacteria do this." },
-            { "text": "Convert atmospheric nitrogen (N2) into ammonia (NH3) or ammonium (NH4+)", "isCorrect": true, "rationale": "Nitrogen-fixing bacteria convert atmospheric nitrogen gas into a usable form for plants, a crucial step in the nitrogen cycle." },
-            { "text": "Convert ammonia into nitrites and nitrates (nitrification)", "isCorrect": false, "rationale": "Nitrifying bacteria do this." },
-            { "text": "Break down dead organic matter (ammonification)", "isCorrect": false, "rationale": "Decomposers and ammonifying bacteria do this." }
-        ],
-        "hint": "They take nitrogen from the air and put it into a form plants can use."
-    },
-    {
-        "question": "What is the role of NADH and FADH2 in cellular respiration?",
-        "answerOptions": [
-            { "text": "To produce ATP directly", "isCorrect": false, "rationale": "They do not directly produce ATP; they are electron carriers." },
-            { "text": "To act as electron carriers, transporting electrons to the electron transport chain", "isCorrect": true, "rationale": "NADH and FADH2 are crucial coenzymes that carry high-energy electrons from glycolysis and the Krebs cycle to the electron transport chain for oxidative phosphorylation." },
-            { "text": "To break down glucose into pyruvate", "isCorrect": false, "rationale": "Glycolysis breaks down glucose." },
-            { "text": "To store energy in the form of glycogen", "isCorrect": false, "rationale": "Glycogen stores glucose." }
-        ],
-        "hint": "Think about their function in energy transfer, especially in the last stage of respiration."
-    },
-    {
-        "question": "Which of the following describes the flow of energy in an ecosystem?",
-        "answerOptions": [
-            { "text": "Decomposers → Producers → Consumers", "isCorrect": false, "rationale": "Energy flows from producers to consumers." },
-            { "text": "Consumers → Producers → Decomposers", "isCorrect": false, "rationale": "This is incorrect." },
-            { "text": "Producers → Consumers → Decomposers", "isCorrect": true, "rationale": "Energy flows from producers (autotrophs) to consumers (heterotrophs), and decomposers recycle matter at all trophic levels." },
-            { "text": "Producers → Decomposers → Consumers", "isCorrect": false, "rationale": "Decomposers are involved at all levels, but not directly after producers in the energy flow." }
-        ],
-        "hint": "Start with the organisms that make their own food."
-    },
-    {
-        "question": "What is the primary role of the cell membrane?",
-        "answerOptions": [
-            { "text": "To store genetic information", "isCorrect": false, "rationale": "The nucleus stores genetic information." },
-            { "text": "To produce ATP", "isCorrect": false, "rationale": "Mitochondria produce ATP." },
-            { "text": "To control what substances enter and leave the cell", "isCorrect": true, "rationale": "The cell membrane is selectively permeable, regulating the passage of molecules into and out of the cell." },
-            { "text": "To synthesize proteins", "isCorrect": false, "rationale": "Ribosomes synthesize proteins." }
-        ],
-        "hint": "It acts as a gatekeeper for the cell."
-    },
-    {
-        "question": "Which phase of mitosis is characterized by the alignment of chromosomes along the metaphase plate?",
-        "answerOptions": [
-            { "text": "Prophase", "isCorrect": false, "rationale": "Prophase involves chromosome condensation and spindle formation." },
-            { "text": "Anaphase", "isCorrect": false, "rationale": "Anaphase involves sister chromatid separation." },
-            { "text": "Telophase", "isCorrect": false, "rationale": "Telophase involves chromosome decondensation and nuclear envelope re-formation." },
-            { "text": "Metaphase", "isCorrect": true, "rationale": "During metaphase, chromosomes align centrally on the metaphase plate, ensuring equal distribution to daughter cells." }
-        ],
-        "hint": "Think 'middle'."
-    },
-    {
-        "question": "What is the function of enzymes in biological reactions?",
-        "answerOptions": [
-            { "text": "To increase the activation energy of the reaction", "isCorrect": false, "rationale": "Enzymes *decrease* activation energy." },
-            { "text": "To be consumed during the reaction", "isCorrect": false, "rationale": "Enzymes are catalysts and are not consumed." },
-            { "text": "To speed up the rate of biochemical reactions", "isCorrect": true, "rationale": "Enzymes are biological catalysts that accelerate the rate of specific biochemical reactions without being used up in the process." },
-            { "text": "To change the equilibrium of the reaction", "isCorrect": false, "rationale": "Enzymes do not change the equilibrium of a reaction." }
-        ],
-        "hint": "They are biological catalysts."
-    },
-    {
-        "question": "Which of the following is an example of a density-dependent limiting factor for a population?",
-        "answerOptions": [
-            { "text": "Natural disasters (e.g., hurricane, wildfire)", "isCorrect": false, "rationale": "These are density-independent factors." },
-            { "text": "Climate change", "isCorrect": false, "rationale": "Climate change is a density-independent factor." },
-            { "text": "Competition for resources", "isCorrect": true, "rationale": "Competition for resources (food, water, space) becomes more intense as population density increases, making it a density-dependent limiting factor." },
-            { "text": "Seasonal temperature changes", "isCorrect": false, "rationale": "These are density-independent factors." }
-        ],
-        "hint": "Think about factors that intensify as a population grows larger and more crowded."
-    },
-    {
-        "question": "What is the primary role of chlorophyll in photosynthesis?",
-        "answerOptions": [
-            { "text": "To absorb water from the soil", "isCorrect": false, "rationale": "Roots absorb water." },
-            { "text": "To transport glucose throughout the plant", "isCorrect": false, "rationale": "Phloem transports glucose." },
-            { "text": "To absorb light energy", "isCorrect": true, "rationale": "Chlorophyll is the green pigment in chloroplasts that absorbs light energy, primarily in the red and blue spectrums, to drive photosynthesis." },
-            { "text": "To break down carbon dioxide", "isCorrect": false, "rationale": "Carbon dioxide is a reactant, but chlorophyll doesn't break it down directly." }
-        ],
-        "hint": "It's the green pigment in plants."
-    },
-    {
-        "question": "Which of the following describes the difference between transcription and translation?",
-        "answerOptions": [
-            { "text": "Transcription occurs in ribosomes, translation in the nucleus.", "isCorrect": false, "rationale": "This is incorrect; transcription is in the nucleus, translation in ribosomes." },
-            { "text": "Transcription produces protein, translation produces RNA.", "isCorrect": false, "rationale": "This is incorrect; transcription produces RNA, translation produces protein." },
-            { "text": "Transcription involves DNA to RNA, translation involves RNA to protein.", "isCorrect": true, "rationale": "Transcription is the synthesis of RNA from a DNA template. Translation is the synthesis of protein from an mRNA template." },
-            { "text": "Transcription is DNA replication, translation is gene expression.", "isCorrect": false, "rationale": "Transcription and translation are both parts of gene expression, but transcription is not DNA replication." }
-        ],
-        "hint": "Recall the flow of genetic information from DNA to functional proteins."
-    },
-    {
-        "question": "What is genetic engineering?",
-        "answerOptions": [
-            { "text": "The process of selective breeding to enhance desirable traits.", "isCorrect": false, "rationale": "Selective breeding is a traditional method, not genetic engineering." },
-            { "text": "The direct manipulation of an organism's genes using biotechnology.", "isCorrect": true, "rationale": "Genetic engineering involves directly altering an organism's DNA, often by inserting, deleting, or modifying genes." },
-            { "text": "The study of heredity and variation in living organisms.", "isCorrect": false, "rationale": "This is the definition of genetics." },
-            { "text": "The process of cloning organisms from somatic cells.", "isCorrect": false, "rationale": "Cloning is a specific biotechnology technique, not the broad definition of genetic engineering." }
-        ],
-        "hint": "Think about directly altering an organism's genetic material."
-    },
-    {
-        "question": "Which cellular process produces lactic acid or ethanol when oxygen is absent?",
-        "answerOptions": [
-            { "text": "Aerobic respiration", "isCorrect": false, "rationale": "Aerobic respiration requires oxygen." },
-            { "text": "Photosynthesis", "isCorrect": false, "rationale": "Photosynthesis produces glucose and oxygen." },
-            { "text": "Fermentation", "isCorrect": true, "rationale": "Fermentation is an anaerobic process that allows glycolysis to continue by regenerating NAD+, producing lactic acid in animals and ethanol/CO2 in yeast." },
-            { "text": "Krebs cycle", "isCorrect": false, "rationale": "The Krebs cycle is part of aerobic respiration and requires oxygen." }
-        ],
-        "hint": "It's an anaerobic pathway for energy production."
-    },
-    {
-        "question": "What is the role of ribosomes in the cell?",
-        "answerOptions": [
-            { "text": "Produce ATP", "isCorrect": false, "rationale": "Mitochondria produce ATP." },
-            { "text": "Synthesize proteins", "isCorrect": true, "rationale": "Ribosomes are the sites of protein synthesis (translation), linking amino acids together according to mRNA instructions." },
-            { "text": "Store genetic information", "isCorrect": false, "rationale": "The nucleus stores genetic information." },
-            { "text": "Digest waste materials", "isCorrect": false, "rationale": "Lysosomes digest waste." }
-        ],
-        "hint": "They are known as the 'protein factories' of the cell."
-    },
-    {
-        "question": "Which part of the cell membrane is responsible for its fluidity?",
-        "answerOptions": [
-            { "text": "Proteins", "isCorrect": false, "rationale": "Proteins are embedded and can move, but aren't the primary source of fluidity." },
-            { "text": "Carbohydrates", "isCorrect": false, "rationale": "Carbohydrates are for cell recognition, not fluidity." },
-            { "text": "Cholesterol", "isCorrect": true, "rationale": "Cholesterol moderates membrane fluidity, preventing it from becoming too fluid at high temperatures or too rigid at low temperatures." },
-            { "text": "Phosphate heads of phospholipids", "isCorrect": false, "rationale": "The hydrophilic heads face water, but the fatty acid tails and cholesterol contribute more to fluidity." }
-        ],
-        "hint": "It's a type of lipid found embedded within the phospholipid bilayer."
-    },
-    {
-        "question": "What is the primary function of the large intestine?",
-        "answerOptions": [
-            { "text": "Chemical digestion of food", "isCorrect": false, "rationale": "Chemical digestion occurs mainly in the stomach and small intestine." },
-            { "text": "Absorption of nutrients", "isCorrect": false, "rationale": "Most nutrient absorption occurs in the small intestine." },
-            { "text": "Absorption of water and electrolytes, and formation of feces", "isCorrect": true, "rationale": "The large intestine's main role is to absorb remaining water and electrolytes from indigestible food matter and compact waste into feces." },
-            { "text": "Production of digestive enzymes", "isCorrect": false, "rationale": "Digestive enzymes are produced by glands like the pancreas and liver, and cells in the stomach/small intestine." }
-        ],
-        "hint": "Think about what happens to undigested material."
-    },
-    {
-        "question": "Which blood component is responsible for transporting oxygen?",
-        "answerOptions": [
-            { "text": "White blood cells", "isCorrect": false, "rationale": "White blood cells are part of the immune system." },
-            { "text": "Platelets", "isCorrect": false, "rationale": "Platelets are involved in blood clotting." },
-            { "text": "Plasma", "isCorrect": false, "rationale": "Plasma transports nutrients, hormones, and waste, but not oxygen primarily." },
-            { "text": "Red blood cells (erythrocytes)", "isCorrect": true, "rationale": "Red blood cells contain hemoglobin, which binds to and transports oxygen from the lungs to the body's tissues." }
-        ],
-        "hint": "These cells contain hemoglobin."
-    },
-    {
-        "question": "What is the function of the glomerulus in the kidney?",
-        "answerOptions": [
-            { "text": "To reabsorb salts and water into the blood", "isCorrect": false, "rationale": "Tubules reabsorb substances." },
-            { "text": "To filter blood and produce filtrate", "isCorrect": true, "rationale": "The glomerulus is a capillary network within the nephron that filters blood, allowing water and small solutes to pass into Bowman's capsule to form filtrate." },
-            { "text": "To secrete waste products into the urine", "isCorrect": false, "rationale": "Secretion occurs in the tubules." },
-            { "text": "To produce urine hormones", "isCorrect": false, "rationale": "Kidneys produce hormones, but not the glomerulus specifically." }
-        ],
-        "hint": "It's the tiny ball of capillaries where initial filtration happens."
-    },
-    {
-        "question": "Which of the following is the correct order of organization in a multicellular organism, from simplest to most complex?",
-        "answerOptions": [
-            { "text": "Organism → Organ system → Organ → Tissue → Cell", "isCorrect": false, "rationale": "This is reverse order and missing molecules." },
-            { "text": "Cell → Tissue → Organ → Organ system → Organism", "isCorrect": true, "rationale": "The hierarchy of biological organization in multicellular organisms starts with cells, which form tissues, then organs, then organ systems, and finally the complete organism." },
-            { "text": "Tissue → Cell → Organ → Organism → Organ system", "isCorrect": false, "rationale": "This order is incorrect." },
-            { "text": "Molecule → Organelle → Organ → Tissue → Cell", "isCorrect": false, "rationale": "This misses higher levels and has organelles in the wrong place." }
-        ],
-        "hint": "Start with the smallest living unit."
-    },
-    {
-        "question": "What is homeostasis?",
-        "answerOptions": [
-            { "text": "The process of growth and development in an organism", "isCorrect": false, "rationale": "Growth and development are different processes." },
-            { "text": "The ability of an organism to maintain a stable internal environment despite external changes", "isCorrect": true, "rationale": "Homeostasis is the physiological process by which organisms maintain relatively stable internal conditions essential for life, often through feedback mechanisms." },
-            { "text": "The process of adaptation to a changing environment", "isCorrect": false, "rationale": "Adaptation is evolutionary change." },
-            { "text": "The process of energy conversion in cells", "isCorrect": false, "rationale": "Energy conversion is metabolism." }
-        ],
-        "hint": "Think about maintaining 'balance' inside the body."
-    },
-    {
-        "question": "Which hormone is responsible for lowering blood glucose levels?",
-        "answerOptions": [
-            { "text": "Glucagon", "isCorrect": false, "rationale": "Glucagon raises blood glucose." },
-            { "text": "Adrenaline", "isCorrect": false, "rationale": "Adrenaline (epinephrine) is a stress hormone, affecting glucose but not primarily for lowering it." },
-            { "text": "Insulin", "isCorrect": true, "rationale": "Insulin, produced by the pancreas, lowers blood glucose levels by promoting glucose uptake by cells and its conversion to glycogen." },
-            { "text": "Cortisol", "isCorrect": false, "rationale": "Cortisol raises blood glucose." }
-        ],
-        "hint": "It's produced by the pancreas and helps cells absorb sugar."
-    },
-    {
-        "question": "What is the role of villi and microvilli in the small intestine?",
-        "answerOptions": [
-            { "text": "To produce digestive enzymes", "isCorrect": false, "rationale": "Enzymes are produced by glands." },
-            { "text": "To increase the surface area for nutrient absorption", "isCorrect": true, "rationale": "Villi and microvilli are folds and projections that vastly increase the surface area of the small intestine, maximizing the absorption of digested nutrients into the bloodstream." },
-            { "text": "To churn and mix food with digestive juices", "isCorrect": false, "rationale": "The stomach and smooth muscle contractions do this." },
-            { "text": "To transport waste material out of the body", "isCorrect": false, "rationale": "The large intestine and anus are involved in waste removal." }
-        ],
-        "hint": "Think about maximizing absorption efficiency."
-    },
-    {
-        "question": "Which part of the brain is responsible for coordinating voluntary movements and balance?",
-        "answerOptions": [
-            { "text": "Cerebrum", "isCorrect": false, "rationale": "The cerebrum is for higher-level functions, thought, and sensation." },
-            { "text": "Brainstem", "isCorrect": false, "rationale": "The brainstem controls basic life functions like breathing and heart rate." },
-            { "text": "Cerebellum", "isCorrect": true, "rationale": "The cerebellum plays a crucial role in motor control, coordination, precision, and accurate timing." },
-            { "text": "Thalamus", "isCorrect": false, "rationale": "The thalamus is a relay station for sensory information." }
-        ],
-        "hint": "It's often associated with fine motor skills and posture."
-    },
-    {
-        "question": "What is the primary function of the circulatory system?",
-        "answerOptions": [
-            { "text": "To break down food into nutrients", "isCorrect": false, "rationale": "Digestive system breaks down food." },
-            { "text": "To transport oxygen, nutrients, hormones, and waste products throughout the body", "isCorrect": true, "rationale": "The circulatory system, consisting of the heart, blood vessels, and blood, is responsible for circulating these vital substances." },
-            { "text": "To exchange gases with the environment", "isCorrect": false, "rationale": "Respiratory system exchanges gases." },
-            { "text": "To protect the body from pathogens", "isCorrect": false, "rationale": "Immune system protects against pathogens." }
-        ],
-        "hint": "Think about what is moved around the body."
-    },
-    {
-        "question": "Which type of immunity involves the production of antibodies by the body's own immune cells?",
-        "answerOptions": [
-            { "text": "Passive immunity", "isCorrect": false, "rationale": "Passive immunity involves receiving pre-formed antibodies from another source." },
-            { "text": "Innater immunity", "isCorrect": false, "rationale": "Innate immunity is non-specific, first-line defense." },
-            { "text": "Active immunity", "isCorrect": true, "rationale": "Active immunity develops when the body's own immune system produces antibodies and memory cells in response to an infection or vaccination." },
-            { "text": "Herd immunity", "isCorrect": false, "rationale": "Herd immunity is a population-level phenomenon." }
-        ],
-        "hint": "It's acquired through exposure to a pathogen or vaccination."
-    },
-    {
-        "question": "What is the role of ribosomes in the synthesis of proteins?",
-        "answerOptions": [
-            { "text": "To transport mRNA from the nucleus to the cytoplasm.", "isCorrect": false, "rationale": "mRNA moves from the nucleus to the cytoplasm via nuclear pores." },
-            { "text": "To synthesize polypeptide chains by reading mRNA codons and bringing appropriate tRNAs.", "isCorrect": true, "rationale": "Ribosomes are the cellular machinery where translation occurs, synthesizing proteins by linking amino acids delivered by tRNA according to the mRNA sequence." },
-            { "text": "To fold proteins into their correct three-dimensional structure.", "isCorrect": false, "rationale": "Protein folding is aided by chaperones and occurs after synthesis, often in the ER." },
-            { "text": "To store amino acids for protein synthesis.", "isCorrect": false, "rationale": "Amino acids are stored in the cytoplasm, not by ribosomes themselves." }
-        ],
-        "hint": "They are the 'workbenches' of protein synthesis."
-    },
-    {
-        "question": "Which of the following is an example of an endothermic animal?",
-        "answerOptions": [
-            { "text": "Snake", "isCorrect": false, "rationale": "Snakes are ectothermic (cold-blooded)." },
-            { "text": "Fish", "isCorrect": false, "rationale": "Most fish are ectothermic." },
-            { "text": "Bird", "isCorrect": true, "rationale": "Birds are endothermic, meaning they generate their own body heat to maintain a constant internal temperature." },
-            { "text": "Lizard", "isCorrect": false, "rationale": "Lizards are ectothermic." }
-        ],
-        "hint": "Think about animals that can regulate their own body temperature."
-    },
-    {
-        "question": "What is transpiration in plants?",
-        "answerOptions": [
-            { "text": "The absorption of water by roots from the soil.", "isCorrect": false, "rationale": "This is water uptake by roots." },
-            { "text": "The release of oxygen into the atmosphere during photosynthesis.", "isCorrect": false, "rationale": "Oxygen release is part of photosynthesis." },
-            { "text": "The evaporation of water from plant leaves, primarily through stomata.", "isCorrect": true, "rationale": "Transpiration is the process of water movement through a plant and its evaporation from aerial parts, such as leaves, stems and flowers." },
-            { "text": "The transport of sugars through the phloem.", "isCorrect": false, "rationale": "This is translocation." }
-        ],
-        "hint": "It's like 'sweating' for plants."
-    },
-    {
-        "question": "Which part of a flower develops into the fruit after fertilization?",
-        "answerOptions": [
-            { "text": "Stamen", "isCorrect": false, "rationale": "The stamen is the male reproductive part." },
-            { "text": "Petal", "isCorrect": false, "rationale": "Petals attract pollinators." },
-            { "text": "Ovary", "isCorrect": true, "rationale": "After fertilization, the ovary of a flower matures into the fruit, enclosing the seeds." },
-            { "text": "Sepal", "isCorrect": false, "rationale": "Sepals protect the bud." }
-        ],
-        "hint": "It's the part that contains the ovules."
-    },
-    {
-        "question": "What is the significance of the ozone layer in Earth's atmosphere?",
-        "answerOptions": [
-            { "text": "It traps heat to warm the planet (greenhouse effect).", "isCorrect": false, "rationale": "Greenhouse gases (like CO2) trap heat, not ozone primarily." },
-            { "text": "It protects living organisms from harmful ultraviolet (UV) radiation.", "isCorrect": true, "rationale": "The ozone layer absorbs most of the Sun's harmful ultraviolet (UV) radiation, protecting life on Earth from its damaging effects." },
-            { "text": "It is the primary source of oxygen for respiration.", "isCorrect": false, "rationale": "Oxygen comes from photosynthesis." },
-            { "text": "It regulates global ocean currents.", "isCorrect": false, "rationale": "Ocean currents are regulated by temperature, salinity, and wind." }
-        ],
-        "hint": "Think about protection from solar energy."
-    },
-    {
-        "question": "Which of the following describes a producer in a food web?",
-        "answerOptions": [
-            { "text": "An organism that consumes other organisms for energy.", "isCorrect": false, "rationale": "This is a consumer." },
-            { "text": "An organism that breaks down dead organic matter.", "isCorrect": false, "rationale": "This is a decomposer." },
-            { "text": "An organism that produces its own food, typically through photosynthesis or chemosynthesis.", "isCorrect": true, "rationale": "Producers are autotrophs that form the base of food webs by converting light or chemical energy into organic compounds." },
-            { "text": "An organism that eats only plants.", "isCorrect": false, "rationale": "This is a primary consumer (herbivore)." }
-        ],
-        "hint": "These organisms are at the bottom of the food chain."
-    },
-    {
-        "question": "What is biodiversity?",
-        "answerOptions": [
-            { "text": "The total number of individuals in a population.", "isCorrect": false, "rationale": "This is population size." },
-            { "text": "The variety of life in a particular habitat or ecosystem.", "isCorrect": true, "rationale": "Biodiversity refers to the variety and variability of life on Earth, encompassing genetic diversity, species diversity, and ecosystem diversity." },
-            { "text": "The process of adaptation to a changing environment.", "isCorrect": false, "rationale": "This is adaptation." },
-            { "text": "The flow of energy through an ecosystem.", "isCorrect": false, "rationale": "This is energy flow." }
-        ],
-        "hint": "Think about the 'variety of life'."
-    },
-    {
-        "question": "Which biome is characterized by very low temperatures, permafrost, and sparse vegetation like mosses and lichens?",
-        "answerOptions": [
-            { "text": "Desert", "isCorrect": false, "rationale": "Deserts are hot and dry." },
-            { "text": "Tropical rainforest", "isCorrect": false, "rationale": "Tropical rainforests are hot and wet." },
-            { "text": "Tundra", "isCorrect": true, "rationale": "The tundra biome is characterized by extremely cold temperatures, permafrost (permanently frozen soil), and a short growing season supporting low-growing vegetation." },
-            { "text": "Temperate grassland", "isCorrect": false, "rationale": "Temperate grasslands have moderate temperatures and distinct seasons." }
-        ],
-        "hint": "It's a cold and treeless biome."
-    },
-    {
-        "question": "What is the primary role of the kidney in the human body?",
-        "answerOptions": [
-            { "text": "To pump blood throughout the body.", "isCorrect": false, "rationale": "The heart pumps blood." },
-            { "text": "To filter waste products from the blood and produce urine.", "isCorrect": true, "rationale": "The kidneys filter blood, removing waste products like urea, excess salts, and water to form urine, and play a key role in maintaining fluid and electrolyte balance." },
-            { "text": "To digest food and absorb nutrients.", "isCorrect": false, "rationale": "The digestive system digests food." },
-            { "text": "To exchange gases with the environment.", "isCorrect": false, "rationale": "The respiratory system exchanges gases." }
-        ],
-        "hint": "Think about its function in detoxification and waste removal."
-    },
-    {
-        "question": "Which of the following is a function of the lymphatic system?",
-        "answerOptions": [
-            { "text": "Transporting oxygen to tissues.", "isCorrect": false, "rationale": "The circulatory system (red blood cells) transports oxygen." },
-            { "text": "Absorbing nutrients from digested food.", "isCorrect": false, "rationale": "The digestive system absorbs nutrients." },
-            { "text": "Returning interstitial fluid to the bloodstream and aiding in immune defense.", "isCorrect": true, "rationale": "The lymphatic system collects excess interstitial fluid (lymph), filters it through lymph nodes, and returns it to the blood, while also playing a critical role in immune surveillance and response." },
-            { "text": "Producing hormones for metabolism.", "isCorrect": false, "rationale": "The endocrine system produces hormones." }
-        ],
-        "hint": "It's involved in fluid balance and immunity."
-    },
-    {
-        "question": "What is the role of myelin sheath around axons?",
-        "answerOptions": [
-            { "text": "To produce neurotransmitters.", "isCorrect": false, "rationale": "Neurons produce neurotransmitters at synapses." },
-            { "text": "To increase the speed of nerve impulse transmission.", "isCorrect": true, "rationale": "The myelin sheath acts as an electrical insulator, allowing nerve impulses to travel much faster along the axon through saltatory conduction." },
-            { "text": "To provide nutrients to the neuron.", "isCorrect": false, "rationale": "Neuroglia cells provide nutrients and support." },
-            { "text": "To connect neurons to muscles.", "isCorrect": false, "rationale": "Neuromuscular junctions connect neurons to muscles." }
-        ],
-        "hint": "It's a fatty layer that insulates nerve fibers."
-    },
-    {
-        "question": "Which part of the cell is responsible for packaging and modifying proteins for secretion or delivery to other organelles?",
-        "answerOptions": [
-            { "text": "Endoplasmic Reticulum", "isCorrect": false, "rationale": "ER synthesizes and initially folds proteins; Golgi modifies and packages." },
-            { "text": "Mitochondria", "isCorrect": false, "rationale": "Mitochondria produce energy." },
-            { "text": "Golgi apparatus", "isCorrect": true, "rationale": "The Golgi apparatus (or Golgi complex) functions to further modify, sort, and package proteins and lipids into vesicles for secretion or delivery to other cellular destinations." },
-            { "text": "Lysosome", "isCorrect": false, "rationale": "Lysosomes digest waste." }
-        ],
-        "hint": "It's often described as the cell's 'post office'."
-    },
-    {
-        "question": "What is the primary function of the circulatory system?",
-        "answerOptions": [
-            { "text": "Breaking down food for nutrients", "isCorrect": false, "rationale": "This is the digestive system." },
-            { "text": "Exchanging gases with the environment", "isCorrect": false, "rationale": "This is the respiratory system." },
-            { "text": "Transporting oxygen, nutrients, hormones, and waste products", "isCorrect": true, "rationale": "The circulatory system (heart, blood vessels, blood) is vital for the transport of these essential substances throughout the body." },
-            { "text": "Controlling voluntary movements", "isCorrect": false, "rationale": "This is the nervous system." }
-        ],
-        "hint": "It's the body's transportation network."
-    },
-    {
-        "question": "Which of the following best describes the process of natural selection?",
-        "answerOptions": [
-            { "text": "Random changes in allele frequencies in a population.", "isCorrect": false, "rationale": "This describes genetic drift." },
-            { "text": "The transfer of genes between populations.", "isCorrect": false, "rationale": "This describes gene flow." },
-            { "text": "Differential survival and reproduction of individuals based on their phenotype.", "isCorrect": true, "rationale": "Natural selection is the mechanism where individuals with heritable traits that enhance survival and reproduction in a given environment tend to leave more offspring." },
-            { "text": "The formation of new species due to geographic isolation.", "isCorrect": false, "rationale": "This is allopatric speciation." }
-        ],
-        "hint": "Think about 'survival of the fittest'."
-    },
-    {
-        "question": "What is the primary function of the esophagus?",
-        "answerOptions": [
-            { "text": "Chemical digestion of carbohydrates", "isCorrect": false, "rationale": "Digestion occurs in the mouth, stomach, and small intestine." },
-            { "text": "Absorption of nutrients into the bloodstream", "isCorrect": false, "rationale": "Nutrient absorption occurs primarily in the small intestine." },
-            { "text": "Transport of food from the pharynx to the stomach via peristalsis", "isCorrect": true, "rationale": "The esophagus is a muscular tube that moves food from the throat to the stomach through rhythmic contractions called peristalsis." },
-            { "text": "Secretion of hydrochloric acid", "isCorrect": false, "rationale": "The stomach secretes hydrochloric acid." }
-        ],
-        "hint": "It's a tube that connects the mouth to the stomach."
-    },
-    {
-        "question": "Which part of the cell is considered the 'control center' because it contains the cell's genetic material?",
-        "answerOptions": [
-            { "text": "Mitochondrion", "isCorrect": false, "rationale": "Mitochondria produce energy." },
-            { "text": "Ribosome", "isCorrect": false, "rationale": "Ribosomes synthesize proteins." },
-            { "text": "Nucleus", "isCorrect": true, "rationale": "The nucleus houses the cell's chromosomes (genetic material) and controls cell activities by regulating gene expression." },
-            { "text": "Cytoplasm", "isCorrect": false, "rationale": "Cytoplasm is the jelly-like substance filling the cell, containing organelles." }
-        ],
-        "hint": "It's where the DNA is located."
-    },
-    {
-        "question": "What is the function of the vacuole in plant cells?",
-        "answerOptions": [
-            { "text": "Energy production", "isCorrect": false, "rationale": "Mitochondria and chloroplasts (in plants) produce energy." },
-            { "text": "Storage of water, nutrients, and waste, and maintaining turgor pressure", "isCorrect": true, "rationale": "The large central vacuole in plant cells stores water, nutrients, and waste products, and by maintaining turgor pressure against the cell wall, it provides structural support." },
-            { "text": "Protein synthesis", "isCorrect": false, "rationale": "Ribosomes synthesize proteins." },
-            { "text": "Cell division", "isCorrect": false, "rationale": "Cell division is a complex process involving the nucleus and cytoplasm." }
-        ],
-        "hint": "It's a large, fluid-filled sac."
-    },
-    {
-        "question": "Which of the following is a primary difference between DNA and RNA?",
-        "answerOptions": [
-            { "text": "DNA is found in the nucleus, RNA only in the cytoplasm.", "isCorrect": false, "rationale": "RNA is synthesized in the nucleus and moves to the cytoplasm." },
-            { "text": "DNA has deoxyribose sugar, RNA has ribose sugar.", "isCorrect": true, "rationale": "This is a key structural difference in their sugar backbones." },
-            { "text": "DNA contains uracil, RNA contains thymine.", "isCorrect": false, "rationale": "This is reversed; DNA has thymine, RNA has uracil." },
-            { "text": "DNA is single-stranded, RNA is double-stranded.", "isCorrect": false, "rationale": "This is reversed; DNA is typically double-stranded, RNA is single-stranded." }
-        ],
-        "hint": "Focus on the sugar component."
-    },
-    {
-        "question": "What is the role of ATP synthase in cellular respiration?",
-        "answerOptions": [
-            { "text": "To break down glucose", "isCorrect": false, "rationale": "Glycolysis breaks down glucose." },
-            { "text": "To synthesize ATP using the energy from a proton gradient", "isCorrect": true, "rationale": "ATP synthase is an enzyme complex that uses the energy of a proton (H+) gradient across the inner mitochondrial membrane to synthesize ATP through chemiosmosis." },
-            { "text": "To transport oxygen", "isCorrect": false, "rationale": "Hemoglobin transports oxygen." },
-            { "text": "To digest proteins", "isCorrect": false, "rationale": "Proteases digest proteins." }
-        ],
-        "hint": "It's a molecular machine that literally makes ATP."
-    },
-    {
-        "question": "Which of the following is an example of an analogous structure?",
-        "answerOptions": [
-            { "text": "Human arm and cat foreleg", "isCorrect": false, "rationale": "These are homologous structures." },
-            { "text": "Bat wing and butterfly wing", "isCorrect": true, "rationale": "Both serve the purpose of flight, but evolved independently from different ancestral structures, making them analogous." },
-            { "text": "Whale flipper and human hand", "isCorrect": false, "rationale": "These are homologous structures." },
-            { "text": "Maple leaf and oak leaf", "isCorrect": false, "rationale": "These are homologous structures." }
-        ],
-        "hint": "Think about similar functions but different evolutionary origins."
-    },
-    {
-        "question": "What is the biological definition of a species?",
-        "answerOptions": [
-            { "text": "A group of organisms that look similar.", "isCorrect": false, "rationale": "Appearance can be misleading; species can have varied appearances." },
-            { "text": "A group of individuals living in the same area.", "isCorrect": false, "rationale": "This defines a population." },
-            { "text": "A group of populations whose members have the potential to interbreed in nature and produce fertile offspring.", "isCorrect": true, "rationale": "The biological species concept defines a species as a group of organisms that can naturally interbreed and produce viable, fertile offspring." },
-            { "text": "A group of organisms that share a common ancestor.", "isCorrect": false, "rationale": "This describes a clade, which can include multiple species." }
-        ],
-        "hint": "Focus on the ability to reproduce successfully in nature."
-    },
-    {
-        "question": "Which type of mutation results in a change in a single nucleotide base pair?",
-        "answerOptions": [
-            { "text": "Frameshift mutation", "isCorrect": false, "rationale": "Frameshift mutations involve insertions or deletions, altering the reading frame." },
-            { "text": "Chromosomal mutation", "isCorrect": false, "rationale": "Chromosomal mutations involve large-scale changes to chromosomes." },
-            { "text": "Point mutation (substitution)", "isCorrect": true, "rationale": "A point mutation is a change in a single nucleotide base pair, often involving the substitution of one base for another." },
-            { "text": "Duplication mutation", "isCorrect": false, "rationale": "Duplication involves the copying of a segment of DNA." }
-        ],
-        "hint": "It's a small-scale change affecting just one 'point' in the DNA."
-    },
-    {
-        "question": "What is the main purpose of mRNA splicing in eukaryotes?",
-        "answerOptions": [
-            { "text": "To add a poly-A tail to the mRNA.", "isCorrect": false, "rationale": "Poly-A tail addition is a separate post-transcriptional modification." },
-            { "text": "To remove introns and join exons, producing a mature mRNA transcript.", "isCorrect": true, "rationale": "mRNA splicing removes non-coding intron sequences from pre-mRNA and ligates coding exon sequences together to form a mature mRNA molecule ready for translation." },
-            { "text": "To unwind the DNA helix for transcription.", "isCorrect": false, "rationale": "DNA helicase unwinds DNA." },
-            { "text": "To synthesize amino acids.", "isCorrect": false, "rationale": "Amino acids are acquired from diet or synthesized through metabolic pathways, not by splicing." }
-        ],
-        "hint": "Think about what happens to the initial RNA transcript before it leaves the nucleus."
-    },
-    {
-        "question": "Which of the following is NOT a characteristic of a living organism?",
-        "answerOptions": [
-            { "text": "Composed of cells", "isCorrect": false, "rationale": "All living organisms are composed of cells." },
-            { "text": "Ability to reproduce", "isCorrect": false, "rationale": "Reproduction is a key characteristic of life." },
-            { "text": "Spontaneous generation", "isCorrect": true, "rationale": "Spontaneous generation (the idea that life arises from non-living matter) is a disproven theory; all living organisms come from pre-existing life." },
-            { "text": "Ability to grow and develop", "isCorrect": false, "rationale": "Growth and development are characteristics of life." }
-        ],
-        "hint": "Think about the historical, disproven idea of how life originates."
-    },
-    {
-        "question": "What is the difference between dominant and recessive alleles?",
-        "answerOptions": [
-            { "text": "Dominant alleles are always more common in a population.", "isCorrect": false, "rationale": "Dominance refers to expression, not frequency." },
-            { "text": "A dominant allele is expressed when present, while a recessive allele is expressed only when two copies are present.", "isCorrect": true, "rationale": "Dominant alleles mask the expression of recessive alleles when both are present, whereas recessive alleles only show their trait when homozygous." },
-            { "text": "Recessive alleles are always harmful.", "isCorrect": false, "rationale": "Recessive alleles are not inherently harmful." },
-            { "text": "Dominant alleles are only found in males, recessive in females.", "isCorrect": false, "rationale": "This is incorrect; dominance/recessiveness applies to both sexes." }
-        ],
-        "hint": "Think about which allele 'shows up' when both are present."
-    },
-    {
-        "question": "Which type of cell transport involves the movement of water across a selectively permeable membrane?",
-        "answerOptions": [
-            { "text": "Active transport", "isCorrect": false, "rationale": "Active transport moves solutes, not primarily water, and requires energy." },
-            { "text": "Facilitated diffusion", "isCorrect": false, "rationale": "Facilitated diffusion moves solutes with protein assistance." },
-            { "text": "Osmosis", "isCorrect": true, "rationale": "Osmosis is the specific term for the passive diffusion of water across a selectively permeable membrane from an area of higher water concentration to lower water concentration." },
-            { "text": "Exocytosis", "isCorrect": false, "rationale": "Exocytosis is bulk transport out of the cell." }
-        ],
-        "hint": "It's the special name for water movement."
-    },
-    {
-        "question": "What is the purpose of the Calvin Cycle in photosynthesis?",
-        "answerOptions": [
-            { "text": "To capture light energy and produce ATP and NADPH.", "isCorrect": false, "rationale": "This describes the light-dependent reactions." },
-            { "text": "To split water molecules and release oxygen.", "isCorrect": false, "rationale": "This occurs during the light-dependent reactions." },
-            { "text": "To convert carbon dioxide into glucose using ATP and NADPH.", "isCorrect": true, "rationale": "The Calvin cycle (light-independent reactions) uses the ATP and NADPH generated during the light reactions to fix carbon dioxide into glucose (or other sugars)." },
-            { "text": "To regenerate NAD+ for glycolysis.", "isCorrect": false, "rationale": "This occurs in fermentation or cellular respiration." }
-        ],
-        "hint": "It's the 'sugar-making' part of photosynthesis."
-    },
-    {
-        "question": "Which cellular process occurs in the cytoplasm and involves the breakdown of glucose into pyruvate?",
-        "answerOptions": [
-            { "text": "Krebs cycle", "isCorrect": false, "rationale": "The Krebs cycle occurs in the mitochondrial matrix." },
-            { "text": "Electron transport chain", "isCorrect": false, "rationale": "The electron transport chain occurs on the inner mitochondrial membrane." },
-            { "text": "Glycolysis", "isCorrect": true, "rationale": "Glycolysis is the anaerobic breakdown of glucose into two molecules of pyruvate, occurring in the cytoplasm." },
-            { "text": "Oxidative phosphorylation", "isCorrect": false, "rationale": "Oxidative phosphorylation encompasses the electron transport chain and chemiosmosis." }
-        ],
-        "hint": "It's the first step in both aerobic and anaerobic respiration."
-    },
-    {
-        "question": "What is the main product of the light-dependent reactions of photosynthesis?",
-        "answerOptions": [
-            { "text": "Glucose", "isCorrect": false, "rationale": "Glucose is produced in the Calvin cycle." },
-            { "text": "Carbon dioxide", "isCorrect": false, "rationale": "Carbon dioxide is a reactant of photosynthesis." },
-            { "text": "ATP and NADPH", "isCorrect": true, "rationale": "The light-dependent reactions convert light energy into chemical energy in the form of ATP and NADPH, which are then used in the Calvin cycle." },
-            { "text": "Water", "isCorrect": false, "rationale": "Water is a reactant that is split." }
-        ],
-        "hint": "These are the energy-carrying molecules needed for the next stage."
-    },
-    {
-        "question": "Which of the following is an example of an ecosystem?",
-        "answerOptions": [
-            { "text": "A single population of deer in a forest.", "isCorrect": false, "rationale": "This is a population." },
-            { "text": "All the living organisms in a pond.", "isCorrect": false, "rationale": "This is a community." },
-            { "text": "A forest, including all the trees, animals, soil, water, and sunlight.", "isCorrect": true, "rationale": "An ecosystem includes all the living (biotic) components (community) and non-living (abiotic) components of an area, interacting as a system." },
-            { "text": "A collection of different biomes worldwide.", "isCorrect": false, "rationale": "This is the biosphere." }
-        ],
-        "hint": "It includes both living and non-living factors."
-    },
-    {
-        "question": "What is the primary role of the digestive system?",
-        "answerOptions": [
-            { "text": "To transport oxygen to cells.", "isCorrect": false, "rationale": "Circulatory system transports oxygen." },
-            { "text": "To break down food into nutrients and absorb them into the body.", "isCorrect": true, "rationale": "The digestive system breaks down food into smaller molecules (nutrients) that can be absorbed and utilized by the body's cells." },
-            { "text": "To regulate body temperature.", "isCorrect": false, "rationale": "Various systems (circulatory, integumentary) regulate temperature." },
-            { "text": "To produce hormones.", "isCorrect": false, "rationale": "The endocrine system produces hormones." }
-        ],
-        "hint": "Think about how your body gets energy from food."
-    },
-    {
-        "question": "Which component of blood is primarily responsible for fighting infections?",
-        "answerOptions": [
-            { "text": "Red blood cells", "isCorrect": false, "rationale": "Red blood cells transport oxygen." },
-            { "text": "Platelets", "isCorrect": false, "rationale": "Platelets are involved in clotting." },
-            { "text": "White blood cells (leukocytes)", "isCorrect": true, "rationale": "White blood cells are key components of the immune system, identifying and destroying pathogens and abnormal cells." },
-            { "text": "Plasma", "isCorrect": false, "rationale": "Plasma is the liquid matrix of blood." }
-        ],
-        "hint": "These are the 'soldiers' of the immune system."
-    },
-    {
-        "question": "What is the function of the nephron in the kidney?",
-        "answerOptions": [
-            { "text": "To store urine before excretion.", "isCorrect": false, "rationale": "The bladder stores urine." },
-            { "text": "To transport urine from the kidney to the bladder.", "isCorrect": false, "rationale": "Ureters transport urine." },
-            { "text": "To filter blood, reabsorb useful substances, and secrete waste to form urine.", "isCorrect": true, "rationale": "The nephron is the functional unit of the kidney, responsible for filtering blood, reabsorbing essential substances, and secreting wastes to produce urine." },
-            { "text": "To produce red blood cells.", "isCorrect": false, "rationale": "Red blood cells are produced in bone marrow." }
-        ],
-        "hint": "It's the microscopic filtering unit of the kidney."
-    },
-    {
-        "question": "Which part of the brain is involved in memory, emotion, and motivation?",
-        "answerOptions": [
-            { "text": "Cerebellum", "isCorrect": false, "rationale": "Cerebellum is for coordination." },
-            { "text": "Brainstem", "isCorrect": false, "rationale": "Brainstem controls basic life functions." },
-            { "text": "Limbic system", "isCorrect": true, "rationale": "The limbic system, a group of structures including the amygdala, hippocampus, and hypothalamus, plays a major role in emotion, motivation, and memory." },
-            { "text": "Occipital lobe", "isCorrect": false, "rationale": "Occipital lobe processes visual information." }
-        ],
-        "hint": "It's a collection of structures deep within the brain, often associated with feelings and learning."
-    },
-    {
-        "question": "What is the basic unit of heredity?",
-        "answerOptions": [
-            { "text": "Chromosome", "isCorrect": false, "rationale": "A chromosome contains many genes." },
-            { "text": "Cell", "isCorrect": false, "rationale": "A cell is the basic unit of life, but a gene is the basic unit of heredity." },
-            { "text": "Gene", "isCorrect": true, "rationale": "A gene is a segment of DNA that contains the instructions for making a specific protein or RNA molecule, thus carrying hereditary information." },
-            { "text": "Protein", "isCorrect": false, "rationale": "Proteins are products of genes." }
-        ],
-        "hint": "It's a segment of DNA that codes for a trait."
-    },
-    {
-        "question": "Which type of genetic cross involves only one trait?",
-        "answerOptions": [
-            { "text": "Dihybrid cross", "isCorrect": false, "rationale": "Dihybrid crosses involve two traits." },
-            { "text": "Monohybrid cross", "isCorrect": true, "rationale": "A monohybrid cross involves the inheritance of a single characteristic, typically examining how different alleles of one gene are passed from parents to offspring." },
-            { "text": "Test cross", "isCorrect": false, "rationale": "A test cross can be monohybrid or dihybrid, but it specifically determines an unknown genotype." },
-            { "text": "Backcross", "isCorrect": false, "rationale": "A backcross is a cross between an F1 hybrid and one of its parental genotypes." }
-        ],
-        "hint": "Think 'one'."
-    },
-    {
-        "question": "What is the function of the cell wall in bacteria?",
-        "answerOptions": [
-            { "text": "To regulate water potential", "isCorrect": false, "rationale": "While it impacts water movement, its primary role is structural." },
-            { "text": "To provide structural support and protection", "isCorrect": true, "rationale": "The bacterial cell wall, made of peptidoglycan, provides structural integrity, protects the cell from osmotic lysis, and maintains cell shape." },
-            { "text": "To carry out photosynthesis", "isCorrect": false, "rationale": "Some bacteria photosynthesize, but the cell wall isn't directly involved." },
-            { "text": "To store genetic material", "isCorrect": false, "rationale": "Genetic material is in the nucleoid or plasmids." }
-        ],
-        "hint": "It's a rigid outer layer."
-    },
-    {
-        "question": "Which of the following is a characteristic of RNA but not DNA?",
-        "answerOptions": [
-            { "text": "Contains the sugar deoxyribose", "isCorrect": false, "rationale": "DNA contains deoxyribose." },
-            { "text": "Is typically double-stranded", "isCorrect": false, "rationale": "DNA is typically double-stranded." },
-            { "text": "Contains uracil instead of thymine", "isCorrect": true, "rationale": "RNA contains the nitrogenous base uracil (U) in place of thymine (T), which is found in DNA." },
-            { "text": "Can form a double helix structure", "isCorrect": false, "rationale": "DNA forms a double helix; RNA is mostly single-stranded but can fold into complex structures." }
-        ],
-        "hint": "Think about one of its unique nitrogenous bases."
-    },
-    {
-        "question": "What is the definition of a homologous structure?",
-        "answerOptions": [
-            { "text": "A structure that has the same function but different evolutionary origin.", "isCorrect": false, "rationale": "This describes an analogous structure." },
-            { "text": "A structure that has different functions but similar evolutionary origin.", "isCorrect": true, "rationale": "Homologous structures are anatomical resemblances that represent variations on a structural theme present in a common ancestor, suggesting divergent evolution." },
-            { "text": "A structure that has lost its original function over evolutionary time.", "isCorrect": false, "rationale": "This describes a vestigial structure." },
-            { "text": "A structure that performs a new function in an organism.", "isCorrect": false, "rationale": "This is too general." }
-        ],
-        "hint": "Think about shared ancestry and underlying structural similarity."
-    },
-    {
-        "question": "What is the bottleneck effect in genetic drift?",
-        "answerOptions": [
-            { "text": "The movement of individuals between populations.", "isCorrect": false, "rationale": "This is gene flow." },
-            { "text": "A sudden reduction in population size due to a disaster, leading to a change in allele frequencies.", "isCorrect": true, "rationale": "The bottleneck effect occurs when a population undergoes a drastic reduction in size, leading to a random and non-representative sample of alleles surviving, which can significantly alter allele frequencies." },
-            { "text": "The establishment of a new population by a few individuals.", "isCorrect": false, "rationale": "This is the founder effect." },
-            { "text": "The selective pressure favoring certain phenotypes.", "isCorrect": false, "rationale": "This is natural selection." }
-        ],
-        "hint": "Imagine a population passing through a 'narrow opening'."
-    },
-    {
-        "question": "Which of the following describes stabilizing selection?",
-        "answerOptions": [
-            { "text": "Favors individuals at one extreme of the phenotypic range.", "isCorrect": false, "rationale": "This is directional selection." },
-            { "text": "Favors individuals at both extremes of the phenotypic range.", "isCorrect": false, "rationale": "This is disruptive selection." },
-            { "text": "Favors intermediate variants and acts against extreme phenotypes.", "isCorrect": true, "rationale": "Stabilizing selection reduces phenotypic variation and maintains the status quo by favoring intermediate phenotypes and acting against extremes." },
-            { "text": "Occurs when one sex selects mates based on certain traits.", "isCorrect": false, "rationale": "This is sexual selection." }
-        ],
-        "hint": "Think about selection that keeps a trait in the 'middle' range."
-    },
-    {
-        "question": "What is the function of the pulmonary artery?",
-        "answerOptions": [
-            { "text": "Carries oxygenated blood from the lungs to the heart.", "isCorrect": false, "rationale": "Pulmonary veins do this." },
-            { "text": "Carries deoxygenated blood from the heart to the lungs.", "isCorrect": true, "rationale": "The pulmonary artery is unique among arteries as it carries deoxygenated blood from the right ventricle of the heart to the lungs to pick up oxygen." },
-            { "text": "Carries oxygenated blood from the heart to the body.", "isCorrect": false, "rationale": "The aorta does this." },
-            { "text": "Carries deoxygenated blood from the body to the heart.", "isCorrect": false, "rationale": "Vena cava does this." }
-        ],
-        "hint": "It takes blood away from the heart to the lungs."
-    },
-    {
-        "question": "Which part of the brain is responsible for regulating basic life functions such as breathing, heart rate, and blood pressure?",
-        "answerOptions": [
-            { "text": "Cerebrum", "isCorrect": false, "rationale": "Cerebrum handles higher functions." },
-            { "text": "Cerebellum", "isCorrect": false, "rationale": "Cerebellum handles coordination." },
-            { "text": "Brainstem", "isCorrect": true, "rationale": "The brainstem, including the medulla oblongata, pons, and midbrain, controls essential involuntary functions necessary for life." },
-            { "text": "Hypothalamus", "isCorrect": false, "rationale": "Hypothalamus regulates homeostasis but isn't the primary control center for *all* basic life functions." }
-        ],
-        "hint": "It connects the cerebrum and cerebellum to the spinal cord."
-    },
-    {
-        "question": "What is the function of the diaphragm in the human respiratory system?",
-        "answerOptions": [
-            { "text": "To filter inhaled air.", "isCorrect": false, "rationale": "Nose and trachea filter air." },
-            { "text": "To exchange gases between the lungs and blood.", "isCorrect": false, "rationale": "Alveoli exchange gases." },
-            { "text": "To contract and flatten, increasing chest cavity volume for inhalation.", "isCorrect": true, "rationale": "The diaphragm is a sheet of muscle that contracts and moves downward during inhalation, increasing the volume of the thoracic cavity and drawing air into the lungs." },
-            { "text": "To produce sound for speech.", "isCorrect": false, "rationale": "The larynx (voice box) produces sound." }
-        ],
-        "hint": "It's a muscle involved in breathing."
-    },
-    {
-        "question": "Which of the following is a primary function of the skeletal system?",
-        "answerOptions": [
-            { "text": "Producing digestive enzymes.", "isCorrect": false, "rationale": "Digestive system produces enzymes." },
-            { "text": "Providing support, protection, and producing blood cells.", "isCorrect": true, "rationale": "The skeletal system provides a framework for the body, protects internal organs, allows for movement (with muscles), and bone marrow produces blood cells." },
-            { "text": "Transporting oxygen and nutrients.", "isCorrect": false, "rationale": "Circulatory system transports." },
-            { "text": "Regulating body temperature.", "isCorrect": false, "rationale": "Integumentary and circulatory systems regulate temperature." }
-        ],
-        "hint": "Think about what bones do for the body."
-    },
-    {
-        "question": "What is a hormone?",
-        "answerOptions": [
-            { "text": "An enzyme that speeds up biochemical reactions.", "isCorrect": false, "rationale": "Enzymes are catalysts, not hormones." },
-            { "text": "A specialized cell that transmits electrical signals.", "isCorrect": false, "rationale": "This describes a neuron." },
-            { "text": "A chemical messenger produced by endocrine glands that travels in the bloodstream to target cells.", "isCorrect": true, "rationale": "Hormones are signaling molecules produced by glands that regulate various physiological processes by acting on specific target cells or organs." },
-            { "text": "A type of protein that provides structural support.", "isCorrect": false, "rationale": "Structural proteins provide support." }
-        ],
-        "hint": "It's a chemical signal produced by glands."
-    },
-    {
-        "question": "Which gland is often called the 'master gland' because it controls many other endocrine glands?",
-        "answerOptions": [
-            { "text": "Thyroid gland", "isCorrect": false, "rationale": "Thyroid regulates metabolism." },
-            { "text": "Adrenal gland", "isCorrect": false, "rationale": "Adrenal glands produce stress hormones." },
-            { "text": "Pituitary gland", "isCorrect": true, "rationale": "The pituitary gland, located at the base of the brain, secretes hormones that control the functions of many other endocrine glands, earning it the 'master gland' title." },
-            { "text": "Pancreas", "isCorrect": false, "rationale": "Pancreas regulates blood sugar." }
-        ],
-        "hint": "It's a small gland at the base of the brain."
-    },
-    {
-        "question": "What is a neuron?",
-        "answerOptions": [
-            { "text": "A type of muscle cell.", "isCorrect": false, "rationale": "Muscle cells are for contraction." },
-            { "text": "A cell that transports oxygen in the blood.", "isCorrect": false, "rationale": "Red blood cells transport oxygen." },
-            { "text": "A specialized cell that transmits electrical and chemical signals (nerve impulses).", "isCorrect": true, "rationale": "Neurons are the fundamental units of the nervous system, responsible for transmitting information throughout the body via electrochemical signals." },
-            { "text": "A cell that digests waste products.", "isCorrect": false, "rationale": "Phagocytes digest waste." }
-        ],
-        "hint": "It's the basic unit of the nervous system."
-    },
-    {
-        "question": "Which part of a neuron receives incoming signals from other neurons?",
-        "answerOptions": [
-            { "text": "Axon", "isCorrect": false, "rationale": "Axons transmit signals away from the cell body." },
-            { "text": "Myelin sheath", "isCorrect": false, "rationale": "Myelin sheath insulates the axon." },
-            { "text": "Dendrite", "isCorrect": true, "rationale": "Dendrites are branching extensions of a neuron that receive signals from other neurons and transmit them towards the cell body." },
-            { "text": "Cell body (soma)", "isCorrect": false, "rationale": "The cell body contains the nucleus and integrates signals." }
-        ],
-        "hint": "They are the 'receiving' branches of the neuron."
-    },
-    {
-        "question": "What is the process of phototropism in plants?",
-        "answerOptions": [
-            { "text": "Growth towards a water source.", "isCorrect": false, "rationale": "This is hydrotropism." },
-            { "text": "Growth towards light.", "isCorrect": true, "rationale": "Phototropism is the growth of a plant (or part of a plant) towards a light source, mediated by hormones like auxins." },
-            { "text": "Growth in response to gravity.", "isCorrect": false, "rationale": "This is gravitropism (or geotropism)." },
-            { "text": "Growth towards a touch stimulus.", "isCorrect": false, "rationale": "This is thigmotropism." }
-        ],
-        "hint": "Think about how plants respond to sunlight."
-    },
-    {
-        "question": "Which plant hormone is responsible for cell elongation and is involved in phototropism?",
-        "answerOptions": [
-            { "text": "Gibberellin", "isCorrect": false, "rationale": "Gibberellins promote stem elongation and seed germination." },
-            { "text": "Cytokinin", "isCorrect": false, "rationale": "Cytokinins promote cell division." },
-            { "text": "Abscisic acid", "isCorrect": false, "rationale": "Abscisic acid inhibits growth and promotes dormancy." },
-            { "text": "Auxin", "isCorrect": true, "rationale": "Auxins are a class of plant hormones that promote cell elongation, apical dominance, and are central to phototropism and gravitropism." }
-        ],
-        "hint": "It's often associated with growth toward light."
-    },
-    {
-        "question": "What is the main role of carbohydrates in living organisms?",
-        "answerOptions": [
-            { "text": "To store genetic information.", "isCorrect": false, "rationale": "Nucleic acids store genetic information." },
-            { "text": "To provide long-term energy storage.", "isCorrect": false, "rationale": "Lipids provide long-term energy storage." },
-            { "text": "To provide immediate energy and structural support.", "isCorrect": true, "rationale": "Carbohydrates serve as the primary source of immediate energy for cells (e.g., glucose) and as structural components (e.g., cellulose in plants, chitin in fungi/arthropods)." },
-            { "text": "To catalyze biochemical reactions.", "isCorrect": false, "rationale": "Proteins (enzymes) catalyze reactions." }
-        ],
-        "hint": "Think about sugars and starches."
-    },
-    {
-        "question": "Which of the following is a major component of plant cell walls?",
-        "answerOptions": [
-            { "text": "Glycogen", "isCorrect": false, "rationale": "Glycogen is an energy storage molecule in animals." },
-            { "text": "Chitin", "isCorrect": false, "rationale": "Chitin is found in fungal cell walls and arthropod exoskeletons." },
-            { "text": "Cellulose", "isCorrect": true, "rationale": "Cellulose is a complex carbohydrate that forms the primary structural component of plant cell walls, providing rigidity and strength." },
-            { "text": "Peptidoglycan", "isCorrect": false, "rationale": "Peptidoglycan is found in bacterial cell walls." }
-        ],
-        "hint": "It's a polysaccharide that makes plant cell walls rigid."
-    },
-    {
-        "question": "What is the function of the stomata in plants?",
-        "answerOptions": [
-            { "text": "To absorb water from the soil.", "isCorrect": false, "rationale": "Roots absorb water." },
-            { "text": "To transport sugars throughout the plant.", "isCorrect": false, "rationale": "Phloem transports sugars." },
-            { "text": "To regulate gas exchange and transpiration.", "isCorrect": true, "rationale": "Stomata are small pores on the leaf surface that regulate the exchange of gases (CO2, O2) and control water loss through transpiration." },
-            { "text": "To provide structural support to the stem.", "isCorrect": false, "rationale": "The stem provides structural support." }
-        ],
-        "hint": "These are small pores on leaves that open and close."
-    },
-    {
-        "question": "Which environmental factor is a common trigger for seed germination?",
-        "answerOptions": [
-            { "text": "Lack of water", "isCorrect": false, "rationale": "Seeds typically require water to germinate." },
-            { "text": "Extreme cold", "isCorrect": false, "rationale": "Extreme cold can inhibit germination, though some seeds require a cold period (stratification) before germinating." },
-            { "text": "Presence of light", "isCorrect": false, "rationale": "Some seeds require light, others dark, but water and temperature are more universal triggers." },
-            { "text": "Adequate water and favorable temperature", "isCorrect": true, "rationale": "Seed germination typically requires sufficient water to hydrate the seed and activate metabolic processes, along with a suitable temperature range for enzyme activity." }
-        ],
-        "hint": "Think about the basic needs for a plant to start growing."
-    },
-    {
-        "question": "What is the purpose of flowers in plants?",
-        "answerOptions": [
-            { "text": "To absorb sunlight for photosynthesis.", "isCorrect": false, "rationale": "Leaves primarily absorb sunlight." },
-            { "text": "To produce food for the plant.", "isCorrect": false, "rationale": "Leaves produce food via photosynthesis." },
-            { "text": "To facilitate sexual reproduction and produce seeds.", "isCorrect": true, "rationale": "Flowers are the reproductive structures of angiosperms (flowering plants), designed to attract pollinators and facilitate fertilization to produce seeds (and often fruit)." },
-            { "text": "To transport water and nutrients.", "isCorrect": false, "rationale": "Vascular tissues (xylem, phloem) transport water and nutrients." }
-        ],
-        "hint": "Think about their role in making new plants."
-    },
-    {
-        "question": "Which of the following is a primary adaptation of animals living in arid environments?",
-        "answerOptions": [
-            { "text": "Large ears for heat absorption.", "isCorrect": false, "rationale": "Large ears (like in fennec foxes) are for heat *dissipation*." },
-            { "text": "Producing dilute urine and sweating extensively.", "isCorrect": false, "rationale": "Dilute urine and sweating lead to water loss, which is detrimental in arid environments." },
-            { "text": "Nocturnal activity and efficient water conservation mechanisms.", "isCorrect": true, "rationale": "Desert animals often exhibit nocturnal behavior to avoid daytime heat and possess physiological adaptations (e.g., concentrated urine, metabolic water production) to conserve water." },
-            { "text": "Having a thick layer of blubber for insulation.", "isCorrect": false, "rationale": "Blubber is for insulation in cold environments." }
-        ],
-        "hint": "Think about strategies for coping with lack of water and extreme temperatures."
-    },
-    {
-        "question": "What is the main characteristic of a K-selected species?",
-        "answerOptions": [
-            { "text": "Produce many small offspring with little parental care.", "isCorrect": false, "rationale": "This describes r-selected species." },
-            { "text": "Rapid maturation and short lifespan.", "isCorrect": false, "rationale": "This describes r-selected species." },
-            { "text": "Produce few, large offspring with extensive parental care and long lifespan.", "isCorrect": true, "rationale": "K-selected species are characterized by traits such as large body size, long lifespan, production of few offspring, and extensive parental care, thriving in stable environments." },
-            { "text": "Live in unstable and unpredictable environments.", "isCorrect": false, "rationale": "This describes r-selected species." }
-        ],
-        "hint": "Think about species that invest heavily in each offspring."
-    },
-    {
-        "question": "Which of the following describes the trophic level of a wolf that eats a deer?",
-        "answerOptions": [
-            { "text": "Primary producer", "isCorrect": false, "rationale": "Producers make their own food." },
-            { "text": "Primary consumer", "isCorrect": false, "rationale": "Primary consumers (herbivores) eat producers." },
-            { "text": "Secondary consumer", "isCorrect": true, "rationale": "A wolf eating a deer (a primary consumer) makes the wolf a secondary consumer (carnivore)." },
-            { "text": "Tertiary consumer", "isCorrect": false, "rationale": "Tertiary consumers eat secondary consumers." }
-        ],
-        "hint": "Follow the food chain: producer → primary consumer → ... "
-    },
-    {
-        "question": "What is mutualism in ecology?",
-        "answerOptions": [
-            { "text": "A relationship where one organism benefits and the other is harmed.", "isCorrect": false, "rationale": "This is parasitism." },
-            { "text": "A relationship where one organism benefits and the other is unaffected.", "isCorrect": false, "rationale": "This is commensalism." },
-            { "text": "A symbiotic relationship where both organisms benefit.", "isCorrect": true, "rationale": "Mutualism is an interaction between two species in which both benefit." },
-            { "text": "A relationship where organisms compete for the same resources.", "isCorrect": false, "rationale": "This is competition." }
-        ],
-        "hint": "Think about a 'win-win' scenario."
     }
 ]
