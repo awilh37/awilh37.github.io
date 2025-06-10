@@ -853,7 +853,14 @@
          * @param {object} quiz - The quiz object to select.
          */
         function selectQuiz(quiz) {
-            currentQuiz = quiz;
+            // Create a deep copy of the quiz to avoid modifying the original stored object
+            currentQuiz = JSON.parse(JSON.stringify(quiz));
+
+            // Shuffle answer options for each question in the copied quiz
+            currentQuiz.questions.forEach(q => {
+                q.answerOptions.sort(() => 0.5 - Math.random());
+            });
+
             currentQuestionIndex = 0;
             userAnswers = {};
             showResults = false;
@@ -907,7 +914,7 @@
          * Retakes the current quiz from the beginning.
          */
         function retakeQuiz() {
-            selectQuiz(currentQuiz); // Re-select to reset all states for the current quiz
+            selectQuiz(currentQuiz); // Re-select to reset all states for the current quiz AND reshuffle answers
         }
 
         /**
@@ -1060,6 +1067,12 @@
                 for (let i = 0; i < Math.min(10, shuffledAllQuestions.length); i++) {
                     const originalQuestion = shuffledAllQuestions[i];
                     const correctOption = originalQuestion.allOptions.find(opt => opt.isCorrect);
+                    // Ensure correctOption is found before proceeding
+                    if (!correctOption) {
+                        console.warn(`Question "${originalQuestion.question}" has no correct option defined. Skipping.`);
+                        continue;
+                    }
+
                     const incorrectOptionsPool = originalQuestion.allOptions.filter(opt => !opt.isCorrect);
 
                     // Shuffle incorrect options and pick 3 unique ones
@@ -1070,10 +1083,31 @@
                         selectedIncorrectOptions.push(shuffledIncorrectPool[j]);
                     }
 
-                    // If fewer than 3 incorrect options were available, we still proceed with what we have.
-                    // The core logic is to have 1 correct + N incorrect.
+                    // The number of options presented to the user should always be 4.
+                    // If we have fewer than 3 incorrect options in the pool,
+                    // we'll still only show the available incorrect ones with the correct one.
+                    // To ensure 4 options, we might need to duplicate placeholder empty options
+                    // or simplify the strict 4-option requirement if the pool is too small.
+                    // For now, let's assume `allOptions` will always provide enough diversity.
+                    // If `selectedIncorrectOptions.length < 3` it will just provide fewer than 4 options.
+                    // To strictly ensure 4 options, a more complex logic would be needed
+                    // to fill up with generic "placeholder" options if no more incorrect ones exist.
+                    // Given the current question structure, we have at least 4 options in `allOptions` for each.
+                    // We need 1 correct and 3 incorrect. So, `allOptions` should have at least 4 items, 1 correct, and 3 incorrect.
 
                     const finalOptions = [correctOption, ...selectedIncorrectOptions];
+
+                    // Ensure exactly 4 options are presented for each question in the UI
+                    // If for some reason we have fewer than 4 options after picking (e.g., if a question only has 1 correct and 1 incorrect in its pool),
+                    // we need to pad it to 4.
+                    while (finalOptions.length < 4) {
+                        finalOptions.push({ text: `(Filler option ${finalOptions.length + 1})`, isCorrect: false, rationale: "This is a placeholder option." });
+                    }
+                    // If by some chance we have more than 4, trim it down.
+                    while (finalOptions.length > 4) {
+                        finalOptions.pop();
+                    }
+
 
                     // Shuffle the final options for this question
                     finalOptions.sort(() => 0.5 - Math.random());
@@ -1085,8 +1119,10 @@
                     });
                 }
 
-                newQuizQuestions = generatedQuizQuestions;
-                newQuizTitle = "Random Biology Quiz - " + new Date().toLocaleDateString();
+                // Determine the next quiz number based on current quizzes in local storage
+                const nextQuizNumber = quizzes.length + 1;
+                newQuizTitle = `Random Biology Quiz #${nextQuizNumber}`; // Removed date for cleaner title
+                newQuizQuestions = generatedQuizQuestions; // Update newQuizQuestions with the generated ones
                 displayMessage('success', 'Random quiz generated successfully!');
 
             } catch (error) {
