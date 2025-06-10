@@ -1,556 +1,680 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, collection, doc, addDoc, onSnapshot, getDoc, updateDoc, deleteDoc, query, where } from 'firebase/firestore';
-
-// Define Firebase configuration and app ID, which are globally provided in the Canvas environment
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
-const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-// Main App component
-function App() {
-  // State variables for Firebase
-  const [db, setDb] = useState(null);
-  const [auth, setAuth] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const [loadingStatus, setLoadingStatus] = useState('Initializing...'); // More granular loading status
-  const [initError, setInitError] = useState(''); // Store initialization errors
-
-  // State variables for quiz functionality
-  const [quizzes, setQuizzes] = useState([]); // List of available quizzes
-  const [currentQuiz, setCurrentQuiz] = useState(null); // The quiz currently being taken
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Index of the current question
-  const [userAnswers, setUserAnswers] = useState({}); // Stores user's answers for each question
-  const [showResults, setShowResults] = useState(false); // Flag to show quiz results
-  const [feedbackMessage, setFeedbackMessage] = useState(''); // Feedback for selected answer
-  const [showRationale, setShowRationale] = useState(false); // Flag to show rationale after answer
-
-  // State variables for quiz creation
-  const [showCreateQuizForm, setShowCreateQuizForm] = useState(false); // Flag to show/hide quiz creation form
-  const [newQuizTitle, setNewQuizTitle] = useState(''); // Title for the new quiz
-  const [newQuizQuestions, setNewQuizQuestions] = useState([ // Questions for the new quiz
-    { question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }
-  ]);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false); // Success message for quiz creation
-  const [showErrorMessage, setShowErrorMessage] = useState(''); // Error message for quiz creation
-  const [isSavingQuiz, setIsSavingQuiz] = useState(false); // Loading state for saving quiz
-
-  // Refs for auto-scrolling
-  const questionsEndRef = useRef(null);
-
-  // Initialize Firebase and set up authentication listener
-  useEffect(() => {
-    const initializeFirebase = async () => {
-      try {
-        if (Object.keys(firebaseConfig).length === 0) {
-          throw new Error("Firebase configuration is missing or empty.");
-        }
-
-        const app = initializeApp(firebaseConfig);
-        const firestore = getFirestore(app);
-        const firebaseAuth = getAuth(app);
-        setDb(firestore);
-        setAuth(firebaseAuth);
-
-        setLoadingStatus('Authenticating...');
-        const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
-          if (user) {
-            setUserId(user.uid);
-            setLoadingStatus('Ready');
-          } else {
-            // Only sign in anonymously if no custom token is provided and no user is signed in
-            if (!initialAuthToken && !firebaseAuth.currentUser) {
-              await signInAnonymously(firebaseAuth);
-            }
-            // After potential anonymous sign-in, set userId
-            setUserId(firebaseAuth.currentUser?.uid || crypto.randomUUID());
-            setLoadingStatus('Ready');
-          }
-        });
-
-        // Attempt sign-in with custom token first, if available
-        if (initialAuthToken) {
-          try {
-            await signInWithCustomToken(firebaseAuth, initialAuthToken);
-          } catch (error) {
-            console.error("Error signing in with custom token:", error);
-            // Fallback to anonymous if custom token fails, but only if not already signed in
-            if (!firebaseAuth.currentUser) {
-              await signInAnonymously(firebaseAuth);
-            }
-          }
-        } else {
-          // If no custom token, and no user is currently signed in, sign in anonymously
-          if (!firebaseAuth.currentUser) {
-            await signInAnonymously(firebaseAuth);
-          }
-        }
-
-        return () => unsubscribe(); // Clean up auth listener on unmount
-      } catch (error) {
-        console.error("Failed to initialize Firebase:", error);
-        setInitError("Failed to initialize the application: " + error.message);
-        setLoadingStatus('Error');
-      }
-    };
-
-    initializeFirebase();
-  }, []); // Empty dependency array means this runs once on component mount
-
-  // Fetch quizzes from Firestore once Firebase and Auth are ready
-  useEffect(() => {
-    if (db && auth && userId && loadingStatus === 'Ready') { // Ensure userId is available too
-      const q = collection(db, `artifacts/${appId}/public/data/quizzes`);
-      const unsubscribe = onSnapshot(q, (snapshot) => {
-        const fetchedQuizzes = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setQuizzes(fetchedQuizzes);
-        setLoadingStatus('Loaded'); // Quizzes are loaded
-      }, (error) => {
-        console.error("Error fetching quizzes:", error);
-        setInitError("Failed to load quizzes: " + error.message);
-        setLoadingStatus('Error');
-      });
-      return () => unsubscribe(); // Clean up the listener
-    }
-  }, [db, auth, userId, loadingStatus]); // Re-run when db, auth, userId or loadingStatus changes
-
-  // Scroll to the end of questions when new questions are added
-  useEffect(() => {
-    if (showCreateQuizForm && questionsEndRef.current) {
-      questionsEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [newQuizQuestions.length, showCreateQuizForm]);
-
-  // Function to select a quiz and start it
-  const selectQuiz = (quiz) => {
-    setCurrentQuiz(quiz);
-    setCurrentQuestionIndex(0);
-    setUserAnswers({});
-    setShowResults(false);
-    setFeedbackMessage('');
-    setShowRationale(false);
-    setShowCreateQuizForm(false); // Hide create quiz form when selecting a quiz
-  };
-
-  // Function to handle answer selection
-  const handleAnswerSelect = (questionIndex, selectedOption) => {
-    if (showRationale) return; // Prevent changing answer after rationale is shown
-
-    const currentQuestion = currentQuiz.questions[questionIndex];
-    const isCorrect = selectedOption.isCorrect;
-
-    setUserAnswers(prev => ({
-      ...prev,
-      [questionIndex]: { selectedOption, isCorrect }
-    }));
-
-    setFeedbackMessage(isCorrect ? 'Correct!' : 'Incorrect.');
-    setShowRationale(true); // Show rationale immediately after selecting an answer
-  };
-
-  // Function to move to the next question
-  const goToNextQuestion = () => {
-    setFeedbackMessage('');
-    setShowRationale(false);
-    if (currentQuestionIndex < currentQuiz.questions.length - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
-    } else {
-      submitQuiz(); // If it's the last question, submit the quiz
-    }
-  };
-
-  // Function to submit the quiz and show results
-  const submitQuiz = () => {
-    setShowResults(true);
-    setFeedbackMessage('');
-    setShowRationale(false);
-  };
-
-  // Function to retake the current quiz
-  const retakeQuiz = () => {
-    selectQuiz(currentQuiz);
-  };
-
-  // Function to calculate score
-  const calculateScore = () => {
-    let score = 0;
-    Object.keys(userAnswers).forEach(qIndex => {
-      if (userAnswers[qIndex].isCorrect) {
-        score++;
-      }
-    });
-    return score;
-  };
-
-  // Handle changes in new quiz question fields
-  const handleNewQuestionChange = (index, field, value) => {
-    const updatedQuestions = [...newQuizQuestions];
-    updatedQuestions[index][field] = value;
-    setNewQuizQuestions(updatedQuestions);
-  };
-
-  // Handle changes in new quiz answer option fields
-  const handleNewAnswerOptionChange = (qIndex, optIndex, value) => {
-    const updatedQuestions = [...newQuizQuestions];
-    updatedQuestions[qIndex].answerOptions[optIndex].text = value;
-    setNewQuizQuestions(updatedQuestions);
-  };
-
-  // Handle setting correct answer for new quiz question
-  const handleNewCorrectAnswerChange = (qIndex, optIndex) => {
-    const updatedQuestions = [...newQuizQuestions];
-    updatedQuestions[qIndex].answerOptions.forEach((option, i) => {
-      option.isCorrect = (i === optIndex);
-    });
-    setNewQuizQuestions(updatedQuestions);
-  };
-
-  // Add a new blank question to the quiz creation form
-  const addNewQuestionField = () => {
-    setNewQuizQuestions(prev => [
-      ...prev,
-      { question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }
-    ]);
-  };
-
-  // Handle saving the new quiz to Firestore
-  const handleSaveNewQuiz = async () => {
-    if (!db || !userId) {
-      setShowErrorMessage("Application not ready. Please try again later.");
-      return;
-    }
-
-    if (!newQuizTitle.trim()) {
-      setShowErrorMessage("Quiz title cannot be empty.");
-      return;
-    }
-
-    // Validate questions and answers
-    const isValid = newQuizQuestions.every(q => {
-      if (!q.question.trim()) return false;
-      if (!q.answerOptions.every(opt => opt.text.trim())) return false;
-      if (!q.answerOptions.some(opt => opt.isCorrect)) return false;
-      return true;
-    });
-
-    if (!isValid) {
-      setShowErrorMessage("All questions must have text, all answer options must have text, and each question must have exactly one correct answer.");
-      return;
-    }
-
-    setIsSavingQuiz(true);
-    setShowErrorMessage('');
-    setShowSuccessMessage(false);
-
-    try {
-      const quizzesRef = collection(db, `artifacts/${appId}/public/data/quizzes`);
-      await addDoc(quizzesRef, {
-        title: newQuizTitle,
-        questions: newQuizQuestions,
-        createdAt: new Date(),
-        createdBy: userId
-      });
-      setNewQuizTitle('');
-      setNewQuizQuestions([
-        { question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }
-      ]);
-      setShowCreateQuizForm(false);
-      setShowSuccessMessage(true);
-      setTimeout(() => setShowSuccessMessage(false), 3000); // Hide success message after 3 seconds
-    } catch (error) {
-      console.error("Error saving new quiz:", error);
-      setShowErrorMessage("Failed to save quiz: " + error.message);
-    } finally {
-      setIsSavingQuiz(false);
-    }
-  };
-
-  // Render loading state if Firebase isn't ready
-  if (loadingStatus !== 'Loaded') {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-        {initError ? (
-          <p className="text-lg text-red-700">{initError}</p>
-        ) : (
-          <p className="text-lg text-gray-700">{loadingStatus}...</p>
-        )}
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 font-sans">
-      <script src="https://cdn.tailwindcss.com"></script>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      <style>{`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honors Bio Quiz App</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
         body {
-          font-family: 'Inter', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
-      `}</style>
+        .quiz-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background-color: #fff;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 2.5rem; /* p-10 */
+        }
+        /* Tailwind-like utility classes for buttons and inputs */
+        .btn-primary {
+            @apply bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md;
+        }
+        .btn-success {
+            @apply bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md;
+        }
+        .btn-secondary {
+            @apply bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out shadow-sm;
+        }
+        .btn-danger {
+             @apply bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md;
+        }
+        .input-field {
+            @apply shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+        }
+        .message-box {
+            @apply px-4 py-3 rounded-lg relative mb-4;
+        }
+        .message-success {
+            @apply bg-green-100 border border-green-400 text-green-700;
+        }
+        .message-error {
+            @apply bg-red-100 border border-red-400 text-red-700;
+        }
+        .close-message {
+            @apply absolute top-0 bottom-0 right-0 px-4 py-3 cursor-pointer;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
 
-      {/* User ID display for multi-user context */}
-      <div className="absolute top-4 right-4 bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full shadow-sm">
-        User ID: {userId || 'N/A'}
-      </div>
-
-      <div className="w-full max-w-4xl bg-white shadow-xl rounded-xl p-6 sm:p-8 lg:p-10 mb-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-6">Honors Bio Quiz App</h1>
-
-        {showErrorMessage && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
-            <span className="block sm:inline">{showErrorMessage}</span>
-            <span className="absolute top-0 bottom-0 right-0 px-4 py-3" onClick={() => setShowErrorMessage('')}>
-              <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.103l-2.651 2.651a1.2 1.2 0 1 1-1.697-1.697L8.303 9.406l-2.651-2.651a1.2 1.2 0 1 1 1.697-1.697L10 7.712l2.651-2.651a1.2 1.2 0 0 1 1.697 1.697L11.697 9.406l2.651 2.651a1.2 1.2 0 0 1 0 1.697z"/></svg>
-            </span>
-          </div>
-        )}
-
-        {showSuccessMessage && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
-            <span className="block sm:inline">Quiz successfully saved!</span>
-          </div>
-        )}
-
-        {!currentQuiz && !showCreateQuizForm && (
-          <div className="text-center">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-4">Select a Quiz or Create a New One</h2>
-            {quizzes.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {quizzes.map(quiz => (
-                  <button
-                    key={quiz.id}
-                    onClick={() => selectQuiz(quiz)}
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md"
-                  >
-                    {quiz.title}
-                  </button>
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-600 mb-4">No quizzes available. Why not create one?</p>
-            )}
-            <button
-              onClick={() => setShowCreateQuizForm(true)}
-              className="mt-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md"
-            >
-              Create New Quiz
-            </button>
-          </div>
-        )}
-
-        {showCreateQuizForm && (
-          <div className="space-y-6">
-            <button
-              onClick={() => {
-                setShowCreateQuizForm(false);
-                setNewQuizTitle('');
-                setNewQuizQuestions([
-                  { question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }
-                ]);
-                setShowErrorMessage('');
-              }}
-              className="mb-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out shadow-sm"
-            >
-              ← Back to Quizzes
-            </button>
-            <h2 className="text-2xl font-semibold text-gray-700 mb-4 text-center">Create New Quiz</h2>
-            <div className="mb-4">
-              <label htmlFor="quizTitle" className="block text-gray-700 text-sm font-bold mb-2">Quiz Title:</label>
-              <input
-                type="text"
-                id="quizTitle"
-                value={newQuizTitle}
-                onChange={(e) => setNewQuizTitle(e.target.value)}
-                className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter quiz title"
-              />
-            </div>
-
-            {newQuizQuestions.map((q, qIndex) => (
-              <div key={qIndex} className="bg-gray-50 p-4 rounded-lg shadow-inner border border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">Question {qIndex + 1}</h3>
-                <div className="mb-3">
-                  <label htmlFor={`questionText-${qIndex}`} className="block text-gray-700 text-sm font-bold mb-2">Question Text:</label>
-                  <textarea
-                    id={`questionText-${qIndex}`}
-                    value={q.question}
-                    onChange={(e) => handleNewQuestionChange(qIndex, 'question', e.target.value)}
-                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    rows="3"
-                    placeholder="Enter question text"
-                  ></textarea>
-                </div>
-
-                <div className="mb-3">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">Answer Options:</label>
-                  {q.answerOptions.map((opt, optIndex) => (
-                    <div key={optIndex} className="flex items-center mb-2">
-                      <input
-                        type="radio"
-                        id={`correctOption-${qIndex}-${optIndex}`}
-                        name={`correctOption-${qIndex}`}
-                        checked={opt.isCorrect}
-                        onChange={() => handleNewCorrectAnswerChange(qIndex, optIndex)}
-                        className="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                      />
-                      <input
-                        type="text"
-                        value={opt.text}
-                        onChange={(e) => handleNewAnswerOptionChange(qIndex, optIndex, e.target.value)}
-                        className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder={`Option ${optIndex + 1}`}
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mb-3">
-                  <label htmlFor={`hint-${qIndex}`} className="block text-gray-700 text-sm font-bold mb-2">Hint:</label>
-                  <input
-                    type="text"
-                    id={`hint-${qIndex}`}
-                    value={q.hint}
-                    onChange={(e) => handleNewQuestionChange(qIndex, 'hint', e.target.value)}
-                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Enter a hint (optional)"
-                  />
-                </div>
-              </div>
-            ))}
-            <div ref={questionsEndRef} /> {/* For auto-scrolling */}
-
-            <button
-              onClick={addNewQuestionField}
-              className="w-full bg-blue-400 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md mb-4"
-            >
-              Add Another Question
-            </button>
-
-            <button
-              onClick={handleSaveNewQuiz}
-              disabled={isSavingQuiz}
-              className={`w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-md ${isSavingQuiz ? 'opacity-50 cursor-not-allowed' : 'transform hover:scale-105'}`}
-            >
-              {isSavingQuiz ? 'Saving Quiz...' : 'Save Quiz'}
-            </button>
-          </div>
-        )}
-
-        {currentQuiz && (
-          <div className="text-center">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-6">{currentQuiz.title}</h2>
-
-            {!showResults ? (
-              <div className="space-y-6">
-                <p className="text-xl font-medium text-gray-700">Question {currentQuestionIndex + 1} of {currentQuiz.questions.length}</p>
-                <p className="text-2xl text-gray-900 font-bold mb-4">{currentQuiz.questions[currentQuestionIndex].question}</p>
-
-                <div className="grid grid-cols-1 gap-4 mb-6">
-                  {currentQuiz.questions[currentQuestionIndex].answerOptions.map((option, index) => {
-                    const isSelected = userAnswers[currentQuestionIndex]?.selectedOption === option;
-                    const isCorrectOption = option.isCorrect;
-                    const isUserCorrect = userAnswers[currentQuestionIndex]?.isCorrect;
-
-                    let bgColor = 'bg-gray-200 hover:bg-gray-300';
-                    let textColor = 'text-gray-800';
-                    let border = 'border border-gray-300';
-
-                    if (showRationale && isSelected) {
-                      bgColor = isUserCorrect ? 'bg-green-200' : 'bg-red-200';
-                      border = isUserCorrect ? 'border-green-400' : 'border-red-400';
-                    } else if (showRationale && isCorrectOption) {
-                      bgColor = 'bg-green-100'; // Highlight correct option even if not selected by user
-                      border = 'border-green-300';
-                    } else if (isSelected) {
-                      bgColor = 'bg-blue-300'; // Selected but no rationale yet
-                    }
-
-                    return (
-                      <button
-                        key={index}
-                        onClick={() => handleAnswerSelect(currentQuestionIndex, option)}
-                        className={`w-full py-3 px-4 rounded-lg text-lg font-medium transition duration-200 ease-in-out ${bgColor} ${textColor} ${border} transform hover:scale-105 shadow-sm
-                          ${showRationale ? 'cursor-default' : 'cursor-pointer'}`}
-                        disabled={showRationale} // Disable clicking after rationale is shown
-                      >
-                        {option.text}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {feedbackMessage && (
-                  <p className={`text-lg font-semibold ${userAnswers[currentQuestionIndex]?.isCorrect ? 'text-green-600' : 'text-red-600'} mb-4`}>
-                    {feedbackMessage}
-                  </p>
-                )}
-
-                {showRationale && (
-                  <>
-                    <p className="text-md text-gray-700 mt-2 mb-2 italic">
-                      **Hint:** {currentQuiz.questions[currentQuestionIndex].hint}
-                    </p>
-                    <p className="text-md text-gray-700 mb-4">
-                      **Explanation:** {currentQuiz.questions[currentQuestionIndex].answerOptions.find(opt => opt.isCorrect)?.rationale}
-                    </p>
-                  </>
-                )}
-
-                <button
-                  onClick={goToNextQuestion}
-                  disabled={!showRationale && userAnswers[currentQuestionIndex] === undefined} // Disable if no answer selected AND rationale not shown
-                  className={`bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-lg
-                    ${(!showRationale && userAnswers[currentQuestionIndex] === undefined) ? 'opacity-50 cursor-not-allowed' : ''}`}
-                >
-                  {currentQuestionIndex === currentQuiz.questions.length - 1 ? 'Finish Quiz' : 'Next Question'}
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                <h3 className="text-3xl font-bold text-gray-800 mb-4">Quiz Results</h3>
-                <p className="text-2xl text-gray-700">You scored {calculateScore()} out of {currentQuiz.questions.length}!</p>
-
-                <div className="mt-8 space-y-4 text-left">
-                  {currentQuiz.questions.map((q, index) => (
-                    <div key={index} className="p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
-                      <p className="font-semibold text-lg text-gray-900 mb-2">{index + 1}. {q.question}</p>
-                      <p className={`font-medium ${userAnswers[index]?.isCorrect ? 'text-green-600' : 'text-red-600'}`}>
-                        Your Answer: {userAnswers[index]?.selectedOption.text || 'Not answered'}
-                        {userAnswers[index] && !userAnswers[index]?.isCorrect && (
-                          <span className="ml-2">(Correct: {q.answerOptions.find(opt => opt.isCorrect)?.text})</span>
-                        )}
-                      </p>
-                      <p className="text-sm text-gray-700 mt-1 italic">Hint: {q.hint}</p>
-                      <p className="text-sm text-gray-700 mt-1">Explanation: {q.answerOptions.find(opt => opt.isCorrect)?.rationale}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-                  <button
-                    onClick={retakeQuiz}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"
-                  >
-                    Retake Quiz
-                  </button>
-                  <button
-                    onClick={() => setCurrentQuiz(null)}
-                    className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-8 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"
-                  >
-                    Choose Another Quiz
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+    <!-- User ID Display -->
+    <div class="absolute top-4 right-4 bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full shadow-sm" id="userIdDisplay">
+        User ID: N/A
     </div>
-  );
-}
 
-export default App;
+    <div class="w-full max-w-4xl bg-white shadow-xl rounded-xl p-6 sm:p-8 lg:p-10 mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-6">Honors Bio Quiz App</h1>
+
+        <div id="messageContainer"></div>
+
+        <div id="appContent" class="text-center">
+            <!-- Content will be rendered here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, doc, addDoc, onSnapshot, getDoc, updateDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // Global variables for Firebase and app state
+        let db;
+        let auth;
+        let userId = null;
+        let isAuthReady = false; // Indicates if Firebase Auth is initialized and user ID is set
+
+        let quizzes = []; // Stores fetched quizzes
+        let currentQuiz = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let showResults = false;
+        let feedbackMessage = '';
+        let showRationale = false;
+
+        let showCreateQuizForm = false;
+        let newQuizTitle = '';
+        let newQuizQuestions = [ // Initial blank question for new quiz form
+            { question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }
+        ];
+        let isSavingQuiz = false; // Flag for showing saving state
+
+        // Firebase configuration and app ID (globally provided by Canvas environment)
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // --- Utility Functions for UI Updates ---
+
+        /**
+         * Displays a temporary message (success or error) to the user.
+         * @param {string} type - 'success' or 'error'.
+         * @param {string} message - The message to display.
+         */
+        function displayMessage(type, message) {
+            const container = document.getElementById('messageContainer');
+            if (!container) {
+                console.error("Message container not found!");
+                return;
+            }
+            container.innerHTML = `
+                <div class="message-box message-${type}">
+                    <span class="block sm:inline">${message}</span>
+                    <span class="close-message" onclick="this.parentNode.remove()">
+                        <svg class="fill-current h-6 w-6 text-${type === 'success' ? 'green' : 'red'}-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.103l-2.651 2.651a1.2 1.2 0 1 1-1.697-1.697L8.303 9.406l-2.651-2.651a1.2 1.2 0 1 1 1.697-1.697L10 7.712l2.651-2.651a1.2 1.2 0 0 1 1.697 1.697L11.697 9.406l2.651 2.651a1.2 1.2 0 0 1 0 1.697z"/></svg>
+                    </span>
+                </div>
+            `;
+            setTimeout(() => {
+                if (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
+            }, 3000); // Hide after 3 seconds
+        }
+
+        /**
+         * Clears the main application content and renders the current view based on state.
+         */
+        function renderApp() {
+            const appContent = document.getElementById('appContent');
+            if (!appContent) {
+                console.error("App content container not found!");
+                return;
+            }
+            appContent.innerHTML = ''; // Clear previous content
+
+            // Update user ID display
+            const userIdDisp = document.getElementById('userIdDisplay');
+            if (userIdDisp) {
+                userIdDisp.textContent = `User ID: ${userId || 'N/A'}`;
+            }
+
+            if (!isAuthReady) {
+                appContent.innerHTML = `<p class="text-lg text-gray-700">Loading application...</p>`;
+                return;
+            }
+
+            if (showCreateQuizForm) {
+                renderCreateQuizForm(appContent);
+            } else if (currentQuiz) {
+                if (showResults) {
+                    renderQuizResults(appContent);
+                } else {
+                    renderCurrentQuiz(appContent);
+                }
+            } else {
+                renderQuizList(appContent);
+            }
+        }
+
+        /**
+         * Renders the list of available quizzes and the option to create a new one.
+         * @param {HTMLElement} parentElement - The DOM element to append content to.
+         */
+        function renderQuizList(parentElement) {
+            const div = document.createElement('div');
+            div.className = 'text-center';
+            div.innerHTML = `
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Select a Quiz or Create a New One</h2>
+            `;
+
+            if (quizzes.length > 0) {
+                const quizGrid = document.createElement('div');
+                quizGrid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
+                quizzes.forEach(quiz => {
+                    const button = document.createElement('button');
+                    button.className = 'w-full btn-primary';
+                    button.textContent = quiz.title;
+                    button.onclick = () => selectQuiz(quiz);
+                    quizGrid.appendChild(button);
+                });
+                div.appendChild(quizGrid);
+            } else {
+                const p = document.createElement('p');
+                p.className = 'text-gray-600 mb-4';
+                p.textContent = 'No quizzes available. Why not create one?';
+                div.appendChild(p);
+            }
+
+            const createButton = document.createElement('button');
+            createButton.className = 'mt-6 btn-success';
+            createButton.textContent = 'Create New Quiz';
+            createButton.onclick = toggleCreateQuizForm;
+            div.appendChild(createButton);
+
+            parentElement.appendChild(div);
+        }
+
+        /**
+         * Renders the current quiz question.
+         * @param {HTMLElement} parentElement - The DOM element to append content to.
+         */
+        function renderCurrentQuiz(parentElement) {
+            const question = currentQuiz.questions[currentQuestionIndex];
+            const div = document.createElement('div');
+            div.className = 'space-y-6';
+            div.innerHTML = `
+                <p class="text-xl font-medium text-gray-700">Question ${currentQuestionIndex + 1} of ${currentQuiz.questions.length}</p>
+                <p class="text-2xl text-gray-900 font-bold mb-4">${question.question}</p>
+                <div class="grid grid-cols-1 gap-4 mb-6" id="answerOptionsContainer"></div>
+                <p id="feedbackMessage" class="text-lg font-semibold mb-4"></p>
+            `;
+
+            const feedbackP = div.querySelector('#feedbackMessage');
+            if (feedbackMessage) {
+                feedbackP.textContent = feedbackMessage;
+                feedbackP.className += ` ${userAnswers[currentQuestionIndex]?.isCorrect ? 'text-green-600' : 'text-red-600'}`;
+            }
+
+            const optionsContainer = div.querySelector('#answerOptionsContainer');
+            question.answerOptions.forEach((option, index) => {
+                const isSelected = userAnswers[currentQuestionIndex]?.selectedOption === option;
+                const isCorrectOption = option.isCorrect;
+                const isUserCorrect = userAnswers[currentQuestionIndex]?.isCorrect;
+
+                let bgColor = 'bg-gray-200 hover:bg-gray-300';
+                let textColor = 'text-gray-800';
+                let border = 'border border-gray-300';
+
+                if (showRationale && isSelected) {
+                    bgColor = isUserCorrect ? 'bg-green-200' : 'bg-red-200';
+                    border = isUserCorrect ? 'border-green-400' : 'border-red-400';
+                } else if (showRationale && isCorrectOption) {
+                    bgColor = 'bg-green-100'; // Highlight correct option even if not selected by user
+                    border = 'border-green-300';
+                } else if (isSelected) {
+                    bgColor = 'bg-blue-300'; // Selected but no rationale yet
+                }
+
+                const button = document.createElement('button');
+                button.className = `w-full py-3 px-4 rounded-lg text-lg font-medium transition duration-200 ease-in-out ${bgColor} ${textColor} ${border} transform hover:scale-105 shadow-sm
+                  ${showRationale ? 'cursor-default' : 'cursor-pointer'}`;
+                button.textContent = option.text;
+                button.disabled = showRationale;
+                button.onclick = () => handleAnswerSelect(currentQuestionIndex, option);
+                optionsContainer.appendChild(button);
+            });
+
+            if (showRationale) {
+                const hintP = document.createElement('p');
+                hintP.className = 'text-md text-gray-700 mt-2 mb-2 italic';
+                hintP.innerHTML = `<strong>Hint:</strong> ${question.hint}`;
+                div.appendChild(hintP);
+
+                const explanationP = document.createElement('p');
+                explanationP.className = 'text-md text-gray-700 mb-4';
+                explanationP.innerHTML = `<strong>Explanation:</strong> ${question.answerOptions.find(opt => opt.isCorrect)?.rationale}`;
+                div.appendChild(explanationP);
+            }
+
+            const nextButton = document.createElement('button');
+            nextButton.className = `bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-lg
+              ${(!showRationale && userAnswers[currentQuestionIndex] === undefined) ? 'opacity-50 cursor-not-allowed' : ''}`;
+            nextButton.textContent = currentQuestionIndex === currentQuiz.questions.length - 1 ? 'Finish Quiz' : 'Next Question';
+            nextButton.disabled = !showRationale && userAnswers[currentQuestionIndex] === undefined;
+            nextButton.onclick = goToNextQuestion;
+            div.appendChild(nextButton);
+
+            parentElement.appendChild(div);
+        }
+
+        /**
+         * Renders the quiz results screen.
+         * @param {HTMLElement} parentElement - The DOM element to append content to.
+         */
+        function renderQuizResults(parentElement) {
+            const div = document.createElement('div');
+            div.className = 'space-y-6';
+            div.innerHTML = `
+                <h3 class="text-3xl font-bold text-gray-800 mb-4">Quiz Results</h3>
+                <p class="text-2xl text-gray-700">You scored ${calculateScore()} out of ${currentQuiz.questions.length}!</p>
+                <div class="mt-8 space-y-4 text-left" id="resultsDetail"></div>
+            `;
+
+            const resultsDetail = div.querySelector('#resultsDetail');
+            currentQuiz.questions.forEach((q, index) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200';
+                const userChoice = userAnswers[index]?.selectedOption?.text || 'Not answered';
+                const isCorrect = userAnswers[index]?.isCorrect;
+                const correctAnswerText = q.answerOptions.find(opt => opt.isCorrect)?.text;
+
+                qDiv.innerHTML = `
+                    <p class="font-semibold text-lg text-gray-900 mb-2">${index + 1}. ${q.question}</p>
+                    <p class="font-medium ${isCorrect ? 'text-green-600' : 'text-red-600'}">
+                        Your Answer: ${userChoice}
+                        ${!isCorrect ? ` <span class="ml-2">(Correct: ${correctAnswerText})</span>` : ''}
+                    </p>
+                    <p class="text-sm text-gray-700 mt-1 italic">Hint: ${q.hint}</p>
+                    <p class="text-sm text-gray-700 mt-1">Explanation: ${q.answerOptions.find(opt => opt.isCorrect)?.rationale}</p>
+                `;
+                resultsDetail.appendChild(qDiv);
+            });
+
+            const buttonContainer = document.createElement('div');
+            buttonContainer.className = 'flex flex-col sm:flex-row justify-center gap-4 mt-8';
+
+            const retakeBtn = document.createElement('button');
+            retakeBtn.className = 'btn-primary';
+            retakeBtn.textContent = 'Retake Quiz';
+            retakeBtn.onclick = retakeQuiz;
+            buttonContainer.appendChild(retakeBtn);
+
+            const chooseAnotherBtn = document.createElement('button');
+            chooseAnotherBtn.className = 'bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-8 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-lg';
+            chooseAnotherBtn.textContent = 'Choose Another Quiz';
+            chooseAnotherBtn.onclick = chooseAnotherQuiz;
+            buttonContainer.appendChild(chooseAnotherBtn);
+
+            div.appendChild(buttonContainer);
+            parentElement.appendChild(div);
+        }
+
+        /**
+         * Renders the form for creating a new quiz.
+         * @param {HTMLElement} parentElement - The DOM element to append content to.
+         */
+        function renderCreateQuizForm(parentElement) {
+            const div = document.createElement('div');
+            div.className = 'space-y-6';
+
+            const backButton = document.createElement('button');
+            backButton.className = 'mb-4 btn-secondary';
+            backButton.textContent = '← Back to Quizzes';
+            backButton.onclick = () => {
+                showCreateQuizForm = false;
+                newQuizTitle = '';
+                newQuizQuestions = [{ question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }];
+                displayMessage('success', ''); // Clear any previous messages
+                renderApp();
+            };
+            div.appendChild(backButton);
+
+            const titleInputHtml = `<h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Create New Quiz</h2>
+                <div class="mb-4">
+                    <label htmlFor="quizTitle" class="block text-gray-700 text-sm font-bold mb-2">Quiz Title:</label>
+                    <input type="text" id="quizTitle" value="${newQuizTitle}" class="input-field" placeholder="Enter quiz title">
+                </div>`;
+            div.insertAdjacentHTML('beforeend', titleInputHtml);
+
+            const questionsContainer = document.createElement('div');
+            questionsContainer.id = 'questionsContainer';
+            div.appendChild(questionsContainer);
+
+
+            newQuizQuestions.forEach((q, qIndex) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'bg-gray-50 p-4 rounded-lg shadow-inner border border-gray-200 mb-4';
+                qDiv.innerHTML = `
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Question ${qIndex + 1}</h3>
+                    <div class="mb-3">
+                        <label htmlFor="questionText-${qIndex}" class="block text-gray-700 text-sm font-bold mb-2">Question Text:</label>
+                        <textarea id="questionText-${qIndex}" class="input-field" rows="3" placeholder="Enter question text">${q.question}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Answer Options:</label>
+                        <div id="optionsForQ${qIndex}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label htmlFor="hint-${qIndex}" class="block text-gray-700 text-sm font-bold mb-2">Hint:</label>
+                        <input type="text" id="hint-${qIndex}" value="${q.hint}" class="input-field" placeholder="Enter a hint (optional)">
+                    </div>
+                `;
+                questionsContainer.appendChild(qDiv);
+
+                const optionsForQ = qDiv.querySelector(`#optionsForQ${qIndex}`);
+                q.answerOptions.forEach((opt, optIndex) => {
+                    const optDiv = document.createElement('div');
+                    optDiv.className = 'flex items-center mb-2';
+                    optDiv.innerHTML = `
+                        <input type="radio" id="correctOption-${qIndex}-${optIndex}" name="correctOption-${qIndex}" ${opt.isCorrect ? 'checked' : ''} class="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <input type="text" value="${opt.text}" class="input-field" placeholder="Option ${optIndex + 1}">
+                    `;
+                    optDiv.querySelector('input[type="radio"]').onchange = () => handleNewCorrectAnswerChange(qIndex, optIndex);
+                    optDiv.querySelector('input[type="text"]').oninput = (e) => handleNewAnswerOptionChange(qIndex, optIndex, e.target.value);
+                    optionsForQ.appendChild(optDiv);
+                });
+
+                // Add event listeners for new question fields
+                qDiv.querySelector(`#questionText-${qIndex}`).oninput = (e) => handleNewQuestionChange(qIndex, 'question', e.target.value);
+                qDiv.querySelector(`#hint-${qIndex}`).oninput = (e) => handleNewQuestionChange(qIndex, 'hint', e.target.value);
+            });
+
+            const addQuestionBtn = document.createElement('button');
+            addQuestionBtn.className = 'w-full bg-blue-400 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md mb-4';
+            addQuestionBtn.textContent = 'Add Another Question';
+            addQuestionBtn.onclick = addNewQuestionField;
+            div.appendChild(addQuestionBtn);
+
+            const saveQuizBtn = document.createElement('button');
+            saveQuizBtn.className = `w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-md ${isSavingQuiz ? 'opacity-50 cursor-not-allowed' : 'transform hover:scale-105'}`;
+            saveQuizBtn.textContent = isSavingQuiz ? 'Saving Quiz...' : 'Save Quiz';
+            saveQuizBtn.disabled = isSavingQuiz;
+            saveQuizBtn.onclick = handleSaveNewQuiz;
+            div.appendChild(saveQuizBtn);
+
+            // Add event listener for quiz title after it's in the DOM
+            const quizTitleInput = div.querySelector('#quizTitle');
+            if (quizTitleInput) {
+                quizTitleInput.oninput = (e) => newQuizTitle = e.target.value;
+            }
+
+            parentElement.appendChild(div);
+        }
+
+        // --- Core Quiz Logic ---
+
+        /**
+         * Selects a quiz and resets the quiz state to start it.
+         * @param {object} quiz - The quiz object to select.
+         */
+        function selectQuiz(quiz) {
+            currentQuiz = quiz;
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            showResults = false;
+            feedbackMessage = '';
+            showRationale = false;
+            showCreateQuizForm = false; // Ensure form is hidden
+            renderApp();
+        }
+
+        /**
+         * Handles the user's answer selection for the current question.
+         * @param {number} questionIndex - The index of the current question.
+         * @param {object} selectedOption - The selected answer option object.
+         */
+        function handleAnswerSelect(questionIndex, selectedOption) {
+            if (showRationale) return; // Prevent re-answering
+
+            const isCorrect = selectedOption.isCorrect;
+            userAnswers[questionIndex] = { selectedOption, isCorrect };
+
+            feedbackMessage = isCorrect ? 'Correct!' : 'Incorrect.';
+            showRationale = true;
+            renderApp(); // Re-render to show feedback and rationale
+        }
+
+        /**
+         * Moves to the next question or submits the quiz if it's the last question.
+         */
+        function goToNextQuestion() {
+            feedbackMessage = '';
+            showRationale = false;
+            if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+                currentQuestionIndex++;
+            } else {
+                submitQuiz();
+            }
+            renderApp();
+        }
+
+        /**
+         * Submits the quiz and transitions to the results view.
+         */
+        function submitQuiz() {
+            showResults = true;
+            feedbackMessage = '';
+            showRationale = false;
+            renderApp();
+        }
+
+        /**
+         * Retakes the current quiz from the beginning.
+         */
+        function retakeQuiz() {
+            selectQuiz(currentQuiz); // Re-select to reset all states for the current quiz
+        }
+
+        /**
+         * Navigates back to the quiz selection screen.
+         */
+        function chooseAnotherQuiz() {
+            currentQuiz = null;
+            renderApp();
+        }
+
+        /**
+         * Calculates the user's score for the current quiz.
+         * @returns {number} The number of correct answers.
+         */
+        function calculateScore() {
+            let score = 0;
+            Object.keys(userAnswers).forEach(qIndex => {
+                if (userAnswers[qIndex].isCorrect) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        // --- Quiz Creation Logic ---
+
+        /**
+         * Toggles the visibility of the quiz creation form.
+         */
+        function toggleCreateQuizForm() {
+            showCreateQuizForm = !showCreateQuizForm;
+            newQuizTitle = ''; // Clear form on toggle
+            newQuizQuestions = [{ question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }];
+            renderApp();
+        }
+
+        /**
+         * Handles changes to new question fields (question text, hint).
+         * @param {number} qIndex - Index of the question.
+         * @param {string} field - The field being changed ('question' or 'hint').
+         * @param {string} value - The new value.
+         */
+        function handleNewQuestionChange(qIndex, field, value) {
+            newQuizQuestions[qIndex][field] = value;
+            // No need to re-render immediately for every input, as input values are managed by DOM
+        }
+
+        /**
+         * Handles changes to new answer option text.
+         * @param {number} qIndex - Index of the question.
+         * @param {number} optIndex - Index of the answer option.
+         * @param {string} value - The new text value.
+         */
+        function handleNewAnswerOptionChange(qIndex, optIndex, value) {
+            newQuizQuestions[qIndex].answerOptions[optIndex].text = value;
+            // No need to re-render immediately
+        }
+
+        /**
+         * Handles setting the correct answer for a new question.
+         * @param {number} qIndex - Index of the question.
+         * @param {number} optIndex - Index of the option being set as correct.
+         */
+        function handleNewCorrectAnswerChange(qIndex, optIndex) {
+            newQuizQuestions[qIndex].answerOptions.forEach((option, i) => {
+                option.isCorrect = (i === optIndex);
+            });
+            // No need to re-render immediately
+        }
+
+        /**
+         * Adds a new blank question field to the creation form.
+         */
+        function addNewQuestionField() {
+            newQuizQuestions.push(
+                { question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }
+            );
+            renderApp(); // Re-render to show the new question in the form
+        }
+
+        /**
+         * Saves the newly created quiz to Firestore.
+         */
+        async function handleSaveNewQuiz() {
+            if (!db || !userId) {
+                displayMessage('error', "Application not ready. Please try again later.");
+                return;
+            }
+
+            if (!newQuizTitle.trim()) {
+                displayMessage('error', "Quiz title cannot be empty.");
+                return;
+            }
+
+            // Validate questions and answers
+            const isValid = newQuizQuestions.every(q => {
+                if (!q.question.trim()) return false;
+                if (!q.answerOptions.every(opt => opt.text.trim())) return false;
+                if (!q.answerOptions.some(opt => opt.isCorrect)) return false;
+                return true;
+            });
+
+            if (!isValid) {
+                displayMessage('error', "All questions must have text, all answer options must have text, and each question must have exactly one correct answer.");
+                return;
+            }
+
+            isSavingQuiz = true;
+            renderApp(); // Update button state to 'Saving...'
+
+            try {
+                const quizzesRef = collection(db, `artifacts/${appId}/public/data/quizzes`);
+                await addDoc(quizzesRef, {
+                    title: newQuizTitle,
+                    questions: newQuizQuestions,
+                    createdAt: new Date(),
+                    createdBy: userId
+                });
+                newQuizTitle = '';
+                newQuizQuestions = [ // Reset form
+                    { question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }
+                ];
+                showCreateQuizForm = false;
+                displayMessage('success', 'Quiz successfully saved!');
+            } catch (error) {
+                console.error("Error saving new quiz:", error);
+                displayMessage('error', "Failed to save quiz: " + error.message);
+            } finally {
+                isSavingQuiz = false;
+                renderApp(); // Ensure UI reflects final state
+            }
+        }
+
+
+        // --- Firebase Initialization and Data Fetching ---
+
+        window.onload = async () => {
+            try {
+                if (Object.keys(firebaseConfig).length === 0) {
+                    throw new Error("Firebase configuration is missing or empty. Please ensure it's provided.");
+                }
+
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Authenticate user
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        userId = user.uid;
+                    } else {
+                        // Sign in anonymously if no custom token is provided and no user is signed in
+                        if (!initialAuthToken && !auth.currentUser) {
+                            await signInAnonymously(auth);
+                        }
+                        userId = auth.currentUser?.uid || crypto.randomUUID(); // Ensure userId is always set
+                    }
+                    isAuthReady = true;
+                    // Start listening for quizzes only once auth is ready
+                    const q = collection(db, `artifacts/${appId}/public/data/quizzes`);
+                    onSnapshot(q, (snapshot) => {
+                        quizzes = snapshot.docs.map(doc => ({
+                            id: doc.id,
+                            ...doc.data()
+                        }));
+                        renderApp(); // Re-render whenever quizzes data changes
+                    }, (error) => {
+                        console.error("Error fetching quizzes:", error);
+                        displayMessage('error', "Failed to load quizzes: " + error.message);
+                    });
+                    renderApp(); // Initial render after auth is ready
+                });
+
+                // Attempt sign-in with custom token first, if available
+                if (initialAuthToken) {
+                    try {
+                        await signInWithCustomToken(auth, initialAuthToken);
+                    } catch (error) {
+                        console.error("Error signing in with custom token:", error);
+                        // Fallback to anonymous if custom token fails, but only if not already signed in
+                        if (!auth.currentUser) {
+                            await signInAnonymously(auth);
+                        }
+                    }
+                } else {
+                    // If no custom token, and no user is currently signed in, sign in anonymously
+                    if (!auth.currentUser) {
+                        await signInAnonymously(auth);
+                    }
+                }
+
+            } catch (error) {
+                console.error("Failed to initialize Firebase:", error);
+                displayMessage('error', "Failed to initialize the application: " + error.message);
+            }
+        };
+    </script>
+</body>
+</html>
