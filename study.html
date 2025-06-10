@@ -52,9 +52,9 @@
 </head>
 <body class="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
 
-    <!-- User ID Display -->
-    <div class="absolute top-4 right-4 bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full shadow-sm" id="userIdDisplay">
-        User ID: N/A
+    <!-- User ID Display - Removed as authentication is no longer used -->
+    <div class="absolute top-4 right-4 bg-gray-100 text-gray-400 text-xs px-3 py-1 rounded-full shadow-sm">
+        Local Storage Mode
     </div>
 
     <div class="w-full max-w-4xl bg-white shadow-xl rounded-xl p-6 sm:p-8 lg:p-10 mb-8">
@@ -68,17 +68,9 @@
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, collection, doc, addDoc, onSnapshot, getDoc, updateDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-        // Global variables for Firebase and app state
-        let db;
-        let auth;
-        let userId = null;
-        let isAuthReady = false; // Indicates if Firebase Auth is initialized and user ID is set
+        // Global variables for app state
+        let isAppReady = false; // Indicates if the application is initialized
 
         let quizzes = []; // Stores fetched quizzes
         let currentQuiz = null;
@@ -95,22 +87,8 @@
         ];
         let isSavingQuiz = false; // Flag for showing saving state
 
-        // Firebase configuration and app ID (globally provided by Canvas environment)
-        // Ensure __firebase_config is correctly parsed and not empty
-        let firebaseConfig = {};
-        try {
-            if (typeof __firebase_config !== 'undefined' && __firebase_config.trim() !== '') {
-                firebaseConfig = JSON.parse(__firebase_config);
-            } else {
-                console.warn("Firebase configuration (__firebase_config) is undefined or empty string.");
-            }
-        } catch (e) {
-            console.error("Error parsing __firebase_config:", e);
-            firebaseConfig = {}; // Ensure it's an empty object if parsing fails
-        }
-
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        // Local Storage Key
+        const LOCAL_STORAGE_QUIZZES_KEY = 'honorsBioQuizzes';
 
         // --- Utility Functions for UI Updates ---
 
@@ -125,17 +103,23 @@
                 console.error("Message container not found!");
                 return;
             }
-            container.innerHTML = `
-                <div class="message-box message-${type}">
-                    <span class="block sm:inline">${message}</span>
-                    <span class="close-message" onclick="this.parentNode.remove()">
-                        <svg class="fill-current h-6 w-6 text-${type === 'success' ? 'green' : 'red'}-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.103l-2.651 2.651a1.2 1.2 0 1 1-1.697-1.697L8.303 9.406l-2.651-2.651a1.2 1.2 0 1 1 1.697-1.697L10 7.712l2.651-2.651a1.2 1.2 0 0 1 1.697 1.697L11.697 9.406l2.651 2.651a1.2 1.2 0 0 1 0 1.697z"/></svg>
-                    </span>
-                </div>
+            // Clear any existing messages first
+            container.innerHTML = '';
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message-box message-${type}`;
+            messageDiv.innerHTML = `
+                <span class="block sm:inline">${message}</span>
+                <span class="close-message">
+                    <svg class="fill-current h-6 w-6 text-${type === 'success' ? 'green' : 'red'}-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.103l-2.651 2.651a1.2 1.2 0 1 1-1.697-1.697L8.303 9.406l-2.651-2.651a1.2 1.2 0 1 1 1.697-1.697L10 7.712l2.651-2.651a1.2 1.2 0 0 1 1.697 1.697L11.697 9.406l2.651 2.651a1.2 1.2 0 0 1 0 1.697z"/></svg>
+                </span>
             `;
+            messageDiv.querySelector('.close-message').onclick = () => messageDiv.remove();
+            container.appendChild(messageDiv);
+
             setTimeout(() => {
-                if (container.firstChild) {
-                    container.removeChild(container.firstChild);
+                if (messageDiv.parentNode === container) { // Check if it's still in the DOM before removing
+                    messageDiv.remove();
                 }
             }, 3000); // Hide after 3 seconds
         }
@@ -151,13 +135,7 @@
             }
             appContent.innerHTML = ''; // Clear previous content
 
-            // Update user ID display
-            const userIdDisp = document.getElementById('userIdDisplay');
-            if (userIdDisp) {
-                userIdDisp.textContent = `User ID: ${userId || 'N/A'}`;
-            }
-
-            if (!isAuthReady) {
+            if (!isAppReady) {
                 appContent.innerHTML = `<p class="text-lg text-gray-700">Loading application...</p>`;
                 return;
             }
@@ -573,14 +551,9 @@
         }
 
         /**
-         * Saves the newly created quiz to Firestore.
+         * Saves the newly created quiz to Local Storage.
          */
         async function handleSaveNewQuiz() {
-            if (!db || !userId) {
-                displayMessage('error', "Application not ready. Please try again later.");
-                return;
-            }
-
             if (!newQuizTitle.trim()) {
                 displayMessage('error', "Quiz title cannot be empty.");
                 return;
@@ -603,13 +576,21 @@
             renderApp(); // Update button state to 'Saving...'
 
             try {
-                const quizzesRef = collection(db, `artifacts/${appId}/public/data/quizzes`);
-                await addDoc(quizzesRef, {
+                // Generate a simple unique ID for the new quiz
+                const newQuizId = 'quiz_' + Date.now();
+                const newQuizData = {
+                    id: newQuizId,
                     title: newQuizTitle,
                     questions: newQuizQuestions,
-                    createdAt: new Date(),
-                    createdBy: userId
-                });
+                    createdAt: new Date().toISOString()
+                };
+
+                // Load existing quizzes, add the new one, and save back to local storage
+                let storedQuizzes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_QUIZZES_KEY) || '[]');
+                storedQuizzes.push(newQuizData);
+                localStorage.setItem(LOCAL_STORAGE_QUIZZES_KEY, JSON.stringify(storedQuizzes));
+                quizzes = storedQuizzes; // Update the global quizzes array
+
                 newQuizTitle = '';
                 newQuizQuestions = [ // Reset form
                     { question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }
@@ -617,7 +598,7 @@
                 showCreateQuizForm = false;
                 displayMessage('success', 'Quiz successfully saved!');
             } catch (error) {
-                console.error("Error saving new quiz:", error);
+                console.error("Error saving new quiz to local storage:", error);
                 displayMessage('error', "Failed to save quiz: " + error.message);
             } finally {
                 isSavingQuiz = false;
@@ -626,66 +607,24 @@
         }
 
 
-        // --- Firebase Initialization and Data Fetching ---
+        // --- Application Initialization ---
 
         window.onload = async () => {
             try {
-                if (Object.keys(firebaseConfig).length === 0) {
-                    throw new Error("Firebase configuration is missing or empty. Please ensure it's provided.");
-                }
-
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-
-                // Authenticate user
-                onAuthStateChanged(auth, async (user) => {
-                    if (user) {
-                        userId = user.uid;
-                    } else {
-                        // Sign in anonymously if no custom token is provided and no user is signed in
-                        if (!initialAuthToken && !auth.currentUser) {
-                            await signInAnonymously(auth);
-                        }
-                        userId = auth.currentUser?.uid || crypto.randomUUID(); // Ensure userId is always set
-                    }
-                    isAuthReady = true;
-                    // Start listening for quizzes only once auth is ready
-                    const q = collection(db, `artifacts/${appId}/public/data/quizzes`);
-                    onSnapshot(q, (snapshot) => {
-                        quizzes = snapshot.docs.map(doc => ({
-                            id: doc.id,
-                            ...doc.data()
-                        }));
-                        renderApp(); // Re-render whenever quizzes data changes
-                    }, (error) => {
-                        console.error("Error fetching quizzes:", error);
-                        displayMessage('error', "Failed to load quizzes: " + error.message);
-                    });
-                    renderApp(); // Initial render after auth is ready
-                });
-
-                // Attempt sign-in with custom token first, if available
-                if (initialAuthToken) {
-                    try {
-                        await signInWithCustomToken(auth, initialAuthToken);
-                    } catch (error) {
-                        console.error("Error signing in with custom token:", error);
-                        // Fallback to anonymous if custom token fails, but only if not already signed in
-                        if (!auth.currentUser) {
-                            await signInAnonymously(auth);
-                        }
-                    }
+                // Load quizzes from local storage
+                const storedQuizzes = localStorage.getItem(LOCAL_STORAGE_QUIZZES_KEY);
+                if (storedQuizzes) {
+                    quizzes = JSON.parse(storedQuizzes);
                 } else {
-                    // If no custom token, and no user is currently signed in, sign in anonymously
-                    if (!auth.currentUser) {
-                        await signInAnonymously(auth);
-                    }
+                    quizzes = [];
                 }
-
+                isAppReady = true; // App is ready after attempting to load local data
+                renderApp();
             } catch (error) {
-                console.error("Failed to initialize Firebase:", error);
-                displayMessage('error', "Failed to initialize the application: " + error.message);
+                console.error("Failed to load application from local storage:", error);
+                displayMessage('error', "Failed to load the application from local storage. " + error.message);
+                isAppReady = true; // Still set to true so basic UI can render, even with an error
+                renderApp();
             }
         };
     </script>
