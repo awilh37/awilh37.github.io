@@ -71,6 +71,7 @@
     <script type="module">
         // Global variables for app state
         let isAppReady = false; // Indicates if the application is initialized
+        let isGeneratingQuestions = false; // New flag for AI generation loading
 
         let quizzes = []; // Stores fetched quizzes
         let currentQuiz = null;
@@ -343,6 +344,15 @@
                 </div>`;
             div.insertAdjacentHTML('beforeend', titleInputHtml);
 
+            // New AI Generate Questions Button
+            const generateButton = document.createElement('button');
+            generateButton.className = `w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md mb-4
+                ${isGeneratingQuestions ? 'opacity-50 cursor-not-allowed' : ''}`;
+            generateButton.textContent = isGeneratingQuestions ? 'Generating Questions...' : 'Generate 10 Questions with AI';
+            generateButton.disabled = isGeneratingQuestions;
+            generateButton.onclick = generateQuizQuestionsAI;
+            div.appendChild(generateButton);
+
             const questionsContainer = document.createElement('div');
             questionsContainer.id = 'questionsContainer';
             div.appendChild(questionsContainer);
@@ -397,7 +407,7 @@
             saveQuizBtn.textContent = isSavingQuiz ? 'Saving Quiz...' : 'Save Quiz';
             saveQuizBtn.disabled = isSavingQuiz;
             saveQuizBtn.onclick = handleSaveNewQuiz;
-            div.appendChild(saveQuizBtn);
+            div.appendChild(saveQuiz);
 
             // Add event listener for quiz title after it's in the DOM
             const quizTitleInput = div.querySelector('#quizTitle');
@@ -603,6 +613,185 @@
             } finally {
                 isSavingQuiz = false;
                 renderApp(); // Ensure UI reflects final state
+            }
+        }
+
+        /**
+         * Generates quiz questions using the Gemini API.
+         * The prompt now includes content from the user's study guide.
+         */
+        async function generateQuizQuestionsAI() {
+            isGeneratingQuestions = true;
+            renderApp(); // Update button state to 'Generating...'
+            displayMessage('success', 'Generating questions... This may take a moment.');
+
+            // Content from the user's "Biology CP/CPA/H Final Exam Study Guide ~ 2025.odt"
+            const studyGuideContent = `
+                Biology Final Exam Review Guide
+
+                Mitosis/Meiosis
+                * What is the cell cycle? What are the parts of the cell cycle? (G1, S, G2, M phase) What happens in each of these phases?
+                * What happens during Interphase of the cell cycle? (G1, S, G2)
+                * Chromosome structure: sister chromatids, centromere, genes
+                * What are the phases of mitosis? (PMAT)
+                * What is cytokinesis?
+                * What is a cell plate? What type of cell forms a cell plate during cell division?
+                * What is the purpose of Meiosis?
+                * What is a tetrad? When do tetrads form?
+                * What is crossing over? What is genetic recombination?
+                * How do mitosis and meiosis differ?
+                * Mitosis occurs in what types of cells? Meiosis occurs in what types of cells?
+                * What are gametes? Egg and sperm? Polar bodies? A zygote?
+                * Haploid (n) vs. diploid (2n) cells.
+
+                DNA
+                * What does "DNA" stand for? What does "RNA" stand for?
+                * What are the building blocks of nucleic acids (DNA/RNA)?
+                * What are the 3 parts of a nucleotide?
+                * What 4 types of bases are found in DNA? RNA?
+                * What are the complementary base pairing rules?
+                DNA: A pairs with T, C with G;
+                RNA: A pairs with U
+                * In what stage of the cell cycle does DNA replicate? What happens in DNA replication?
+                * What are the 3 main differences between DNA and RNA?
+                * How do you go from DNA to proteins?
+                  * Transcription. What is it and where does it occur?
+                  * Translation. What is it and where does it occur?
+                * What is a codon? Anticodon?
+                * What is a mutation? Why do they occur?
+                * What is a base substitution? Does it always affect the amino acids produced?
+                * What are base insertions and deletions?
+
+                Genetics
+                * What is genetics?
+                * Who was Mendel? Why did he use pea plants to study genetics?
+                * What is the P generation? F1? F2?
+                * What are alleles?
+                * Dominant vs. Recessive
+                  * Dominant alleles are written as a capital letter (T), recessive as a lowercase (t)
+                * Purebred vs. Hybrid. (Homozygous = purebred (BB or bb) / Heterozygous = hybrid (Bb))
+                * Genotype vs. Phenotype ~ Genotypic and Phenotypic ratios
+                * What is the law of segregation?
+                * What is the law of independent assortment?
+                * What is probability?
+                * Use a punnett square to solve one and two factor crosses.
+                  * Ex: One Factor Cross ~ A homozygous black mouse (BB) is crossed with a brown (bb) mouse. Brown is recessive. What will all of the babies (the F1) look like? If 2 F1 mated, what would be the genotype and phenotypes of their offsprings?
+                  * Ex: Two Factor Cross ~ A heterozygous black, homozygous running mouse (BbRR) is crossed with a homozygous brown, heterozygous running mouse (bbRr). Black (B) is dominant to brown (b). Running (R) is dominant to waltzing (r).
+                  * What are the possible gametes from each mouse?
+                  * Heterozygous black, homozygous running mouse = BR and bR.
+                  * Homozygous brown, heterozygous running mouse = bR and br.
+                * Genetic problems involving incomplete dominance (the traits blend)
+                  * Ex: RR=red. WW=white. RW=pink.
+                * Genetics problems involving codominance (both traits show).
+                  * Ex: BB=brown fur. WW= white fur. BW=roan (a mix of both brown and white)
+                * Genetic problems involving Blood types (type AB is an example of codominance)
+                * Know the genotypes and phenotypes of each blood type (A, B, AB, O)
+                * What is the genotype of a male and a female? XY vs XX
+                * What are sex-linked traits? Solve genetic problems involving sex-linked traits
+                * What is nondisjunction?
+                * Using a pedigree: how to interpret them, determine if a trait is dominant/recessive, autosomal/sex-linked, identify genotypes of individuals.
+
+                Evolution and Classification
+                * What is evolution?
+                * What are the mechanisms that change allele frequencies in a population? (Gene Flow, Genetic Drift, Founder Effect, Population Bottleneck, Mutation, Natural Selection)
+                * What was Lamarck's theory of evolution?
+                * What is an adaptation?
+                * Darwin's finches ~ Descent with Modification, Natural Selection
+                * What are fossils? How do they provide evidence for evolution?
+                * Homologous structures vs. Analogous structures vs. Vestigial structures
+                * Biochemical evidence of evolution (DNA/amino acid sequence similarities)
+                * What is a species?
+                * What is the classification system? (Domain, Kingdom, Phylum, Class, Order, Family, Genus, Species)
+                * What is binomial nomenclature?
+            `;
+
+            const prompt = `Generate 10 multiple-choice questions for an Honors Biology quiz based on the following study guide content.
+            Each question should have 4 answer options, only one of which is correct.
+            Provide a concise rationale (1-2 sentences) for each answer option (explaining why it's plausible or incorrect).
+            Provide a brief, non-obvious hint for each question.
+            Ensure the questions cover a mix of topics from the study guide (e.g., cell cycle, DNA, genetics, evolution, classification).
+            Return the response as a JSON array of question objects.
+
+            Study Guide Content:
+            \`\`\`
+            ${studyGuideContent}
+            \`\`\`
+            `;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            const payload = {
+                contents: chatHistory,
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "ARRAY",
+                        items: {
+                            type: "OBJECT",
+                            properties: {
+                                "question": { "type": "STRING" },
+                                "answerOptions": {
+                                    "type": "ARRAY",
+                                    "items": {
+                                        "type": "OBJECT",
+                                        "properties": {
+                                            "text": { "type": "STRING" },
+                                            "isCorrect": { "type": "BOOLEAN" },
+                                            "rationale": { "type": "STRING" }
+                                        },
+                                        "propertyOrdering": ["text", "isCorrect", "rationale"]
+                                    },
+                                    "minItems": 4,
+                                    "maxItems": 4
+                                },
+                                "hint": { "type": "STRING" }
+                            },
+                            "propertyOrdering": ["question", "answerOptions", "hint"]
+                        },
+                        "minItems": 10,
+                        "maxItems": 10
+                    }
+                }
+            };
+
+            const apiKey = ""; // Canvas will automatically provide this
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`API error: ${response.status} ${response.statusText} - ${errorText}`);
+                }
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const jsonString = result.candidates[0].content.parts[0].text;
+                    const generatedQuestions = JSON.parse(jsonString);
+
+                    newQuizQuestions = generatedQuestions;
+                    newQuizTitle = "AI Generated Biology Quiz - " + new Date().toLocaleDateString();
+                    displayMessage('success', 'Questions generated successfully!');
+                } else {
+                    throw new Error('No candidates found or unexpected API response structure.');
+                }
+            } catch (error) {
+                console.error("Error generating questions:", error);
+                displayMessage('error', "Failed to generate questions: " + error.message + ". Please try again.");
+                // Optionally reset newQuizQuestions to empty or default if generation fails
+                newQuizQuestions = [{ question: '', answerOptions: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }], hint: '' }];
+            } finally {
+                isGeneratingQuestions = false;
+                renderApp(); // Re-render to show generated questions or error
             }
         }
 
