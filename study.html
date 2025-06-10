@@ -407,7 +407,7 @@
             saveQuizBtn.textContent = isSavingQuiz ? 'Saving Quiz...' : 'Save Quiz';
             saveQuizBtn.disabled = isSavingQuiz;
             saveQuizBtn.onclick = handleSaveNewQuiz;
-            div.appendChild(saveQuizBtn); /* Changed saveQuiz to saveQuizBtn */
+            div.appendChild(saveQuizBtn);
 
             // Add event listener for quiz title after it's in the DOM
             const quizTitleInput = div.querySelector('#quizTitle');
@@ -755,7 +755,8 @@
                 }
             };
 
-            const apiKey = ""; // Canvas will automatically provide this
+            // Correctly access the API key from the environment
+            const apiKey = typeof __api_key !== 'undefined' ? __api_key : '';
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             try {
