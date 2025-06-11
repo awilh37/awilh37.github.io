@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>quiz.html</title>
+    <title>awilh37's quiz app!</title>
     <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Marked.js CDN for Markdown rendering -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <!-- Marked.js CDN for Markdown rendering - Removed as it's not needed without LLM explanation -->
     <style>
         /* Custom font for a clean look */
         body {
@@ -30,38 +29,7 @@
             background-color: #fee2e2; /* Red for incorrect answer */
             border-color: #ef4444;
         }
-        /* Basic styling for markdown content */
-        #explanation-output h1, #explanation-output h2, #explanation-output h3 {
-            font-weight: bold;
-            margin-top: 1em;
-            margin-bottom: 0.5em;
-        }
-        #explanation-output h1 { font-size: 1.5em; }
-        #explanation-output h2 { font-size: 1.3em; }
-        #explanation-output h3 { font-size: 1.1em; }
-        #explanation-output p {
-            margin-bottom: 1em;
-        }
-        #explanation-output ul, #explanation-output ol {
-            list-style-position: inside;
-            margin-bottom: 1em;
-            padding-left: 1.5em;
-        }
-        #explanation-output ul {
-            list-style-type: disc;
-        }
-        #explanation-output ol {
-            list-style-type: decimal;
-        }
-        #explanation-output li {
-            margin-bottom: 0.5em;
-        }
-        #explanation-output strong {
-            font-weight: bold;
-        }
-        #explanation-output em {
-            font-style: italic;
-        }
+        /* Basic styling for markdown content - Removed as it's not needed without LLM explanation */
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
@@ -124,23 +92,6 @@
             </button>
             <p id="data-load-feedback" class="text-sm mt-2"></p>
         </div>
-
-        <!-- Gemini API Concept Explanation Section -->
-        <div class="mt-8 pt-6 border-t border-gray-200">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Concept Explanation (Powered by Gemini)</h2>
-            <p class="text-gray-600 text-sm mb-3">
-                Enter a historical concept or term to get a brief explanation.
-            </p>
-            <input type="text" id="concept-input" placeholder="e.g., Manifest Destiny"
-                   class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
-            <button id="explain-concept-button"
-                    class="mt-3 bg-purple-600 text-white py-2 px-4 rounded-md font-medium hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 transition duration-200 ease-in-out">
-                Explain Concept
-            </button>
-            <div id="explanation-output" class="text-gray-700 mt-4 p-3 bg-gray-50 rounded-md border border-gray-200 min-h-[50px] overflow-auto max-h-[300px]"></div>
-            <p id="explanation-feedback" class="text-sm mt-2"></p>
-        </div>
-
     </div>
 
     <script>
@@ -167,12 +118,6 @@
         const dataSourceUrlInput = document.getElementById('data-source-url');
         const loadDataButton = document.getElementById('load-data-button');
         const dataLoadFeedback = document.getElementById('data-load-feedback');
-
-        // New DOM elements for LLM feature
-        const conceptInput = document.getElementById('concept-input');
-        const explainConceptButton = document.getElementById('explain-concept-button');
-        const explanationOutput = document.getElementById('explanation-output');
-        const explanationFeedback = document.getElementById('explanation-feedback');
 
         /**
          * Shuffles an array in place using the Fisher-Yates (Knuth) algorithm.
@@ -455,74 +400,10 @@
             }
         }
 
-        /**
-         * Calls the Gemini API to get an explanation for a given concept.
-         * @param {string} concept - The concept or term to explain.
-         */
-        async function explainConceptWithLLM(concept) {
-            if (!concept.trim()) {
-                explanationFeedback.textContent = "Please enter a concept to explain.";
-                explanationFeedback.classList.add('text-red-500');
-                explanationOutput.innerHTML = ''; // Use innerHTML for Markdown
-                return;
-            }
-
-            explanationFeedback.textContent = "Getting explanation...";
-            explanationFeedback.classList.remove('text-red-500', 'text-green-600');
-            explanationFeedback.classList.add('text-blue-500');
-            explanationOutput.innerHTML = 'Loading...'; // Show loading state, use innerHTML
-
-            const prompt = `Explain the historical concept "${concept}" concisely, as if for a US History student. Focus on its key meaning and significance. Use Markdown for formatting (e.g., **bold**, *italic*, lists).`;
-
-            let chatHistory = [];
-            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-            const payload = { contents: chatHistory };
-            const apiKey = ""; // Canvas will provide this in runtime
-
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`API call failed with status: ${response.status}`);
-                }
-
-                const result = await response.json();
-                console.log("Gemini API response:", result);
-
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    const text = result.candidates[0].content.parts[0].text;
-                    // Convert Markdown to HTML and set as innerHTML
-                    explanationOutput.innerHTML = marked.parse(text);
-                    explanationFeedback.textContent = "Explanation loaded successfully!";
-                    explanationFeedback.classList.remove('text-red-500', 'text-blue-500');
-                    explanationFeedback.classList.add('text-green-600');
-                } else {
-                    throw new Error("No explanation content found in API response.");
-                }
-            } catch (error) {
-                explanationOutput.innerHTML = 'Could not get explanation.'; // Use innerHTML
-                explanationFeedback.textContent = `Error: ${error.message}`;
-                explanationFeedback.classList.remove('text-green-600', 'text-blue-500');
-                explanationFeedback.classList.add('text-red-500');
-                console.error("Error calling Gemini API:", error);
-            }
-        }
-
-
         // Event Listeners
         nextButton.addEventListener('click', handleNextQuestion);
         restartButton.addEventListener('click', startQuiz);
         loadDataButton.addEventListener('click', () => loadQuestionsFromURL(dataSourceUrlInput.value.trim()));
-        explainConceptButton.addEventListener('click', () => explainConceptWithLLM(conceptInput.value));
-
 
         // Initialize the quiz when the page loads
         window.onload = initializeQuiz;
