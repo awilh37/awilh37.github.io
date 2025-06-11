@@ -15,9 +15,29 @@
     "answer": "Oregon Trail"
   },
   {
+    "question": "The formal incorporation of Texas into the United States in 1845 is known as the:",
+    "choices": ["Texas Independence", "Treaty of Guadalupe Hidalgo", "Annexation of Texas", "Gadsden Purchase"],
+    "answer": "Annexation of Texas"
+  },
+  {
+    "question": "What conflict erupted between the United States and Mexico from 1846 to 1848, largely over territorial disputes?",
+    "choices": ["Mexican Revolution", "Texas Revolution", "War with Mexico", "Filibuster War"],
+    "answer": "War with Mexico"
+  },
+  {
+    "question": "The acquisition of which territory in 1846, after negotiations with Great Britain, completed the U.S. claim to the Pacific Northwest?",
+    "choices": ["Louisiana Territory", "Florida Territory", "Oregon Territory", "Alaska Territory"],
+    "answer": "Acquisition of the Oregon Territory"
+  },
+  {
+    "question": "This allegorical painting by John Gast, created in 1872, famously depicted the concept of Manifest Destiny.",
+    "choices": ["Spirit of '76", "Washington Crossing the Delaware", "American Progress by J. Gast", "The Oxbow"],
+    "answer": "American Progress by J. Gast"
+  },
+  {
     "question": "What significant event led to a massive population surge in California in the late 1840s?",
     "choices": ["The Great Migration", "The Transcontinental Railroad completion", "The California Gold Rush", "The Treaty of Guadalupe Hidalgo"],
-    "answer": "The California Gold Rush"
+    "answer": "California Gold Rush"
   },
   {
     "question": "This land purchase completed the continental expansion of the United States, providing land for a southern transcontinental railroad.",
@@ -37,7 +57,7 @@
   {
     "question": "The Nullification Crisis of the 1830s centered on the right of states to nullify federal laws, primarily sparked by which issue?",
     "choices": ["Slavery expansion", "Tariff policies", "Native American removal", "Banking regulations"],
-    "answer": "Tariff policies"
+    "answer": "Nullification Crisis"
   },
   {
     "question": "The proposal to prohibit slavery in any territory acquired from Mexico was known as the:",
@@ -50,8 +70,13 @@
     "answer": "Compromise of 1850"
   },
   {
+    "question": "What controversial act, part of the Compromise of 1850, required all citizens to assist in the return of enslaved people and denied fugitives a jury trial?",
+    "choices": ["Kansas-Nebraska Act", "Wilmot Proviso", "Fugitive Slave Act", "Personal Liberty Laws"],
+    "answer": "Fugitive Slave Act"
+  },
+  {
     "question": "What influential anti-slavery novel, published by Harriet Beecher Stowe in 1852, significantly fueled abolitionist sentiment?",
-    "choices": ["Narrative of the Life of Frederick Douglass", "The Liberator", "Uncle Tom's Cabin", "Twelve Years a Slave"],
+    "choices": ["Narrative of the Life of Frederick Douglass", "The Liberator", "Uncle Tom's Cabin by H. Beecher Stowe", "Twelve Years a Slave"],
     "answer": "Uncle Tom's Cabin by H. Beecher Stowe"
   },
   {
@@ -70,9 +95,34 @@
     "answer": "Lincoln-Douglas Debates"
   },
   {
+    "question": "Which major event immediately preceded the secession of Southern states and the outbreak of the Civil War?",
+    "choices": ["Dred Scott Decision", "John Brown's Raid", "Election of 1860", "Kansas-Nebraska Act"],
+    "answer": "Election of 1860"
+  },
+  {
+    "question": "Who was the abolitionist who led the raid on the federal arsenal at Harpers Ferry in 1859, hoping to spark a slave revolt?",
+    "choices": ["William Lloyd Garrison", "Frederick Douglass", "Harriet Tubman", "John Brown's Raid at Harpers Ferry"],
+    "answer": "John Brown's Raid at Harpers Ferry"
+  },
+  {
+    "question": "Who was the Illinois Senator and Democratic nominee in the 1860 election, known for advocating popular sovereignty?",
+    "choices": ["Abraham Lincoln", "Jefferson Davis", "Stephen Douglas", "John C. Breckinridge"],
+    "answer": "Stephen Douglas"
+  },
+  {
     "question": "The 1857 Supreme Court decision that declared enslaved people were not citizens and had no right to sue, and that Congress could not prohibit slavery in territories, was the:",
-    "choices": ["Marbury v. Madison", "McCulloch v. Maryland", "Dred Scott Decision", "Plessy v. Ferguson"],
+    "choices": ["Marbury v. Madison", "McCulloch v. Maryland", "Dred Scott", "Plessy v. Ferguson"],
     "answer": "Dred Scott"
+  },
+  {
+    "question": "Who was the 16th U.S. President, who led the Union during the Civil War and issued the Emancipation Proclamation?",
+    "choices": ["George Washington", "Andrew Jackson", "Abraham Lincoln", "Ulysses S. Grant"],
+    "answer": "Abraham Lincoln"
+  },
+  {
+    "question": "This political party emerged in the 1840s, opposing the expansion of slavery into western territories.",
+    "choices": ["Whig Party", "Democratic Party", "Free-Soilers", "Republican Party"],
+    "answer": "Free-Soilers"
   },
   {
     "question": "Who was the leading figure in the American abolitionist movement, publisher of 'The Liberator' newspaper?",
@@ -85,14 +135,39 @@
     "answer": "Harriet Tubman"
   },
   {
+    "question": "Who wrote 'Uncle Tom's Cabin', a novel that greatly influenced anti-slavery sentiment?",
+    "choices": ["Frederick Douglass", "Harriet Tubman", "Harriet Beecher Stowe", "Sojourner Truth"],
+    "answer": "Harriet Beecher Stowe"
+  },
+  {
+    "question": "The group of states that remained loyal to the federal government of the United States during the Civil War was known as the:",
+    "choices": ["Confederacy", "Union", "Border States", "Republicans"],
+    "answer": "Union"
+  },
+  {
     "question": "The principle that the authority of a state and its government are created and sustained by the consent of its people, through their elected representatives, is known as:",
     "choices": ["Federalism", "Democracy", "Popular sovereignty", "Republicanism"],
     "answer": "Popular sovereignty"
   },
   {
+    "question": "What was the term for a person who advocated for the withdrawal of a state from the Union, especially in the context of the American Civil War?",
+    "choices": ["Unionist", "Federalist", "Secessionist", "Abolitionist"],
+    "answer": "Secessionist"
+  },
+  {
     "question": "What was the term for someone who advocated for the complete end of slavery in the United States?",
     "choices": ["Secessionist", "Confederate", "Abolitionist", "Unionist"],
     "answer": "Abolitionist"
+  },
+  {
+    "question": "A type of warfare in which opposing forces attack and counterattack until one side is exhausted and loses men and resources, exemplified by the later stages of the American Civil War, is called a:",
+    "choices": ["Blitzkrieg", "Guerrilla warfare", "War of attrition", "Total war"],
+    "answer": "War of attrition"
+  },
+  {
+    "question": "A military blockade and bombardment of a city or fortress to compel its surrender is known as a:",
+    "choices": ["Raid", "Ambush", "Siege", "Skirmish"],
+    "answer": "Siege"
   },
   {
     "question": "What was the primary strategy of the Union to blockade Southern ports and divide the Confederacy by controlling the Mississippi River?",
@@ -115,14 +190,44 @@
     "answer": "Robert E. Lee"
   },
   {
-    "question": "Which Union general famously led the 'March to the Sea' through Georgia, employing a 'scorched earth' policy?",
-    "choices": ["Ulysses S. Grant", "George Meade", "William Tecumseh Sherman", "Don Carlos Buell"],
-    "answer": "William Tecumseh Sherman"
+    "question": "Who was the early commander of the Union Army of the Potomac, known for his cautious approach, who was later replaced by Lincoln?",
+    "choices": ["Ulysses S. Grant", "George McClellan", "William Tecumseh Sherman", "Ambrose Burnside"],
+    "answer": "George McClellan"
+  },
+  {
+    "question": "Who was the white commander of the 54th Massachusetts Regiment, a famous African American Union regiment?",
+    "choices": ["Frederick Douglass", "Harriet Tubman", "Robert Gould Shaw", "Thaddeus Stevens"],
+    "answer": "Robert Gould Shaw"
+  },
+  {
+    "question": "What was the name of the African American infantry regiment that gained fame for its bravery in the assault on Fort Wagner in 1863?",
+    "choices": ["1st Kansas Colored Infantry", "54th Massachusetts Regiment", "US Colored Troops", "Buffalo Soldiers"],
+    "answer": "54th Massachusetts Regiment"
+  },
+  {
+    "question": "Who served as the President of the Confederate States of America during the Civil War?",
+    "choices": ["Robert E. Lee", "Alexander Stephens", "Jefferson Davis", "Stonewall Jackson"],
+    "answer": "Jefferson Davis"
+  },
+  {
+    "question": "Who assassinated President Abraham Lincoln at Ford's Theatre on April 14, 1865?",
+    "choices": ["Lewis Powell", "David Herold", "George Atzerodt", "John Wilkes Booth"],
+    "answer": "John Wilkes Booth"
   },
   {
     "question": "The first shots of the Civil War were fired at which location in Charleston, South Carolina?",
     "choices": ["Fort Donelson", "Fort Henry", "Fort Sumter", "Fort Knox"],
     "answer": "Fort Sumter"
+  },
+  {
+    "question": "These violent disturbances in July 1863, primarily by working-class Irish immigrants, protested the conscription laws during the Civil War.",
+    "choices": ["Boston Tea Party", "Shays' Rebellion", "NYC Draft Riots", "Whiskey Rebellion"],
+    "answer": "NYC Draft Riots"
+  },
+  {
+    "question": "What was the first combat between two ironclad warships in history, fought during the Civil War in March 1862?",
+    "choices": ["Battle of Mobile Bay", "Monitor v. Merrimac", "Battle of Hampton Roads", "CSS Alabama vs. USS Kearsarge"],
+    "answer": "Monitor v. Merrimac"
   },
   {
     "question": "Considered the bloodiest single-day battle in American history, this 1862 battle in Maryland led to Lincoln issuing the Emancipation Proclamation.",
@@ -145,6 +250,11 @@
     "answer": "Gettysburg Address"
   },
   {
+    "question": "Which Union general famously led the 'March to the Sea' through Georgia, employing a 'scorched earth' policy?",
+    "choices": ["Ulysses S. Grant", "George Meade", "William Tecumseh Sherman", "Don Carlos Buell"],
+    "answer": "William Tecumseh Sherman"
+  },
+  {
     "question": "The official end of the Civil War occurred when Robert E. Lee surrendered to Ulysses S. Grant at:",
     "choices": ["Richmond, Virginia", "Petersburg, Virginia", "Appomattox Court House", "Washington D.C."],
     "answer": "Appomattox"
@@ -155,9 +265,24 @@
     "answer": "Emancipation Proclamation"
   },
   {
+    "question": "When did John Wilkes Booth assassinate President Abraham Lincoln?",
+    "choices": ["April 9, 1865", "April 14, 1865", "May 1, 1865", "March 4, 1865"],
+    "answer": "Lincoln's Assassination"
+  },
+  {
+    "question": "In his 1865 address, Lincoln expressed his vision for reconciliation with the South, stating 'With malice toward none, with charity for all...'",
+    "choices": ["Gettysburg Address", "First Inaugural Address", "Lincoln-Douglas Debates", "Lincoln's Second Inaugural Address (1865)"],
+    "answer": "Lincoln's Second Inaugural Address (1865)"
+  },
+  {
     "question": "The period following the Civil War (1865-1877) focused on rebuilding the South and integrating freed slaves into society was called:",
     "choices": ["Reconstruction", "Antebellum Era", "Gilded Age", "Progressive Era"],
     "answer": "Reconstruction"
+  },
+  {
+    "question": "This phase of Reconstruction, led by Congress, aimed to provide stronger protections for African Americans and punish former Confederates.",
+    "choices": ["Presidential Reconstruction", "Radical Reconstruction", "Compromise of 1877", "Southern Redemption"],
+    "answer": "Presidential and Congressional (Radical) Reconstruction"
   },
   {
     "question": "This federal agency was established in 1865 to aid freed slaves and poor whites in the South during Reconstruction, providing food, housing, medical aid, schools, and legal assistance.",
@@ -172,17 +297,17 @@
   {
     "question": "Which amendment to the U.S. Constitution abolished slavery?",
     "choices": ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"],
-    "answer": "13th Amendment"
+    "answer": "13th, 14th, and 15th Amendments"
   },
   {
     "question": "Which amendment granted citizenship to all persons born or naturalized in the United States, including former enslaved people?",
     "choices": ["13th Amendment", "14th Amendment", "15th Amendment", "16th Amendment"],
-    "answer": "14th Amendment"
+    "answer": "13th, 14th, and 15th Amendments"
   },
   {
     "question": "Which amendment guaranteed African American men the right to vote?",
     "choices": ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"],
-    "answer": "15th Amendment"
+    "answer": "13th, 14th, and 15th Amendments"
   },
   {
     "question": "A white supremacist terrorist organization that emerged during Reconstruction, intimidating and suppressing African Americans and their allies, was the:",
@@ -190,9 +315,14 @@
     "answer": "Ku Klux Klan"
   },
   {
+    "question": "The unlawful killing of a person by a mob, often targeting African Americans during and after Reconstruction, is known as:",
+    "choices": ["Execution", "Vigilantism", "Assassination", "Lynching"],
+    "answer": "Lynching"
+  },
+  {
     "question": "What system of state and local laws enacted in the Southern and some border states of the United States from the late 19th to the mid-20th centuries enforced racial segregation?",
     "choices": ["Black Codes", "Reconstruction Acts", "Jim Crow laws", "Voter ID laws"],
-    "answer": "Jim Crow laws"
+    "answer": "Rise of Jim Crow laws (Black codes)"
   },
   {
     "question": "The informal agreement that effectively ended Reconstruction in the South, withdrawing federal troops in exchange for Rutherford B. Hayes winning the presidency, was the:",
