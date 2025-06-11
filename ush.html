@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USHI Final Study Quiz</title>
+    <title>Study Stuff</title>
     <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -32,7 +32,7 @@
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
     <div class="bg-white shadow-xl rounded-lg p-6 md:p-8 w-full max-w-md">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">USHI Final Study Quiz</h1>
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Study Stuff</h1>
 
         <!-- Quiz Container -->
         <div id="quiz-container">
@@ -118,6 +118,19 @@
         const dataLoadFeedback = document.getElementById('data-load-feedback');
 
         /**
+         * Shuffles an array in place using the Fisher-Yates (Knuth) algorithm.
+         * @param {Array} array - The array to shuffle.
+         * @returns {Array} The shuffled array.
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+            }
+            return array;
+        }
+
+        /**
          * Initializes the quiz. Attempts to load questions from the default URL,
          * then loads saved data and displays the first question.
          */
@@ -148,6 +161,9 @@
             resultContainer.classList.add('hidden'); // Hide result screen
             nextButton.style.display = 'block'; // Show next button
             feedbackMessage.textContent = ''; // Clear feedback
+            
+            // Shuffle questions when starting a new quiz
+            shuffleArray(questions);
             displayQuestion();
         }
 
@@ -169,13 +185,15 @@
             questionText.textContent = currentQuestion.question;
             choicesContainer.innerHTML = ''; // Clear previous choices
 
+            // Create a shuffled copy of choices for the current question
+            const shuffledChoices = shuffleArray([...currentQuestion.choices]);
+
             // Enable all choice buttons before displaying new choices
             Array.from(choicesContainer.children).forEach(button => {
                 button.disabled = false;
             });
 
-
-            currentQuestion.choices.forEach((choice, index) => {
+            shuffledChoices.forEach((choice, index) => {
                 const choiceButton = document.createElement('button');
                 choiceButton.textContent = choice;
                 choiceButton.classList.add(
