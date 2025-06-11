@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USHI Final Study Quiz</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a clean look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light background */
+        }
+        /* Style for choices to highlight selection */
+        .choice-button:hover:not(.selected) {
+            background-color: #e2e8f0; /* Lighter hover for non-selected */
+        }
+        .choice-button.selected {
+            border-color: #3b82f6; /* Blue border for selected */
+            background-color: #bfdbfe; /* Light blue background for selected */
+        }
+        .choice-button.correct {
+            background-color: #d1fae5; /* Green for correct answer */
+            border-color: #10b981;
+        }
+        .choice-button.incorrect {
+            background-color: #fee2e2; /* Red for incorrect answer */
+            border-color: #ef4444;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white shadow-xl rounded-lg p-6 md:p-8 w-full max-w-md">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">USHI Final Study Quiz</h1>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container">
+            <!-- Question Display -->
+            <p id="question-text" class="text-lg text-gray-700 font-semibold mb-4"></p>
+
+            <!-- Answer Choices -->
+            <div id="choices-container" class="grid grid-cols-1 gap-3 mb-6">
+                <!-- Buttons will be dynamically inserted here -->
+            </div>
+
+            <!-- Quiz Navigation and Feedback -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
+                <button id="next-button"
+                        class="w-full sm:w-auto bg-blue-600 text-white py-2 px-6 rounded-md font-medium text-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition duration-200 ease-in-out"
+                        style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    Next
+                </button>
+                <div id="feedback-message" class="text-md text-red-500 font-medium text-center sm:text-right mt-2 sm:mt-0"></div>
+            </div>
+
+            <!-- Score Display -->
+            <p id="score-display" class="text-xl font-bold text-gray-800 mt-6 text-center"></p>
+
+            <!-- Quiz Result -->
+            <div id="result-container" class="hidden text-center mt-6">
+                <p class="text-2xl font-bold text-gray-800 mb-4">Quiz Complete!</p>
+                <p id="final-score" class="text-xl text-gray-700 mb-4"></p>
+                <button id="restart-button"
+                        class="bg-green-600 text-white py-2 px-6 rounded-md font-medium text-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75 transition duration-200 ease-in-out"
+                        style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    Restart Quiz
+                </button>
+            </div>
+        </div>
+
+        <!-- Saved Data Section -->
+        <div class="mt-8 pt-6 border-t border-gray-200">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Your Progress</h2>
+            <p id="last-score-saved" class="text-gray-600 text-md">Last Quiz Score: N/A</p>
+            <p id="high-score-saved" class="text-gray-600 text-md">High Score: N/A</p>
+        </div>
+
+        <!-- External Data Source Input -->
+        <div class="mt-8 pt-6 border-t border-gray-200">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Load Custom Questions</h2>
+            <p class="text-gray-600 text-sm mb-3">
+                Enter the path to your JSON file (e.g., 'questions.json') or a URL.
+            </p>
+            <input type="text" id="data-source-url" value="https://awilh37.github.io/qs.json"
+                   class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
+            <button id="load-data-button"
+                    class="mt-3 bg-indigo-500 text-white py-2 px-4 rounded-md font-medium hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 transition duration-200 ease-in-out">
+                Load Questions
+            </button>
+            <p id="data-load-feedback" class="text-sm mt-2"></p>
+        </div>
+    </div>
+
+    <script>
+        // Array of quiz questions. This will be replaced by data fetched from an external source.
+        let questions = []; // Initialize as empty, will be populated by loadQuestionsFromURL
+
+        // Global variables for quiz state
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedChoice = null; // To keep track of the selected answer before moving to next question
+        let isAnswered = false; // Flag to prevent multiple selections
+
+        // DOM Element references
+        const questionText = document.getElementById('question-text');
+        const choicesContainer = document.getElementById('choices-container');
+        const nextButton = document.getElementById('next-button');
+        const scoreDisplay = document.getElementById('score-display');
+        const resultContainer = document.getElementById('result-container');
+        const finalScore = document.getElementById('final-score');
+        const restartButton = document.getElementById('restart-button');
+        const feedbackMessage = document.getElementById('feedback-message');
+        const lastScoreSaved = document.getElementById('last-score-saved');
+        const highScoreSaved = document.getElementById('high-score-saved');
+        const dataSourceUrlInput = document.getElementById('data-source-url');
+        const loadDataButton = document.getElementById('load-data-button');
+        const dataLoadFeedback = document.getElementById('data-load-feedback');
+
+        /**
+         * Initializes the quiz. Attempts to load questions from the default URL,
+         * then loads saved data and displays the first question.
+         */
+        async function initializeQuiz() {
+            // Attempt to load questions from the default URL on page load
+            await loadQuestionsFromURL(dataSourceUrlInput.value.trim());
+            loadSavedData();
+            // If questions were successfully loaded, start the quiz.
+            // If not, the feedback message will indicate the error.
+            if (questions.length > 0) {
+                startQuiz();
+            }
+        }
+
+        /**
+         * Starts or restarts the quiz.
+         */
+        function startQuiz() {
+            if (questions.length === 0) {
+                dataLoadFeedback.textContent = "No questions loaded. Please load questions first.";
+                dataLoadFeedback.classList.remove('text-green-600', 'text-blue-500');
+                dataLoadFeedback.classList.add('text-red-500');
+                return;
+            }
+            currentQuestionIndex = 0;
+            score = 0;
+            scoreDisplay.textContent = `Score: ${score} / ${questions.length}`;
+            resultContainer.classList.add('hidden'); // Hide result screen
+            nextButton.style.display = 'block'; // Show next button
+            feedbackMessage.textContent = ''; // Clear feedback
+            displayQuestion();
+        }
+
+        /**
+         * Displays the current question and its choices.
+         */
+        function displayQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                showResult();
+                return;
+            }
+
+            isAnswered = false; // Reset answered flag for new question
+            selectedChoice = null; // Clear previous selection
+            feedbackMessage.textContent = ''; // Clear feedback message
+            nextButton.textContent = 'Next'; // Reset button text
+
+            const currentQuestion = questions[currentQuestionIndex];
+            questionText.textContent = currentQuestion.question;
+            choicesContainer.innerHTML = ''; // Clear previous choices
+
+            // Enable all choice buttons before displaying new choices
+            Array.from(choicesContainer.children).forEach(button => {
+                button.disabled = false;
+            });
+
+
+            currentQuestion.choices.forEach((choice, index) => {
+                const choiceButton = document.createElement('button');
+                choiceButton.textContent = choice;
+                choiceButton.classList.add(
+                    'choice-button', // Custom class for styling
+                    'w-full', 'py-3', 'px-4', 'border', 'border-gray-300', 'rounded-md',
+                    'text-left', 'text-gray-700', 'font-medium', 'focus:outline-none',
+                    'transition', 'duration-150', 'ease-in-out', 'hover:border-blue-400'
+                );
+                choiceButton.dataset.choice = choice; // Store choice value
+                choiceButton.addEventListener('click', () => selectAnswer(choiceButton));
+                choicesContainer.appendChild(choiceButton);
+            });
+            scoreDisplay.textContent = `Score: ${score} / ${questions.length}`;
+        }
+
+        /**
+         * Handles the selection of an answer.
+         * @param {HTMLElement} selectedButton - The button element that was clicked.
+         */
+        function selectAnswer(selectedButton) {
+            if (isAnswered) {
+                return; // Prevent changing answer after selection
+            }
+
+            // Remove 'selected' class from all other choices
+            Array.from(choicesContainer.children).forEach(button => {
+                button.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            selectedChoice = selectedButton.dataset.choice;
+            selectedButton.classList.add('selected'); // Mark current selection
+
+            checkAnswer(selectedButton);
+        }
+
+        /**
+         * Checks if the selected answer is correct and provides feedback.
+         * @param {HTMLElement} selectedButton - The button element that was clicked.
+         */
+        function checkAnswer(selectedButton) {
+            isAnswered = true; // Mark question as answered
+            const currentQuestion = questions[currentQuestionIndex];
+            const isCorrect = selectedChoice === currentQuestion.answer;
+
+            if (isCorrect) {
+                score++;
+                selectedButton.classList.add('correct');
+                feedbackMessage.textContent = 'Correct!';
+                feedbackMessage.classList.remove('text-red-500');
+                feedbackMessage.classList.add('text-green-600');
+            } else {
+                selectedButton.classList.add('incorrect');
+                feedbackMessage.textContent = `Incorrect. The correct answer was: "${currentQuestion.answer}"`;
+                feedbackMessage.classList.remove('text-green-600');
+                feedbackMessage.classList.add('text-red-500');
+
+                // Highlight the correct answer
+                Array.from(choicesContainer.children).forEach(button => {
+                    if (button.dataset.choice === currentQuestion.answer) {
+                        button.classList.add('correct');
+                    }
+                });
+            }
+            scoreDisplay.textContent = `Score: ${score} / ${questions.length}`;
+            // Disable all choice buttons after an answer is selected
+            Array.from(choicesContainer.children).forEach(button => {
+                button.disabled = true;
+            });
+
+            // If it's the last question, change next button text to "View Results"
+            if (currentQuestionIndex === questions.length - 1) {
+                nextButton.textContent = 'View Results';
+            }
+        }
+
+
+        /**
+         * Moves to the next question or shows the result if the quiz is complete.
+         */
+        function handleNextQuestion() {
+            if (!isAnswered) {
+                feedbackMessage.textContent = 'Please select an answer first!';
+                feedbackMessage.classList.remove('text-green-600');
+                feedbackMessage.classList.add('text-red-500');
+                return;
+            }
+
+            currentQuestionIndex++;
+            displayQuestion();
+        }
+
+        /**
+         * Displays the final score and quiz completion message.
+         */
+        function showResult() {
+            resultContainer.classList.remove('hidden'); // Show result screen
+            questionText.textContent = ''; // Clear question
+            choicesContainer.innerHTML = ''; // Clear choices
+            nextButton.style.display = 'none'; // Hide next button
+            scoreDisplay.textContent = ''; // Clear score display
+            feedbackMessage.textContent = ''; // Clear feedback
+
+            finalScore.textContent = `You scored ${score} out of ${questions.length} questions!`;
+            saveScore(score); // Save the current score
+        }
+
+        /**
+         * Saves the current quiz score and high score to browser's local storage.
+         * @param {number} currentScore - The score from the most recent quiz.
+         */
+        function saveScore(currentScore) {
+            localStorage.setItem('lastQuizScore', currentScore);
+            let highScore = localStorage.getItem('highScore') || 0;
+            if (currentScore > parseInt(highScore)) {
+                highScore = currentScore;
+                localStorage.setItem('highScore', highScore);
+            }
+            loadSavedData(); // Refresh display of saved data
+        }
+
+        /**
+         * Loads and displays the last quiz score and high score from local storage.
+         */
+        function loadSavedData() {
+            const lastScore = localStorage.getItem('lastQuizScore');
+            const highScore = localStorage.getItem('highScore');
+
+            // Ensure questions.length is available when updating scores,
+            // as it might be 0 if questions haven't loaded yet.
+            const totalQuestions = questions.length > 0 ? questions.length : 'N/A';
+
+            if (lastScore !== null) {
+                lastScoreSaved.textContent = `Last Quiz Score: ${lastScore} / ${totalQuestions}`;
+            } else {
+                lastScoreSaved.textContent = `Last Quiz Score: N/A`;
+            }
+
+            if (highScore !== null) {
+                highScoreSaved.textContent = `High Score: ${highScore} / ${totalQuestions}`;
+            } else {
+                highScoreSaved.textContent = `High Score: N/A`;
+            }
+        }
+
+        /**
+         * Loads questions from a specified external JSON URL or local path.
+         * @param {string} url - The URL or local path to the JSON file.
+         */
+        async function loadQuestionsFromURL(url) {
+            if (!url) {
+                dataLoadFeedback.textContent = "Please enter a valid URL.";
+                dataLoadFeedback.classList.add('text-red-500');
+                return;
+            }
+
+            dataLoadFeedback.textContent = "Loading questions...";
+            dataLoadFeedback.classList.remove('text-red-500', 'text-green-600');
+            dataLoadFeedback.classList.add('text-blue-500');
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const newQuestions = await response.json(); // Assume JSON is directly returned
+
+                // Log the parsed questions for debugging
+                console.log("Parsed questions from URL:", newQuestions);
+
+                // Detailed validation for the loaded questions structure
+                if (!Array.isArray(newQuestions)) {
+                    throw new Error("Invalid JSON structure: Root element is not an array.");
+                }
+
+                for (let i = 0; i < newQuestions.length; i++) {
+                    const q = newQuestions[i];
+                    if (typeof q.question !== 'string') {
+                        throw new Error(`Invalid JSON structure: Question ${i+1} is missing a 'question' string property.`);
+                    }
+                    if (!Array.isArray(q.choices)) {
+                        throw new Error(`Invalid JSON structure: Question '${q.question}' (item ${i+1}) has 'choices' that is not an array.`);
+                    }
+                    if (!q.choices.every(c => typeof c === 'string')) {
+                        throw new Error(`Invalid JSON structure: Question '${q.question}' (item ${i+1}) has 'choices' containing non-string elements.`);
+                    }
+                    if (typeof q.answer !== 'string') {
+                        throw new Error(`Invalid JSON structure: Question '${q.question}' (item ${i+1}) is missing an 'answer' string property.`);
+                    }
+                }
+
+                questions = newQuestions;
+                dataLoadFeedback.textContent = `Successfully loaded ${questions.length} questions!`;
+                dataLoadFeedback.classList.remove('text-red-500', 'text-blue-500');
+                dataLoadFeedback.classList.add('text-green-600');
+                startQuiz(); // Restart quiz with new questions
+
+            } catch (error) {
+                dataLoadFeedback.textContent = `Error loading questions: ${error.message}. Ensure the JSON file is correctly formatted and accessible.`;
+                dataLoadFeedback.classList.remove('text-green-600', 'text-blue-500');
+                dataLoadFeedback.classList.add('text-red-500');
+                console.error("Failed to load questions:", error);
+            }
+        }
+
+
+        // Event Listeners
+        nextButton.addEventListener('click', handleNextQuestion);
+        restartButton.addEventListener('click', startQuiz);
+        // Use an arrow function to pass the input value to the async function
+        loadDataButton.addEventListener('click', () => loadQuestionsFromURL(dataSourceUrlInput.value.trim()));
+
+        // Initialize the quiz when the page loads
+        window.onload = initializeQuiz;
+
+    </script>
+</body>
+</html>
