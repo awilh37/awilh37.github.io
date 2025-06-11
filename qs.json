@@ -1,0 +1,202 @@
+[
+  {
+    "question": "What was the 19th-century belief in the divinely ordained expansion of the US across North America?",
+    "choices": ["American Imperialism", "Manifest Destiny", "Monroe Doctrine", "Colonial Expansion"],
+    "answer": "Manifest Destiny"
+  },
+  {
+    "question": "Which U.S. President was most associated with the concept of Manifest Destiny and territorial expansion in the mid-1800s?",
+    "choices": ["Andrew Jackson", "Thomas Jefferson", "James K. Polk", "Zachary Taylor"],
+    "answer": "James K. Polk"
+  },
+  {
+    "question": "The primary route for pioneers migrating to the Pacific Northwest during the mid-19th century was known as the:",
+    "choices": ["California Trail", "Santa Fe Trail", "Oregon Trail", "Mormon Trail"],
+    "answer": "Oregon Trail"
+  },
+  {
+    "question": "What significant event led to a massive population surge in California in the late 1840s?",
+    "choices": ["The Great Migration", "The Transcontinental Railroad completion", "The California Gold Rush", "The Treaty of Guadalupe Hidalgo"],
+    "answer": "The California Gold Rush"
+  },
+  {
+    "question": "This land purchase completed the continental expansion of the United States, providing land for a southern transcontinental railroad.",
+    "choices": ["Louisiana Purchase", "Alaska Purchase", "Gadsden Purchase", "Florida Purchase"],
+    "answer": "Gadsden Purchase"
+  },
+  {
+    "question": "A network of secret routes and safe houses used by 19th-century enslaved people of African descent in the United States to escape to free states and Canada was called the:",
+    "choices": ["Underground Railroad", "Freedom Express", "Northern Passage", "Abolitionist Line"],
+    "answer": "Underground Railroad"
+  },
+  {
+    "question": "Which compromise in 1820 attempted to maintain the balance of power between slave and free states by admitting Missouri as a slave state and Maine as a free state, and prohibiting slavery north of 36°30′ latitude?",
+    "choices": ["Compromise of 1850", "Kansas-Nebraska Act", "Missouri Compromise", "Wilmot Proviso"],
+    "answer": "Missouri Compromise"
+  },
+  {
+    "question": "The Nullification Crisis of the 1830s centered on the right of states to nullify federal laws, primarily sparked by which issue?",
+    "choices": ["Slavery expansion", "Tariff policies", "Native American removal", "Banking regulations"],
+    "answer": "Tariff policies"
+  },
+  {
+    "question": "The proposal to prohibit slavery in any territory acquired from Mexico was known as the:",
+    "choices": ["Compromise of 1850", "Wilmot Proviso", "Ostend Manifesto", "Fugitive Slave Act"],
+    "answer": "Wilmot Proviso"
+  },
+  {
+    "question": "This 1850 legislative package included the Fugitive Slave Act, the admission of California as a free state, and popular sovereignty in Utah and New Mexico territories.",
+    "choices": ["Missouri Compromise", "Kansas-Nebraska Act", "Compromise of 1850", "Dred Scott Decision"],
+    "answer": "Compromise of 1850"
+  },
+  {
+    "question": "What influential anti-slavery novel, published by Harriet Beecher Stowe in 1852, significantly fueled abolitionist sentiment?",
+    "choices": ["Narrative of the Life of Frederick Douglass", "The Liberator", "Uncle Tom's Cabin", "Twelve Years a Slave"],
+    "answer": "Uncle Tom's Cabin by H. Beecher Stowe"
+  },
+  {
+    "question": "This 1854 act allowed citizens in new territories to decide whether to permit slavery by popular sovereignty, leading to violence.",
+    "choices": ["Missouri Compromise", "Compromise of 1850", "Kansas-Nebraska Act", "Fugitive Slave Act"],
+    "answer": "Kansas-Nebraska Act"
+  },
+  {
+    "question": "The period of violent civil guerrilla warfare in the Kansas Territory (1854-1859) over the issue of slavery's expansion was called:",
+    "choices": ["Kansas Uprising", "Jayhawker Wars", "Bleeding Kansas", "Border Ruffian Conflict"],
+    "answer": "\"Bleeding Kansas\""
+  },
+  {
+    "question": "A series of seven debates between Abraham Lincoln and Stephen Douglas in 1858, mainly discussing slavery and popular sovereignty, were known as the:",
+    "choices": ["Great Debates", "Presidential Debates", "Lincoln-Douglas Debates", "Illinois Debates"],
+    "answer": "Lincoln-Douglas Debates"
+  },
+  {
+    "question": "The 1857 Supreme Court decision that declared enslaved people were not citizens and had no right to sue, and that Congress could not prohibit slavery in territories, was the:",
+    "choices": ["Marbury v. Madison", "McCulloch v. Maryland", "Dred Scott Decision", "Plessy v. Ferguson"],
+    "answer": "Dred Scott"
+  },
+  {
+    "question": "Who was the leading figure in the American abolitionist movement, publisher of 'The Liberator' newspaper?",
+    "choices": ["Frederick Douglass", "Harriet Tubman", "William Lloyd Garrison", "John Brown"],
+    "answer": "William Lloyd Garrison"
+  },
+  {
+    "question": "Which conductor on the Underground Railroad was known as 'Moses' for leading hundreds of enslaved people to freedom?",
+    "choices": ["Sojourner Truth", "Harriet Tubman", "Ida B. Wells", "Elizabeth Cady Stanton"],
+    "answer": "Harriet Tubman"
+  },
+  {
+    "question": "The principle that the authority of a state and its government are created and sustained by the consent of its people, through their elected representatives, is known as:",
+    "choices": ["Federalism", "Democracy", "Popular sovereignty", "Republicanism"],
+    "answer": "Popular sovereignty"
+  },
+  {
+    "question": "What was the term for someone who advocated for the complete end of slavery in the United States?",
+    "choices": ["Secessionist", "Confederate", "Abolitionist", "Unionist"],
+    "answer": "Abolitionist"
+  },
+  {
+    "question": "What was the primary strategy of the Union to blockade Southern ports and divide the Confederacy by controlling the Mississippi River?",
+    "choices": ["Total War", "Scorched Earth Policy", "Anaconda Plan", "Offensive-Defensive Strategy"],
+    "answer": "Anaconda Plan"
+  },
+  {
+    "question": "The Confederate strategy to gain foreign support based on the South's vital cotton exports was called:",
+    "choices": ["Cotton Diplomacy", "Economic Warfare", "King Cotton diplomacy", "Agricultural Alliance"],
+    "answer": "\"King Cotton\" diplomacy"
+  },
+  {
+    "question": "Who was the commanding general of the Union Army at the end of the Civil War, famous for his victories at Vicksburg and his acceptance of Lee's surrender?",
+    "choices": ["George McClellan", "William Tecumseh Sherman", "Ulysses S. Grant", "Winfield Scott"],
+    "answer": "Ulysses S. Grant"
+  },
+  {
+    "question": "Who was the commanding general of the Confederate Army of Northern Virginia throughout the Civil War?",
+    "choices": ["Stonewall Jackson", "James Longstreet", "Robert E. Lee", "Braxton Bragg"],
+    "answer": "Robert E. Lee"
+  },
+  {
+    "question": "Which Union general famously led the 'March to the Sea' through Georgia, employing a 'scorched earth' policy?",
+    "choices": ["Ulysses S. Grant", "George Meade", "William Tecumseh Sherman", "Don Carlos Buell"],
+    "answer": "William Tecumseh Sherman"
+  },
+  {
+    "question": "The first shots of the Civil War were fired at which location in Charleston, South Carolina?",
+    "choices": ["Fort Donelson", "Fort Henry", "Fort Sumter", "Fort Knox"],
+    "answer": "Fort Sumter"
+  },
+  {
+    "question": "Considered the bloodiest single-day battle in American history, this 1862 battle in Maryland led to Lincoln issuing the Emancipation Proclamation.",
+    "choices": ["Gettysburg", "Vicksburg", "Antietam", "Bull Run"],
+    "answer": "Antietam"
+  },
+  {
+    "question": "The turning point battle of the Civil War, fought in Pennsylvania over three days in July 1863, was:",
+    "choices": ["Vicksburg", "Antietam", "Shiloh", "Gettysburg"],
+    "answer": "Gettysburg"
+  },
+  {
+    "question": "The Union victory in this 1863 siege gained control of the Mississippi River, effectively splitting the Confederacy.",
+    "choices": ["Siege of Atlanta", "Siege of Richmond", "Siege of Vicksburg", "Siege of Petersburg"],
+    "answer": "Vicksburg"
+  },
+  {
+    "question": "Abraham Lincoln delivered this famous speech in November 1863, dedicating a cemetery and redefining the purpose of the Civil War.",
+    "choices": ["Second Inaugural Address", "House Divided Speech", "Gettysburg Address", "Emancipation Proclamation"],
+    "answer": "Gettysburg Address"
+  },
+  {
+    "question": "The official end of the Civil War occurred when Robert E. Lee surrendered to Ulysses S. Grant at:",
+    "choices": ["Richmond, Virginia", "Petersburg, Virginia", "Appomattox Court House", "Washington D.C."],
+    "answer": "Appomattox"
+  },
+  {
+    "question": "What executive order issued by Abraham Lincoln in 1863 declared all enslaved people in Confederate territory to be free?",
+    "choices": ["Thirteenth Amendment", "Civil Rights Act of 1866", "Emancipation Proclamation", "Homestead Act"],
+    "answer": "Emancipation Proclamation"
+  },
+  {
+    "question": "The period following the Civil War (1865-1877) focused on rebuilding the South and integrating freed slaves into society was called:",
+    "choices": ["Reconstruction", "Antebellum Era", "Gilded Age", "Progressive Era"],
+    "answer": "Reconstruction"
+  },
+  {
+    "question": "This federal agency was established in 1865 to aid freed slaves and poor whites in the South during Reconstruction, providing food, housing, medical aid, schools, and legal assistance.",
+    "choices": ["Southern Relief Organization", "Freedmen's Bureau", "African American Aid Society", "Reconstruction Agency"],
+    "answer": "Freedmen's Bureau"
+  },
+  {
+    "question": "What derogatory term was used to describe Northerners who moved to the South during Reconstruction, often viewed as opportunistic exploiters?",
+    "choices": ["Scalawags", "Carpetbaggers", "Reconstructionists", "Unionists"],
+    "answer": "Carpetbaggers"
+  },
+  {
+    "question": "Which amendment to the U.S. Constitution abolished slavery?",
+    "choices": ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"],
+    "answer": "13th Amendment"
+  },
+  {
+    "question": "Which amendment granted citizenship to all persons born or naturalized in the United States, including former enslaved people?",
+    "choices": ["13th Amendment", "14th Amendment", "15th Amendment", "16th Amendment"],
+    "answer": "14th Amendment"
+  },
+  {
+    "question": "Which amendment guaranteed African American men the right to vote?",
+    "choices": ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"],
+    "answer": "15th Amendment"
+  },
+  {
+    "question": "A white supremacist terrorist organization that emerged during Reconstruction, intimidating and suppressing African Americans and their allies, was the:",
+    "choices": ["White League", "Knights of the White Camellia", "Ku Klux Klan", "Red Shirts"],
+    "answer": "Ku Klux Klan"
+  },
+  {
+    "question": "What system of state and local laws enacted in the Southern and some border states of the United States from the late 19th to the mid-20th centuries enforced racial segregation?",
+    "choices": ["Black Codes", "Reconstruction Acts", "Jim Crow laws", "Voter ID laws"],
+    "answer": "Jim Crow laws"
+  },
+  {
+    "question": "The informal agreement that effectively ended Reconstruction in the South, withdrawing federal troops in exchange for Rutherford B. Hayes winning the presidency, was the:",
+    "choices": ["Compromise of 1850", "Missouri Compromise", "Compromise of 1877", "Wilmot Proviso"],
+    "answer": "Compromise of 1877"
+  }
+]
