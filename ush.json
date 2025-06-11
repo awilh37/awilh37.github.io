@@ -267,7 +267,7 @@
   {
     "question": "When did John Wilkes Booth assassinate President Abraham Lincoln?",
     "choices": ["April 9, 1865", "April 14, 1865", "May 1, 1865", "March 4, 1865"],
-    "answer": "Lincoln's Assassination"
+    "answer": "April 14, 1865"
   },
   {
     "question": "In his 1865 address, Lincoln expressed his vision for reconciliation with the South, stating 'With malice toward none, with charity for all...'",
