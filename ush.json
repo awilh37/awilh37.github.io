@@ -282,7 +282,7 @@
   {
     "question": "This phase of Reconstruction, led by Congress, aimed to provide stronger protections for African Americans and punish former Confederates.",
     "choices": ["Presidential Reconstruction", "Radical Reconstruction", "Compromise of 1877", "Southern Redemption"],
-    "answer": "Presidential and Congressional (Radical) Reconstruction"
+    "answer": "Radical Reconstruction"
   },
   {
     "question": "This federal agency was established in 1865 to aid freed slaves and poor whites in the South during Reconstruction, providing food, housing, medical aid, schools, and legal assistance.",
@@ -297,17 +297,17 @@
   {
     "question": "Which amendment to the U.S. Constitution abolished slavery?",
     "choices": ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"],
-    "answer": "13th, 14th, and 15th Amendments"
+    "answer": "13th Amendment"
   },
   {
     "question": "Which amendment granted citizenship to all persons born or naturalized in the United States, including former enslaved people?",
     "choices": ["13th Amendment", "14th Amendment", "15th Amendment", "16th Amendment"],
-    "answer": "13th, 14th, and 15th Amendments"
+    "answer": "14th Amendment"
   },
   {
     "question": "Which amendment guaranteed African American men the right to vote?",
     "choices": ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"],
-    "answer": "13th, 14th, and 15th Amendments"
+    "answer": "15th Amendment"
   },
   {
     "question": "A white supremacist terrorist organization that emerged during Reconstruction, intimidating and suppressing African Americans and their allies, was the:",
@@ -322,7 +322,7 @@
   {
     "question": "What system of state and local laws enacted in the Southern and some border states of the United States from the late 19th to the mid-20th centuries enforced racial segregation?",
     "choices": ["Black Codes", "Reconstruction Acts", "Jim Crow laws", "Voter ID laws"],
-    "answer": "Rise of Jim Crow laws (Black codes)"
+    "answer": "Jim Crow laws"
   },
   {
     "question": "The informal agreement that effectively ended Reconstruction in the South, withdrawing federal troops in exchange for Rutherford B. Hayes winning the presidency, was the:",
