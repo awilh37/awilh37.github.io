@@ -6,3 +6,6 @@
 
 [OfflineDesmos - Forked](https://awilh37.github.io/desmos) | [OfflineDesmos - Forked (Repo)](https://github.com/awilh37/desmos)
 
+## HTML Pages
+[Quiz Page](quiz.html)
+[Study Page](study.html)
