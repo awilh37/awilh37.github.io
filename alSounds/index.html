@@ -1,6 +1,25 @@
 BIRDS</br>
-<audio controls loop><source src="birds.mp3"></audio></br>
+<audio controls loop>
+    <source src="birds.mp3">
+</audio></br>
 WAGON</br>
-<audio controls loop><source src="wagon.mp3"></audio></br>
+<audio controls loop>
+    <source src="wagon.mp3">
+</audio></br>
 PEOPLE</br>
-<audio controls loop><source src="people.mp3"></audio></br>
+<audio controls loop>
+    <source src="people.mp3">
+</audio></br>
+
+<button id="stopAllAudioButton">Pause All Audio</button>
+
+<script>     document.addEventListener('DOMContentLoaded', () => {
+        const stopButton = document.getElementById('stopAllAudioButton');
+
+        stopButton.addEventListener('click', () => {
+            const allAudios = document.querySelectorAll('audio'); // Select all audio elements
+            allAudios.forEach(audioEl => {
+                audioEl.pause(); // Pause each audio element
+            });
+        });
+    });</script>
