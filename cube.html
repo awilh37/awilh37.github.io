@@ -15,7 +15,6 @@
             margin: 0;
             background-color: #f0f0f0;
             color: #333;
-            /* Prevent text selection when spamming spacebar */
             user-select: none; 
         }
         #timer {
@@ -48,19 +47,35 @@
             font-weight: bold;
             margin-top: 15px;
         }
-        #clearButton {
+
+        /* --- NEW CSS for button container and Undo Button --- */
+        #buttonContainer {
+            display: flex;
+            gap: 10px; /* Adds space between buttons */
+        }
+        #clearButton, #undoButton {
             margin-top: 20px;
             padding: 8px 15px;
             font-size: 1rem;
             cursor: pointer;
             border: none;
             border-radius: 5px;
-            background-color: #d9534f;
             color: white;
+        }
+        #clearButton {
+            background-color: #d9534f;
         }
         #clearButton:hover {
             background-color: #c9302c;
         }
+        #undoButton {
+            background-color: #f0ad4e; /* An orange color */
+        }
+        #undoButton:hover {
+            background-color: #ec971f;
+        }
+        /* --- END NEW CSS --- */
+
     </style>
 </head>
 <body>
@@ -72,8 +87,12 @@
         <h2>Recent 5 Solves</h2>
         <ol id="timesList"></ol>
         <div id="ao5">Ao5: N/A</div>
-        <button id="clearButton">Clear Times</button>
-    </div>
+
+        <div id="buttonContainer">
+            <button id="clearButton">Clear All</button>
+            <button id="undoButton">Undo Last</button>
+        </div>
+        </div>
 
     <script>
         // DOM Elements
@@ -81,13 +100,14 @@
         const timesList = document.getElementById('timesList');
         const ao5Display = document.getElementById('ao5');
         const clearButton = document.getElementById('clearButton');
+        const undoButton = document.getElementById('undoButton'); // <-- NEW
 
         // Timer State
         let timerInterval = null;
         let startTime = 0;
         let isRunning = false;
         
-        // Load times from localStorage or initialize as empty array
+        // Load *all* times from localStorage
         let times = JSON.parse(localStorage.getItem('cubeTimes')) || [];
 
         /**
@@ -96,7 +116,7 @@
         function formatTime(ms) {
             const totalSeconds = ms / 1000;
             const seconds = Math.floor(totalSeconds);
-            const milliseconds = Math.floor((totalSeconds - seconds) * 100); // Get two decimal places
+            const milliseconds = Math.floor((totalSeconds - seconds) * 100); 
             
             return `${seconds}.${milliseconds.toString().padStart(2, '0')}`;
         }
@@ -117,10 +137,9 @@
             
             isRunning = true;
             startTime = Date.now();
-            timerDisplay.style.color = '#d9534f'; // Red color when running
+            timerDisplay.style.color = '#d9534f';
             
-            // Start the interval to update the display
-            timerInterval = setInterval(updateTimer, 10); // Update every 10ms for 2 decimal places
+            timerInterval = setInterval(updateTimer, 10);
         }
 
         /**
@@ -131,22 +150,18 @@
 
             isRunning = false;
             clearInterval(timerInterval);
-            timerDisplay.style.color = '#333'; // Back to default color
+            timerDisplay.style.color = '#333'; 
             
             const solveTime = Date.now() - startTime;
             
-            // Add the new time
+            // Add the new time to the full list
             times.push(solveTime);
             
-            // Keep only the 5 most recent times
-            if (times.length > 5) {
-                times.shift(); // Removes the oldest time (from the beginning)
-            }
+            // --- MODIFICATION: We no longer remove old times here ---
+            // The times.shift() logic is removed.
+            // --- END MODIFICATION ---
             
-            // Save to localStorage
             saveTimes();
-            
-            // Update the UI
             updateUI();
         }
 
@@ -159,23 +174,23 @@
 
         /**
          * Calculates the Average of 5 (Ao5)
-         * (Discards the best and worst times, averages the middle 3)
          */
         function calculateAo5() {
-            if (times.length < 5) {
+            // --- MODIFICATION: Calculate based on *only* the last 5 times ---
+            const recentTimes = times.slice(-5); // Get the last 5 elements
+            
+            if (recentTimes.length < 5) {
                 return 'N/A';
             }
             
-            // Copy and sort the times to find best/worst
-            const sortedTimes = [...times].sort((a, b) => a - b);
+            // Copy and sort the *recent* times
+            const sortedTimes = [...recentTimes].sort((a, b) => a - b);
+            // --- END MODIFICATION ---
             
             // Discard best (index 0) and worst (index 4)
             const middleThree = sortedTimes.slice(1, 4);
             
-            // Calculate the sum
             const sum = middleThree.reduce((total, time) => total + time, 0);
-            
-            // Get the average
             const average = sum / 3;
             
             return formatTime(average);
@@ -185,17 +200,18 @@
          * Updates the times list and Ao5 display on the page
          */
         function updateUI() {
-            // Clear the current list
             timesList.innerHTML = '';
+
+            // --- MODIFICATION: Only display the 5 most recent times ---
+            const recentTimes = times.slice(-5); 
             
-            // Add each time to the list
-            times.forEach(time => {
+            recentTimes.forEach(time => {
                 const li = document.createElement('li');
                 li.textContent = formatTime(time);
                 timesList.appendChild(li);
             });
+            // --- END MODIFICATION ---
             
-            // Update the Ao5 display
             ao5Display.textContent = `Ao5: ${calculateAo5()}`;
         }
 
@@ -203,7 +219,7 @@
          * Clears all saved times
          */
         function clearAllTimes() {
-            if (confirm('Are you sure you want to clear all solve times?')) {
+            if (confirm('Are you sure you want to clear ALL solve times?')) {
                 times = [];
                 saveTimes();
                 updateUI();
@@ -211,9 +227,21 @@
             }
         }
 
+        /**
+         * --- NEW FUNCTION: Removes the most recent solve ---
+         */
+        function undoLastSolve() {
+            if (times.length > 0) {
+                times.pop(); // Remove the last element from the array
+                saveTimes(); // Re-save the shortened array
+                updateUI();  // Update the screen
+            }
+        }
+        // --- END NEW FUNCTION ---
+
+
         // --- Event Listeners ---
 
-        // Listen for Spacebar
         window.addEventListener('keyup', (e) => {
             if (e.code === 'Space') {
                 if (isRunning) {
@@ -224,8 +252,6 @@
             }
         });
         
-        // Listen for mousedown/touchstart to stop (common in cube timers)
-        // This provides a more accurate "stop" on release
         window.addEventListener('mousedown', () => {
              if (isRunning) {
                  stopTimer();
@@ -237,8 +263,8 @@
              }
         });
 
-        // Clear button
         clearButton.addEventListener('click', clearAllTimes);
+        undoButton.addEventListener('click', undoLastSolve); // <-- NEW
         
         // Initial load
         updateUI();
