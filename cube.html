@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Cube Timer</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            /* Prevent text selection when spamming spacebar */
+            user-select: none; 
+        }
+        #timer {
+            font-size: 8rem;
+            font-weight: bold;
+            color: #333;
+        }
+        #instructions {
+            font-size: 1.2rem;
+            color: #555;
+            margin-top: 10px;
+        }
+        #results {
+            margin-top: 30px;
+            width: 300px;
+            text-align: left;
+        }
+        h2 {
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+        #timesList {
+            list-style-type: decimal;
+            padding-left: 30px;
+            font-size: 1.2rem;
+        }
+        #ao5 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        #clearButton {
+            margin-top: 20px;
+            padding: 8px 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #d9534f;
+            color: white;
+        }
+        #clearButton:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="timer">0.00</div>
+    <div id="instructions">Press Spacebar to start/stop</div>
+    
+    <div id="results">
+        <h2>Recent 5 Solves</h2>
+        <ol id="timesList"></ol>
+        <div id="ao5">Ao5: N/A</div>
+        <button id="clearButton">Clear Times</button>
+    </div>
+
+    <script>
+        // DOM Elements
+        const timerDisplay = document.getElementById('timer');
+        const timesList = document.getElementById('timesList');
+        const ao5Display = document.getElementById('ao5');
+        const clearButton = document.getElementById('clearButton');
+
+        // Timer State
+        let timerInterval = null;
+        let startTime = 0;
+        let isRunning = false;
+        
+        // Load times from localStorage or initialize as empty array
+        let times = JSON.parse(localStorage.getItem('cubeTimes')) || [];
+
+        /**
+         * Formats milliseconds into a "ss.msms" string
+         */
+        function formatTime(ms) {
+            const totalSeconds = ms / 1000;
+            const seconds = Math.floor(totalSeconds);
+            const milliseconds = Math.floor((totalSeconds - seconds) * 100); // Get two decimal places
+            
+            return `${seconds}.${milliseconds.toString().padStart(2, '0')}`;
+        }
+
+        /**
+         * Updates the timer display every interval
+         */
+        function updateTimer() {
+            const elapsed = Date.now() - startTime;
+            timerDisplay.textContent = formatTime(elapsed);
+        }
+
+        /**
+         * Starts the timer
+         */
+        function startTimer() {
+            if (isRunning) return;
+            
+            isRunning = true;
+            startTime = Date.now();
+            timerDisplay.style.color = '#d9534f'; // Red color when running
+            
+            // Start the interval to update the display
+            timerInterval = setInterval(updateTimer, 10); // Update every 10ms for 2 decimal places
+        }
+
+        /**
+         * Stops the timer, records the time, and updates the UI
+         */
+        function stopTimer() {
+            if (!isRunning) return;
+
+            isRunning = false;
+            clearInterval(timerInterval);
+            timerDisplay.style.color = '#333'; // Back to default color
+            
+            const solveTime = Date.now() - startTime;
+            
+            // Add the new time
+            times.push(solveTime);
+            
+            // Keep only the 5 most recent times
+            if (times.length > 5) {
+                times.shift(); // Removes the oldest time (from the beginning)
+            }
+            
+            // Save to localStorage
+            saveTimes();
+            
+            // Update the UI
+            updateUI();
+        }
+
+        /**
+         * Saves the current times array to localStorage
+         */
+        function saveTimes() {
+            localStorage.setItem('cubeTimes', JSON.stringify(times));
+        }
+
+        /**
+         * Calculates the Average of 5 (Ao5)
+         * (Discards the best and worst times, averages the middle 3)
+         */
+        function calculateAo5() {
+            if (times.length < 5) {
+                return 'N/A';
+            }
+            
+            // Copy and sort the times to find best/worst
+            const sortedTimes = [...times].sort((a, b) => a - b);
+            
+            // Discard best (index 0) and worst (index 4)
+            const middleThree = sortedTimes.slice(1, 4);
+            
+            // Calculate the sum
+            const sum = middleThree.reduce((total, time) => total + time, 0);
+            
+            // Get the average
+            const average = sum / 3;
+            
+            return formatTime(average);
+        }
+
+        /**
+         * Updates the times list and Ao5 display on the page
+         */
+        function updateUI() {
+            // Clear the current list
+            timesList.innerHTML = '';
+            
+            // Add each time to the list
+            times.forEach(time => {
+                const li = document.createElement('li');
+                li.textContent = formatTime(time);
+                timesList.appendChild(li);
+            });
+            
+            // Update the Ao5 display
+            ao5Display.textContent = `Ao5: ${calculateAo5()}`;
+        }
+
+        /**
+         * Clears all saved times
+         */
+        function clearAllTimes() {
+            if (confirm('Are you sure you want to clear all solve times?')) {
+                times = [];
+                saveTimes();
+                updateUI();
+                timerDisplay.textContent = '0.00';
+            }
+        }
+
+        // --- Event Listeners ---
+
+        // Listen for Spacebar
+        window.addEventListener('keyup', (e) => {
+            if (e.code === 'Space') {
+                if (isRunning) {
+                    stopTimer();
+                } else {
+                    startTimer();
+                }
+            }
+        });
+        
+        // Listen for mousedown/touchstart to stop (common in cube timers)
+        // This provides a more accurate "stop" on release
+        window.addEventListener('mousedown', () => {
+             if (isRunning) {
+                 stopTimer();
+             }
+        });
+        window.addEventListener('touchstart', () => {
+             if (isRunning) {
+                 stopTimer();
+             }
+        });
+
+        // Clear button
+        clearButton.addEventListener('click', clearAllTimes);
+        
+        // Initial load
+        updateUI();
+
+    </script>
+</body>
+</html>
