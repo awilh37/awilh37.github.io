@@ -2,6 +2,17 @@
 // EASY TO UPDATE: Just modify this array to add your projects!
 const projects = [
     {
+        title: "Minecraft 1.12.2",
+        description: "Unblockable Eaglercraft client for Minecraft 1.12.2 with enhanced features and optimizations.",
+        fullDescription: "Utilizing Eaglercraft from lax1dude, this client is able to run a fully functional Minecraft 1.12.2 experience directly in the browser. Features include multiplayer support, custom resource packs, performance optimizations, and a seamless user interface. Perfect for playing Minecraft without the need for a traditional installation.",
+        icon: "⛏",
+        tags: ["Game", "HTML/javascript", "Multiplayer"],
+        link: "https://awilh37.github.io/mc",
+        repository: "https://github.com/awilh37/mc",
+        type: "mine",
+        screenshots: []
+    },
+    {
         title: "Cube Timer",
         description: "A Rubik's cube speed cubing timer with statistics and personal records tracking.",
         fullDescription: "A comprehensive speed cubing timer built with vanilla JavaScript. Features include real-time stopwatch functionality, personal best tracking, average calculations (AO5, AO12), session statistics, and local storage persistence. Perfect for cubers of all levels to track their improvement over time.",
