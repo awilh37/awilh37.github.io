@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>awilh37's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="animated-bg">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#home" class="nav-logo">awilh37</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Hey, I'm <span class="gradient-text">awilh37</span></h1>
+            <p class="hero-subtitle">Full-stack developer • Problem solver • Creative thinker</p>
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <h2 class="section-title">Projects</h2>
+        
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="mine">My Projects</button>
+            <button class="filter-btn" data-filter="forked">🍴 Forked</button>
+            <button class="filter-btn hidden-tab" data-filter="hidden" style="display:none;">🔒 Hidden</button>
+        </div>
+        
+        <div class="projects-grid" id="projectsContainer">
+            <!-- Projects will be generated here by JavaScript -->
+        </div>
+        
+        <p class="hidden-projects-hint" id="hiddenHint" style="display:none; text-align: center; margin-top: 2rem; font-size: 0.9rem; color: #888;">
+            Press <code>`</code> (backtick) to unlock hidden projects
+        </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-content">
+            <p>Feel free to reach out! I'm always interested in hearing about new projects and opportunities.</p>
+            <div class="contact-links">
+                <a href="mailto:awilh37@gmail.com" class="contact-link">Email</a>
+                <a href="https://github.com/awilh37" target="_blank" class="contact-link">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <div class="modal-icon" id="modalIcon"></div>
+                <h2 id="modalTitle"></h2>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription"></p>
+                
+                <div id="screenshotsContainer" class="screenshots-container">
+                    <!-- Screenshots carousel will be inserted here -->
+                </div>
+                
+                <div class="modal-links">
+                    <a id="modalRepoLink" href="#" target="_blank" rel="noopener noreferrer" class="modal-link modal-link-primary">View Repository</a>
+                    <a id="modalProjectLink" href="#" target="_blank" rel="noopener noreferrer" class="modal-link modal-link-secondary">Visit Project</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
