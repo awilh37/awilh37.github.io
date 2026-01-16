@@ -13,6 +13,17 @@ const projects = [
         screenshots: []
     },
     {
+        title: "Chem Midterm Study",
+        description: "Website for studying for 2025-26 H Chem midterm",
+        fullDescription: "Based on the study guide provided, this website takes all of the practice problems and turns them into a flashcard based study format. ",
+        icon: "🧪",
+        tags: ["Study", "Chem", "Midterm"],
+        link: "https://awilh37.github.io/chemmid",
+        repository: "https://github.com/awilh37/chemmid",
+        type: "mine",
+        screenshots: []
+    },
+    {
         title: "Cube Timer",
         description: "A Rubik's cube speed cubing timer with statistics and personal records tracking.",
         fullDescription: "A comprehensive speed cubing timer built with vanilla JavaScript. Features include real-time stopwatch functionality, personal best tracking, average calculations (AO5, AO12), session statistics, and local storage persistence. Perfect for cubers of all levels to track their improvement over time.",
