@@ -8,3 +8,4 @@
 8. awilh37/element - mine
 9. awilh37/5x5-2048 - forked
 10. awilh37/desmos - forked
+11. awilh37/spotify - hidden

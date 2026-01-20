@@ -136,6 +136,17 @@ const projects = [
         originalAuthor: "T.H.YU",
         originalLink: "https://github.com/th-yu/OfflineDesmos",
         screenshots: []
+    },
+    {
+        title: "Spotify Controller [WIP]",
+        description: "Controller for Spotify Web Player with keyboard shortcuts and custom controls",
+        fullDescription: "Web-based controller for Spotify Web Player. Provides keyboard shortcuts for play/pause, skip, volume control, and more. Features custom UI for controlling playback without needing to switch to the Spotify tab. Currently a work in progress with more features planned.",
+        icon: "🎵",
+        tags: ["Spotify API", "Music", "Controller"],
+        link: "https://awilh37.github.io/spotify",
+        repository: "https://github.com/awilh37/spotify",
+        type: "hidden",
+        screenshots: []
     }
 ];
 
