@@ -7,8 +7,8 @@ const projects = [
         fullDescription: "Utilizing a simple webiste, this is able to pull from a scalable .json database with all of the vocab, helping the user translate to all of their Sancon needs. ",
         icon: "🐱‍🐉",
         tags: ["Language", "HTML/javascript", "Dictionary"],
-        link: "https://awilh37.github.io/sancon",
-        repository: "https://github.com/awilh37/sancon",
+        link: "https://awilh37.github.io/Sancon",
+        repository: "https://github.com/awilh37/Sancon",
         type: "hidden",
         screenshots: []
     },
