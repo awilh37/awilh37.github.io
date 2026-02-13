@@ -2,6 +2,17 @@
 // EASY TO UPDATE: Just modify this array to add your projects!
 const projects = [
     {
+        title: "Sancon Vocab",
+        description: "Full dictionary for Sancon language created by Evan Pereria. ",
+        fullDescription: "Utilizing a simple webiste, this is able to pull from a scalable .json database with all of the vocab, helping the user translate to all of their Sancon needs. ",
+        icon: "🐱‍🐉",
+        tags: ["Language", "HTML/javascript", "Dictionary"],
+        link: "https://awilh37.github.io/sancon",
+        repository: "https://github.com/awilh37/sancon",
+        type: "hidden",
+        screenshots: []
+    },
+    {
         title: "Minecraft 1.12.2",
         description: "Unblockable Eaglercraft client for Minecraft 1.12.2 with enhanced features and optimizations.",
         fullDescription: "Utilizing Eaglercraft from lax1dude, this client is able to run a fully functional Minecraft 1.12.2 experience directly in the browser. Features include multiplayer support, custom resource packs, performance optimizations, and a seamless user interface. Perfect for playing Minecraft without the need for a traditional installation.",
