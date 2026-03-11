@@ -10,3 +10,4 @@
 10. awilh37/desmos - forked
 11. awilh37/spotify - hidden
 12. awilh37/sancon - hidden
+13. awilh37/arcade - hidden

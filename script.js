@@ -2,6 +2,17 @@
 // EASY TO UPDATE: Just modify this array to add your projects!
 const projects = [
     {
+        title: "Digital Arcade",
+        description: "Collection of competitive multiplayer web-based games",
+        fullDescription: "Multiplayer arcade platform built with npm. Features real-time games like connect four. Includes user authentication, matchmaking, and global leaderboards for competitive play.",
+        icon: "🕹️",
+        tags: ["Game", "Multiplayer", "Competitive"],
+        link: "https://awilh37.github.io/arcade",
+        repository: "https://github.com/awilh37/arcade",
+        type: "hidden",
+        screenshots: []
+    },    
+    {
         title: "Sancon Vocab",
         description: "Full dictionary for Sancon language created by Evan Pereria. ",
         fullDescription: "Utilizing a simple webiste, this is able to pull from a scalable .json database with all of the vocab, helping the user translate to all of their Sancon needs. ",
